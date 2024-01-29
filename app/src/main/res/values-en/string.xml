@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Main. -->
+    <string name="app_name">D-Text</string>
+    <string name="title_name">D-TEXT</string>
+    <string name="tagline">Keeps You Safe</string>
+
+    <!-- Home. -->
+    <string name="history">History</string>
+
+    <!-- Risk Level. -->
+    <string name="unsafe">Unsafe Link</string>
+    <string name="suspicious">Suspicious Link</string>
+    <string name="safe">Safe Link</string>
+    <string name="no_information">No Information</string>
+
+    <!-- Setting. -->
+    <string name="title_privacy_policy">Privacy Policy</string>
+
+    <!-- Policy. -->
+    <string name="policy_1">Personal Data Protection Policy</string>
+    <string name="policy_2">Please read and understand this Personal Data Protection Policy carefully. To be aware of the protection policy Personal information of our application The details are as follows:</string>
+    <string name="policy_3">Respecting the privacy rights of service users</string>
+    <string name="policy_4">1. This project respects and gives importance to rights. Personal information and protection of your personal information, and you would like to receive security and safety in using the service through our application</string>
+    <string name="policy_5">2. Your personal information that the project receives, such as name, telephone number, etc., which can identify you and is personal information that is complete, accurate, up-to-date, and of good quality, will be used in accordance with the objectives. Operation of projects only and projects Strict measures will be taken to maintain security. as well as preventing personal information from being used without your permission.</string>
+</resources>
