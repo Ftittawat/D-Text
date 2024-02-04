@@ -4,6 +4,14 @@
     <string name="title_name">D-TEXT</string>
     <string name="tagline">Keeps You Safe</string>
 
+    <!-- Onboard. -->
+    <string name="onboard_title_1">การแจ้งเตือน</string>
+    <string name="onboard_subtitle_1">แจ้งเตือนทันทีเมื่อพบ URL ที่เป็นอันตราย</string>
+    <string name="onboard_title_2">การตรวจจับอัตโนมัติ</string>
+    <string name="onboard_subtitle_2">ตรวจจับ URL ที่เป็นอันตรายตลอด 24 ชั่วโมง</string>
+    <string name="onboard_title_3">การสแกนด้วยตนเอง</string>
+    <string name="onboard_subtitle_3">สามารถสแกนลิงค์ด้วยตนเองเมื่อมีข้อสงสัย</string>
+
     <!-- Home. -->
     <string name="history">ประวัติ</string>
 
@@ -22,4 +30,6 @@
     <string name="policy_3">การเคารพสิทธิในความเป็นส่วนบุคคลของผู้ใช้บริการ</string>
     <string name="policy_4">1. โครงการนี้เคารพและให้ความสำคัญถึงสิทธิ ข้อมูลส่วนบุคคล และการคุ้มครองข้อมูลส่วนบุคคลของท่านและท่านย่อมมีความประสงค์ที่จะได้รับความมั่นคงปลอดภัยในการใช้บริการผ่านแอปพลิเคชันของเรา</string>
     <string name="policy_5">2. ข้อมูลส่วนบุคคลของท่านที่โครงการได้รับมา เช่น ชื่อ หมายเลขโทรศัพท์ เป็นต้น ซึ่งสามารถบ่งบอกตัวบุคคล ของท่านได้ และเป็นข้อมูลส่วนบุคคลที่มีความสมบูรณ์ ถูกต้องเป็นปัจจุบันและมีคุณภาพจะถูกนำไปใช้ให้เป็นไปตาม วัตถุประสงค์ การดำเนินงานของโครงการเท่านั้นและโครงการจะดำเนินมาตรการที่เข้มงวดในการรักษาความมั่นคงปลอดภัยตลอดจนการป้องกันมิให้มีการนำข้อมูลส่วนบุคคลไปใช้โดยมิได้รับอนุญาตจากท่าน</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

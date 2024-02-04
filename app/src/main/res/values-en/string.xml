@@ -5,6 +5,14 @@
     <string name="title_name">D-TEXT</string>
     <string name="tagline">Keeps You Safe</string>
 
+    <!-- Onboard. -->
+    <string name="onboard_title_1">Notifications</string>
+    <string name="onboard_subtitle_1">Notify when found Dangerous URLs</string>
+    <string name="onboard_title_2">Automatic Detection</string>
+    <string name="onboard_subtitle_2">Detect Dangerous URLs 24/7</string>
+    <string name="onboard_title_3">Manual Scan</string>
+    <string name="onboard_subtitle_3">You can scan links manually when in doubt</string>
+
     <!-- Home. -->
     <string name="history">History</string>
 
