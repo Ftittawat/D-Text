@@ -1,4 +1,4 @@
-package com.example.d_text.presentation.onboard.third
+package com.example.d_text.presentation.onboardingscreen.second
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -8,24 +8,24 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.d_text.R
 
-class ThirdOnboardFragment : Fragment() {
+class SecondOnboardFragment : Fragment() {
 
     companion object {
-        fun newInstance() = ThirdOnboardFragment()
+        fun newInstance() = SecondOnboardFragment()
     }
 
-    private lateinit var viewModel: ThirdOnboardViewModel
+    private lateinit var viewModel: SecondOnboardViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_third_onboard, container, false)
+        return inflater.inflate(R.layout.fragment_second_onboard, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(ThirdOnboardViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(SecondOnboardViewModel::class.java)
         // TODO: Use the ViewModel
     }
 

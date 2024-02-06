@@ -3,6 +3,20 @@
     <string name="app_name">D-Text</string>
     <string name="title_name">D-TEXT</string>
     <string name="tagline">Keeps You Safe</string>
+    <string name="welcome_title">Security Guard for Mobile Phone</string>
+
+    <!-- Account. -->
+    <string name="sign_in">เข้าสู่ระบบ</string>
+    <string name="sign_up">ลงทะเบียน</string>
+    <string name="email">อีเมล</string>
+    <string name="password">รหัสผ่าน</string>
+    <string name="confirm_password">ยืนยันรหัสผ่าน</string>
+    <string name="phone">เบอร์โทร</string>
+    <string name="or">หรือ</string>
+    <string name="forgot_password"><u>ลืมรหัสผ่าน?</u></string>
+    <string name="google">เข้าสู่ระบบด้วย Google</string>
+    <string name="no_account">คุณยังไม่มีบัญชี?</string>
+    <string name="have_account">คุณมีบัญชีแล้ว?</string>
 
     <!-- Onboard. -->
     <string name="onboard_title_1">การแจ้งเตือน</string>
@@ -30,6 +44,4 @@
     <string name="policy_3">การเคารพสิทธิในความเป็นส่วนบุคคลของผู้ใช้บริการ</string>
     <string name="policy_4">1. โครงการนี้เคารพและให้ความสำคัญถึงสิทธิ ข้อมูลส่วนบุคคล และการคุ้มครองข้อมูลส่วนบุคคลของท่านและท่านย่อมมีความประสงค์ที่จะได้รับความมั่นคงปลอดภัยในการใช้บริการผ่านแอปพลิเคชันของเรา</string>
     <string name="policy_5">2. ข้อมูลส่วนบุคคลของท่านที่โครงการได้รับมา เช่น ชื่อ หมายเลขโทรศัพท์ เป็นต้น ซึ่งสามารถบ่งบอกตัวบุคคล ของท่านได้ และเป็นข้อมูลส่วนบุคคลที่มีความสมบูรณ์ ถูกต้องเป็นปัจจุบันและมีคุณภาพจะถูกนำไปใช้ให้เป็นไปตาม วัตถุประสงค์ การดำเนินงานของโครงการเท่านั้นและโครงการจะดำเนินมาตรการที่เข้มงวดในการรักษาความมั่นคงปลอดภัยตลอดจนการป้องกันมิให้มีการนำข้อมูลส่วนบุคคลไปใช้โดยมิได้รับอนุญาตจากท่าน</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

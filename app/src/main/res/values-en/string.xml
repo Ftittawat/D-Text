@@ -4,6 +4,20 @@
     <string name="app_name">D-Text</string>
     <string name="title_name">D-TEXT</string>
     <string name="tagline">Keeps You Safe</string>
+    <string name="welcome_title">Security Guard for Mobile Phone</string>
+
+    <!-- Account. -->
+    <string name="sign_in">Sign In</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="email">E-mail</string>
+    <string name="password">Password</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="phone">Phone</string>
+    <string name="or">OR</string>
+    <string name="forgot_password"><u>Forgot Password?</u></string>
+    <string name="google">Sign in with Google</string>
+    <string name="no_account">Don’t have an account?</string>
+    <string name="have_account">Have an account?</string>
 
     <!-- Onboard. -->
     <string name="onboard_title_1">Notifications</string>

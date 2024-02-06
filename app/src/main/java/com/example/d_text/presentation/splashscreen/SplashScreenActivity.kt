@@ -6,6 +6,7 @@ import android.os.Handler
 import androidx.appcompat.app.AppCompatActivity
 import com.example.d_text.databinding.ActivitySplashScreenBinding
 import com.example.d_text.presentation.home.HomeActivity
+import com.example.d_text.presentation.welcomescreen.WelcomeScreenActivity
 
 class SplashScreenActivity : AppCompatActivity() {
 
@@ -17,7 +18,7 @@ class SplashScreenActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         Handler().postDelayed({
-            intent = Intent(this, HomeActivity::class.java)
+            intent = Intent(this, WelcomeScreenActivity::class.java)
             startActivity(intent)
             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
             finish()

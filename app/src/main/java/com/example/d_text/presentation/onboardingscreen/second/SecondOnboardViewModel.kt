@@ -1,4 +1,4 @@
-package com.example.d_text.presentation.onboard.second
+package com.example.d_text.presentation.onboardingscreen.second
 
 import androidx.lifecycle.ViewModel
 

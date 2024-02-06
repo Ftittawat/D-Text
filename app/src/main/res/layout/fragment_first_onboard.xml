@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.onboard.first.FirstOnboardFragment"
+    tools:context=".presentation.onboardingscreen.first.FirstOnboardFragment"
     android:background="@color/blue_primary"
     android:theme="@style/Base.Theme.DText.Onboard.Screen">
 

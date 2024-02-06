@@ -1,12 +1,10 @@
 package com.example.d_text.presentation.home
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
-import androidx.lifecycle.ViewModelProvider
 import com.example.d_text.databinding.ActivityHomeBinding
-import com.example.d_text.presentation.onboard.first.FirstOnboardFragment
+import com.example.d_text.presentation.onboardingscreen.first.FirstOnboardFragment
 import javax.inject.Inject
 
 class HomeActivity : AppCompatActivity() {
