@@ -37,17 +37,28 @@
         <item name="android:windowLightStatusBar">false</item>
     </style>
 
-    <style name="Theme.DText" parent="Base.Theme.DText"/>
-    <style name="Theme.DText.Light.SystemBar" parent="Base.Theme.DText.Light.SystemBar"/>
-    <style name="Theme.DText.Splash.Screen" parent="Base.Theme.DText.Splash.Screen"/>
     <style name="Theme.DText.Fullscreen" parent="Theme.DText">
         <item name="android:actionBarStyle">@style/Widget.Theme.DText.ActionBar.Fullscreen</item>
         <item name="android:windowActionBarOverlay">true</item>
         <item name="android:windowBackground">@null</item>
     </style>
 
+    <style name="Base.Theme.DText.Home" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/blue_primary</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="background">@color/background</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">@color/background</item>
+        <item name="android:windowLightStatusBar">true</item>
+    </style>
+
     <style name="ThemeOverlay.DText.FullscreenContainer" parent="">
         <item name="fullscreenBackgroundColor">@color/light_blue_600</item>
         <item name="fullscreenTextColor">@color/light_blue_A200</item>
     </style>
+
+    <style name="Theme.DText" parent="Base.Theme.DText"/>
+    <style name="Theme.DText.Light.SystemBar" parent="Base.Theme.DText.Light.SystemBar"/>
+    <style name="Theme.DText.Splash.Screen" parent="Base.Theme.DText.Splash.Screen"/>
 </resources>

@@ -5,6 +5,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        android:name=".presentation.App"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -27,7 +28,7 @@
         <activity
             android:name=".presentation.home.HomeActivity"
             android:exported="true"
-            android:theme="@style/Base.Theme.DText.Onboard.Screen" >
+            android:theme="@style/Base.Theme.DText.Home" >
         </activity>
         <activity
             android:name=".presentation.welcomescreen.WelcomeScreenActivity"
@@ -41,7 +42,28 @@
         <activity
             android:name=".presentation.SignUp.SignUpActivity"
             android:exported="true"
-            android:theme="@style/Base.Theme.DText.Onboard.Screen"/>
+            android:theme="@style/Base.Theme.DText.Onboard.Screen"
+            android:windowSoftInputMode="adjustResize"/>
+        <activity
+            android:name=".presentation.setting.SettingActivity"
+            android:exported="true"
+            android:theme="@style/Base.Theme.DText.Home"/>
+        <activity
+            android:name=".presentation.setting.notification.SettingNotificationActivity"
+            android:exported="false"
+            android:theme="@style/Base.Theme.DText.Home"/>
+        <activity
+            android:name=".presentation.setting.autoscan.SettingAutoScanActivity"
+            android:exported="true"
+            android:theme="@style/Base.Theme.DText.Home"/>
+        <activity
+            android:name=".presentation.setting.about.SettingAboutActivity"
+            android:exported="true"
+            android:theme="@style/Base.Theme.DText.Home"/>
+        <activity
+            android:name=".presentation.setting.policy.SettingPolicyActivity"
+            android:exported="true"
+            android:theme="@style/Base.Theme.DText.Home"/>
     </application>
 
 </manifest>

@@ -1,10 +1,20 @@
 package com.example.d_text.presentation.home
 
+import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import android.view.View
+import android.view.inputmethod.InputMethodManager
+import androidx.lifecycle.ViewModelProvider
 import com.example.d_text.databinding.ActivityHomeBinding
+import com.example.d_text.presentation.core.HomeViewModelFactory
+import com.example.d_text.presentation.di.Injector
+import com.example.d_text.presentation.notification.NotificationFragment
 import com.example.d_text.presentation.onboardingscreen.first.FirstOnboardFragment
+import com.example.d_text.presentation.setting.SettingActivity
+import com.example.d_text.presentation.setting.SettingViewModel
 import javax.inject.Inject
 
 class HomeActivity : AppCompatActivity() {
@@ -14,16 +24,47 @@ class HomeActivity : AppCompatActivity() {
     private lateinit var homeViewModel: HomeViewModel
     private lateinit var binding: ActivityHomeBinding
 
+    private val notificationFragment = NotificationFragment()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
-//        homeViewModel = ViewModelProvider(this, factory).get(HomeViewModel::class.java)
-        Handler().postDelayed({
-            val fragmentManager = supportFragmentManager
-            val fragmentTransaction = fragmentManager.beginTransaction()
-            fragmentTransaction.replace(binding.fragmentContainer.id, FirstOnboardFragment.newInstance())
-            fragmentTransaction.commit()
-        }, 2000)
+//        (application as Injector).createHomeSubComponent()
+//            .inject(this)
+//        homeViewModel = ViewModelProvider(this, factory)
+//            .get(HomeViewModel::class.java)
+//        Handler().postDelayed({
+//            val fragmentManager = supportFragmentManager
+//            val fragmentTransaction = fragmentManager.beginTransaction()
+//            fragmentTransaction.replace(binding.fragmentContainer.id, FirstOnboardFragment.newInstance())
+//            fragmentTransaction.commit()
+//        }, 2000)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        setupButton()
+    }
+
+    private fun setupButton() {
+        binding.activity.setOnClickListener {
+            it.hideKeyboard()
+        }
+        binding.notificationButton.setOnClickListener {
+            notificationFragment.show(supportFragmentManager, "NotificationFragmentTag")
+        }
+        binding.settingButton.setOnClickListener {
+            intent = Intent(this, SettingActivity::class.java)
+            startActivity(intent)
+        }
+        binding.scanButton.setOnClickListener {
+
+        }
+    }
+
+    private fun View.hideKeyboard() {
+        val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(windowToken, 0)
     }
 }

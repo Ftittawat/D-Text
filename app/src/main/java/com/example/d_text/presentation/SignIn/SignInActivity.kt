@@ -1,13 +1,19 @@
 package com.example.d_text.presentation.SignIn
 
+import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
+import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import com.example.d_text.databinding.ActivitySigninBinding
 import com.example.d_text.presentation.SignUp.SignUpActivity
+import com.example.d_text.presentation.core.SignInViewModelFactory
+import com.example.d_text.presentation.home.HomeActivity
 import javax.inject.Inject
 
 class SignInActivity : AppCompatActivity() {
@@ -24,22 +30,28 @@ class SignInActivity : AppCompatActivity() {
 //        signInViewModel = ViewModelProvider(this, factory).get(SignInViewModel::class.java)
 
         binding.signInButton.setOnClickListener {
-
-        }
-
-        binding.noAccountButton.setOnClickListener {
-            intent = Intent(this, SignUpActivity::class.java)
+            intent = Intent(this, HomeActivity::class.java)
             startActivity(intent)
         }
+    }
 
-        binding.email.setOnFocusChangeListener { view, b ->
-            if (b) {
-                binding.logoContainer.isGone = true
-            }
-            else {
-                binding.logoContainer.isVisible = true
-            }
+    override fun onResume() {
+        super.onResume()
+        setupButton()
+    }
 
+    private fun setupButton() {
+        binding.bottomContainer.setOnClickListener {
+            it.hideKeyboard()
         }
+
+        binding.closeButton.setOnClickListener {
+            onBackPressed()
+        }
+    }
+
+    private fun View.hideKeyboard() {
+        val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(windowToken, 0)
     }
 }
