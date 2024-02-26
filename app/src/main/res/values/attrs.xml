@@ -3,4 +3,8 @@
         <attr name="fullscreenBackgroundColor" format="color" />
         <attr name="fullscreenTextColor" format="color" />
     </declare-styleable>
+    <attr name="state_unsafe" format="boolean" />
+    <attr name="state_suspicious" format="boolean" />
+    <attr name="state_safe" format="boolean" />
+    <attr name="state_no_information" format="boolean" />
 </resources>

@@ -4,8 +4,8 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.d_text.databinding.ActivityWelcomeBinding
-import com.example.d_text.presentation.SignIn.SignInActivity
-import com.example.d_text.presentation.SignUp.SignUpActivity
+import com.example.d_text.presentation.signIn.SignInActivity
+import com.example.d_text.presentation.signUp.SignUpActivity
 
 class WelcomeScreenActivity : AppCompatActivity() {
 

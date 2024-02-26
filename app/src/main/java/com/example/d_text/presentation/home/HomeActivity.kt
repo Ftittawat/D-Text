@@ -7,6 +7,8 @@ import android.os.Bundle
 import android.os.Handler
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import androidx.core.view.isGone
+import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import com.example.d_text.databinding.ActivityHomeBinding
 import com.example.d_text.presentation.core.HomeViewModelFactory
@@ -21,10 +23,8 @@ class HomeActivity : AppCompatActivity() {
 
     @Inject
     lateinit var factory: HomeViewModelFactory
-    private lateinit var homeViewModel: HomeViewModel
+    private lateinit var vm: HomeViewModel
     private lateinit var binding: ActivityHomeBinding
-
-    private val notificationFragment = NotificationFragment()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,10 +48,17 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun setupButton() {
+//        binding.notificationIndicator.isVisible = true
         binding.activity.setOnClickListener {
             it.hideKeyboard()
         }
         binding.notificationButton.setOnClickListener {
+            val notificationFragment = NotificationFragment()
+//            val bundle = Bundle()
+//            binding.notificationIndicator.isGone = true
+//            bundle.putString("test", "NotificationFragmentTest")
+//            bundle.putInt("test2", 500)
+//            notificationFragment.arguments = bundle
             notificationFragment.show(supportFragmentManager, "NotificationFragmentTag")
         }
         binding.settingButton.setOnClickListener {

@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import com.example.d_text.R
 import com.example.d_text.databinding.FragmentNotificationBinding
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import javax.inject.Inject
 
@@ -25,28 +26,39 @@ class NotificationFragment : BottomSheetDialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-//        binding = FragmentNotificationBinding.inflate(inflater, container,false)
-//        return inflater.inflate(
-//            R.layout.fragment_notification, container, false
-//        )
         binding = FragmentNotificationBinding.inflate(layoutInflater)
         return binding.root
     }
 
-//    override fun onStart() {
-//        super.onStart()
-//        val layoutParams = bottomSheet.layoutParams
-//        layoutParams.height = WindowManager.LayoutParams.MATCH_PARENT
-//        bottomSheet.layoutParams = layoutParams
-////        val view: FrameLayout = dialog?.findViewById(R.id.notification_sheet)!!
-////        view.layoutParams.height = ViewGroup.LayoutParams.MATCH_PARENT
-//    }
+    override fun onStart() {
+        super.onStart()
+        dialog?.window?.setLayout(
+            ViewGroup.LayoutParams.MATCH_PARENT,
+            ViewGroup.LayoutParams.MATCH_PARENT
+        )
 
-    private fun setupFullHeight(bottomSheet: View) {
-        val layoutParams = bottomSheet.layoutParams
-        layoutParams.height = WindowManager.LayoutParams.MATCH_PARENT
-        bottomSheet.layoutParams = layoutParams
+        val bottomSheet: View? = dialog?.findViewById(com.google.android.material.R.id.design_bottom_sheet)
+        bottomSheet?.layoutParams?.height = ViewGroup.LayoutParams.MATCH_PARENT
+        setStyle(STYLE_NORMAL, R.style.FullScreenBottomSheetDialog)
+        bottomSheet?.let {
+            val behavior = BottomSheetBehavior.from(it)
+//            behavior.isDraggable = false
+            behavior.state = BottomSheetBehavior.STATE_EXPANDED
+        }
     }
 
-    private fun getWindowHeight() = resources.displayMetrics.heightPixels
+    override fun onResume() {
+        super.onResume()
+        setupButton()
+    }
+
+    private fun setupButton() {
+        binding.closeButton.setOnClickListener {
+            dismiss()
+        }
+//        val data_1 = arguments?.getString("test")
+//        val data_2 = arguments?.getInt("test2")
+//        binding.notificationText.text = data_1
+//        binding.notificationText2.text = data_2.toString()
+    }
 }

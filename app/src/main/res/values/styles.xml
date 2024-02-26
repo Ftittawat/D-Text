@@ -62,6 +62,14 @@
         <item name="android:textSize">12sp</item>
     </style>
 
+    <style name="FullScreenBottomSheetDialog" parent="Theme.Design.BottomSheetDialog">
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowSoftInputMode">adjustResize</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+    </style>
+
     <!-- Components. -->
 
     <style name="Theme.Switch" parent="Theme.AppCompat.Light">
@@ -71,6 +79,8 @@
     </style>
 
     <style name="Theme.CheckBox" parent="Theme.AppCompat.Light">
+        <item name="colorAccent">@color/blue_primary</item>
+        <item name="android:textColorSecondary">@color/text_secondary</item>
     </style>
 
 </resources>

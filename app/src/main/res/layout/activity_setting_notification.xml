@@ -87,6 +87,17 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="38dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/setting_notification_description_1"
+            android:fontFamily="@font/kanit"
+            android:textSize="14sp"
+            android:textColor="@color/text_secondary"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginStart="46dp"
             android:layout_marginTop="8dp"
             android:text="@string/risk_level"
@@ -224,6 +235,16 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="38dp"
+            android:layout_marginEnd="30dp"
+            android:text="@string/setting_notification_description_2"
+            android:fontFamily="@font/kanit"
+            android:textSize="14sp"
+            android:textColor="@color/text_secondary"/>
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 

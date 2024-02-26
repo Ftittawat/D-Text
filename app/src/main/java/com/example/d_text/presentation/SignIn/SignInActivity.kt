@@ -1,17 +1,13 @@
-package com.example.d_text.presentation.SignIn
+package com.example.d_text.presentation.signIn
 
-import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.isGone
-import androidx.core.view.isVisible
-import androidx.lifecycle.ViewModelProvider
 import com.example.d_text.databinding.ActivitySigninBinding
-import com.example.d_text.presentation.SignUp.SignUpActivity
+import com.example.d_text.presentation.acceptpolicy.AcceptPolicyActivity
 import com.example.d_text.presentation.core.SignInViewModelFactory
 import com.example.d_text.presentation.home.HomeActivity
 import javax.inject.Inject
@@ -30,7 +26,7 @@ class SignInActivity : AppCompatActivity() {
 //        signInViewModel = ViewModelProvider(this, factory).get(SignInViewModel::class.java)
 
         binding.signInButton.setOnClickListener {
-            intent = Intent(this, HomeActivity::class.java)
+            intent = Intent(this, AcceptPolicyActivity::class.java)
             startActivity(intent)
         }
     }

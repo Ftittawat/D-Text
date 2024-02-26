@@ -1,4 +1,4 @@
-package com.example.d_text.presentation.SignIn
+package com.example.d_text.presentation.signIn
 
 import androidx.lifecycle.ViewModel
 

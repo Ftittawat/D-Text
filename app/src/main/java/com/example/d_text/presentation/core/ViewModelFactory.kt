@@ -2,8 +2,8 @@ package com.example.d_text.presentation.core
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.d_text.presentation.SignIn.SignInViewModel
-import com.example.d_text.presentation.SignUp.SignUpViewModel
+import com.example.d_text.presentation.signIn.SignInViewModel
+import com.example.d_text.presentation.signUp.SignUpViewModel
 import com.example.d_text.presentation.home.HomeViewModel
 import com.example.d_text.presentation.setting.SettingViewModel
 

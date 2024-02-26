@@ -20,6 +20,8 @@
     <string name="google">Sign in with Google</string>
     <string name="no_account">Don’t have an account?</string>
     <string name="have_account">Have an account?</string>
+    <string name="accept_policy">Accept all terms</string>
+    <string name="continue_title">Continue</string>
 
     <!-- Onboard. -->
     <string name="onboard_title_1">Notifications</string>
@@ -54,6 +56,10 @@
     <string name="detect_type">Detections Type</string>
     <string name="detect_messages">Detect form Messages</string>
     <string name="detect_notifications">Detect form Notifications</string>
+    <string name="setting_notification_description_1">Turn on/off notifications when links are detected.</string>
+    <string name="setting_notification_description_2">Setting notifications based on the type of links detected.</string>
+    <string name="setting_scan_description_1">Turn on/off automatic link detections.</string>
+    <string name="setting_scan_description_2">Setting up automatic link verification channels.</string>
 
     <!-- Policy. -->
     <string name="policy_1">Personal Data Protection Policy</string>

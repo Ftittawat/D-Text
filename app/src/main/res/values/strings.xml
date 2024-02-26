@@ -19,6 +19,8 @@
     <string name="google">เข้าสู่ระบบด้วย Google</string>
     <string name="no_account">คุณยังไม่มีบัญชี?</string>
     <string name="have_account">คุณมีบัญชีแล้ว?</string>
+    <string name="accept_policy">ยอมรับเงื่อนไขทั้งหมด</string>
+    <string name="continue_title">ดำเนินการต่อ</string>
 
     <!-- Onboard. -->
     <string name="onboard_title_1">การแจ้งเตือน</string>
@@ -53,6 +55,10 @@
     <string name="detect_type">ประเภทของการตรวจสอบ</string>
     <string name="detect_messages">ตรวจสอบจากข้อความ</string>
     <string name="detect_notifications">ตรวจสอบจากการแจ้งเตือน</string>
+    <string name="setting_notification_description_1">เปิด-ปิดการแจ้งเตือนเมื่อตรวจพบลิงก์</string>
+    <string name="setting_notification_description_2">การตั้งค่าการแจ้งเตือนตามประเภทของลิงก์ที่ตรวจพบ</string>
+    <string name="setting_scan_description_1">เปิด-ปิดการตรวจสอบลิงก์อัตโนมัติ</string>
+    <string name="setting_scan_description_2">การตั้งค่าช่องทางการตรวจสอบลิงก์อัตโนมัติ</string>
 
     <!-- Policy. -->
     <string name="policy_1">นโยบายการคุ้มครองข้อมูลส่วนบุคคล</string>

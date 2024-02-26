@@ -33,37 +33,50 @@
         <activity
             android:name=".presentation.welcomescreen.WelcomeScreenActivity"
             android:exported="true"
-            android:theme="@style/Base.Theme.DText.Splash.Screen"/>
+            android:theme="@style/Base.Theme.DText.Splash.Screen">
+        </activity>
         <activity
-            android:name=".presentation.SignIn.SignInActivity"
+            android:name=".presentation.signIn.SignInActivity"
             android:exported="true"
             android:theme="@style/Base.Theme.DText.Onboard.Screen"
-            android:windowSoftInputMode="adjustResize"/>
+            android:windowSoftInputMode="adjustResize">
+        </activity>
         <activity
-            android:name=".presentation.SignUp.SignUpActivity"
+            android:name=".presentation.signUp.SignUpActivity"
             android:exported="true"
             android:theme="@style/Base.Theme.DText.Onboard.Screen"
-            android:windowSoftInputMode="adjustResize"/>
+            android:windowSoftInputMode="adjustResize">
+        </activity>
+        <activity
+            android:name=".presentation.acceptpolicy.AcceptPolicyActivity"
+            android:exported="true"
+            android:theme="@style/Base.Theme.DText.Onboard.Screen">
+        </activity>
         <activity
             android:name=".presentation.setting.SettingActivity"
             android:exported="true"
-            android:theme="@style/Base.Theme.DText.Home"/>
+            android:theme="@style/Base.Theme.DText.Home">
+        </activity>
         <activity
             android:name=".presentation.setting.notification.SettingNotificationActivity"
             android:exported="false"
-            android:theme="@style/Base.Theme.DText.Home"/>
+            android:theme="@style/Base.Theme.DText.Home">
+        </activity>
         <activity
             android:name=".presentation.setting.autoscan.SettingAutoScanActivity"
             android:exported="true"
-            android:theme="@style/Base.Theme.DText.Home"/>
+            android:theme="@style/Base.Theme.DText.Home">
+        </activity>
         <activity
             android:name=".presentation.setting.about.SettingAboutActivity"
             android:exported="true"
-            android:theme="@style/Base.Theme.DText.Home"/>
+            android:theme="@style/Base.Theme.DText.Home">
+        </activity>
         <activity
             android:name=".presentation.setting.policy.SettingPolicyActivity"
             android:exported="true"
-            android:theme="@style/Base.Theme.DText.Home"/>
+            android:theme="@style/Base.Theme.DText.Home">
+        </activity>
     </application>
 
 </manifest>
