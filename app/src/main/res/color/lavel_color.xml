@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:color="@color/red" app:state_unsafe="true"/>
+    <item android:color="@color/yellow" app:state_suspicious="true"/>
+    <item android:color="@color/green" app:state_safe="true"/>
+    <item android:color="@color/text_secondary"/>
+</selector>
