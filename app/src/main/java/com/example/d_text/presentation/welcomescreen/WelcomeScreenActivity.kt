@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.d_text.databinding.ActivityWelcomeBinding
+import com.example.d_text.presentation.authentication.AuthenticationActivity
 import com.example.d_text.presentation.signIn.SignInActivity
 import com.example.d_text.presentation.signUp.SignUpActivity
 
@@ -17,12 +18,14 @@ class WelcomeScreenActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.signInButton.setOnClickListener {
-            intent = Intent(this, SignInActivity::class.java)
+            intent = Intent(this, AuthenticationActivity::class.java)
+            intent.putExtra("sign_in", true)
             startActivity(intent)
         }
 
         binding.signUpButton.setOnClickListener {
-            intent = Intent(this, SignUpActivity::class.java)
+            intent = Intent(this, AuthenticationActivity::class.java)
+            intent.putExtra("sign_in", false)
             startActivity(intent)
         }
     }

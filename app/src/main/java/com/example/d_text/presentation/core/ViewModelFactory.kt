@@ -2,6 +2,7 @@ package com.example.d_text.presentation.core
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.example.d_text.presentation.authentication.AuthenticationViewModel
 import com.example.d_text.presentation.signIn.SignInViewModel
 import com.example.d_text.presentation.signUp.SignUpViewModel
 import com.example.d_text.presentation.home.HomeViewModel
@@ -28,5 +29,11 @@ class SignInViewModelFactory() : ViewModelProvider.Factory {
 class SignUpViewModelFactory() : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return SignUpViewModel() as T
+    }
+}
+
+class AuthenticationViewModelFactory() : ViewModelProvider.Factory {
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
+        return AuthenticationViewModel() as T
     }
 }

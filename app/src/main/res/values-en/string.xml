@@ -22,6 +22,10 @@
     <string name="have_account">Have an account?</string>
     <string name="accept_policy">Accept all terms</string>
     <string name="continue_title">Continue</string>
+    <string name="reset_title">Reset Password</string>
+    <string name="enter_email">Enter your Email</string>
+    <string name="enter_otp">Enter OTP</string>
+    <string name="new_password">Enter new Password</string>
 
     <!-- Onboard. -->
     <string name="onboard_title_1">Notifications</string>

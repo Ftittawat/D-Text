@@ -36,6 +36,12 @@
             android:theme="@style/Base.Theme.DText.Splash.Screen">
         </activity>
         <activity
+            android:name=".presentation.authentication.AuthenticationActivity"
+            android:exported="true"
+            android:theme="@style/Base.Theme.DText.Onboard.Screen"
+            android:windowSoftInputMode="adjustResize">
+        </activity>
+        <activity
             android:name=".presentation.signIn.SignInActivity"
             android:exported="true"
             android:theme="@style/Base.Theme.DText.Onboard.Screen"

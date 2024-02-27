@@ -21,6 +21,10 @@
     <string name="have_account">คุณมีบัญชีแล้ว?</string>
     <string name="accept_policy">ยอมรับเงื่อนไขทั้งหมด</string>
     <string name="continue_title">ดำเนินการต่อ</string>
+    <string name="reset_title">รีเซ็ตรหัสผ่าน</string>
+    <string name="enter_email">กรอกอีเมลของคุณ</string>
+    <string name="enter_otp">กรอกรหัส OTP</string>
+    <string name="new_password">กรอกรหัสผ่านใหม่</string>
 
     <!-- Onboard. -->
     <string name="onboard_title_1">การแจ้งเตือน</string>
