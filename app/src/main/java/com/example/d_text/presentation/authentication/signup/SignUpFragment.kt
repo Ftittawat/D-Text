@@ -27,7 +27,7 @@ class SignUpFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        vm = ViewModelProvider(this).get(SignUpViewModel::class.java)
+        vm = ViewModelProvider(this)[SignUpViewModel::class.java]
     }
 
     override fun onResume() {

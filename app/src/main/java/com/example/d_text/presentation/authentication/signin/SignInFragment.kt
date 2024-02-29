@@ -3,6 +3,8 @@ package com.example.d_text.presentation.authentication.signin
 import android.content.Context
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -30,7 +32,7 @@ class SignInFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        vm = ViewModelProvider(this).get(SignInViewModel::class.java)
+        vm = ViewModelProvider(this)[SignInViewModel::class.java]
     }
 
 //    override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -38,9 +40,18 @@ class SignInFragment : Fragment() {
 ////        vm = ViewModelProvider(this).get(SignInViewModel::class.java)
 //    }
 
+    override fun onStart() {
+        super.onStart()
+        setupView()
+    }
+
     override fun onResume() {
         super.onResume()
         setupButton()
+    }
+
+    private fun setupView() {
+        watcher { validateEmail() }
     }
 
     private fun setupButton() {
@@ -64,6 +75,36 @@ class SignInFragment : Fragment() {
                 ?.addToBackStack(null)
                 ?.commit()
         }
+    }
+
+    private fun watcher(func: () -> Unit) {
+        binding.email.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                func()
+            }
+        })
+        binding.password.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                func()
+            }
+        })
+    }
+
+    private fun validateEmail() {
+        vm.errorEmail.value = vm.validationEmail(binding.email.text.toString())
     }
 
     private fun View.hideKeyboard() {

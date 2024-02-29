@@ -5,6 +5,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.core.view.isGone
@@ -32,8 +33,7 @@ class HomeActivity : AppCompatActivity() {
         setContentView(binding.root)
 //        (application as Injector).createHomeSubComponent()
 //            .inject(this)
-//        homeViewModel = ViewModelProvider(this, factory)
-//            .get(HomeViewModel::class.java)
+        vm = ViewModelProvider(this)[HomeViewModel::class.java]
 //        Handler().postDelayed({
 //            val fragmentManager = supportFragmentManager
 //            val fragmentTransaction = fragmentManager.beginTransaction()

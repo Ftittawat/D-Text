@@ -20,15 +20,15 @@ import javax.inject.Inject
 class SettingActivity : AppCompatActivity() {
 
     @Inject
-//    lateinit var factory: SettingViewModelFactory
     lateinit var factory: ViewModelProvider.Factory
-    private lateinit var viewModel: SettingViewModel
+    private lateinit var vm: SettingViewModel
     private lateinit var binding: ActivitySettingBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySettingBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        vm = ViewModelProvider(this)[SettingViewModel::class.java]
     }
 
     override fun onResume() {

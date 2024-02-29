@@ -24,7 +24,7 @@ class ResetPasswordThirdStepFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        vm = ViewModelProvider(this).get(ResetPasswordThirdStepViewModel::class.java)
+        vm = ViewModelProvider(this)[ResetPasswordThirdStepViewModel::class.java]
     }
 
     override fun onResume() {

@@ -28,7 +28,7 @@ class AcceptPolicyFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        vm = ViewModelProvider(this).get(AcceptPolicyViewModel::class.java)
+        vm = ViewModelProvider(this)[AcceptPolicyViewModel::class.java]
     }
 
     override fun onResume() {
