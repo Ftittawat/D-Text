@@ -25,6 +25,20 @@
     <string name="enter_email">กรอกอีเมลของคุณ</string>
     <string name="enter_otp">กรอกรหัส OTP</string>
     <string name="new_password">กรอกรหัสผ่านใหม่</string>
+    <string name="error_empty_email">กรุณากรอกข้อมูล</string>
+    <string name="error_format">รูปแบบอีเมลไม่ถูกต้อง</string>
+    <string name="error_empty_password">กรุณากรอกข้อมูล</string>
+    <string name="error_incorrect_password">รหัสผ่านไม่ถูกต้อง</string>
+    <string name="error_notmatch_password">รหัสผ่านไม่ตรงกัน</string>
+    <string name="error_confirm_password">กรุณากรอกข้อมูล</string>
+    <string name="error_empty_phone">กรุณากรอกข้อมูล</string>
+    <string name="error_format_phone">รูปแบบเบอร์โทรศัพท์ไม่ถูกต้อง</string>
+    <string name="error_password_uppercase">ต้องมีอักษรตัวพิมพ์ใหญ่อย่างน้อยหนึ่งตัว</string>
+    <string name="error_password_lowercase">ต้องมีอักษรตัวพิมพ์เล็กอย่างน้อยหนึ่งตัว</string>
+    <string name="error_password_digit">ต้องมีอักษรตัวเลขอย่างน้อยหนึ่งตัว</string>
+    <string name="error_password_special_character">ต้องมี @#$%^&amp;_+=! อย่างน้อยหนึ่งตัว</string>
+    <string name="error_password_whitespace">ไม่อนุญาตให้มีช่องว่าง</string>
+    <string name="error_password_min">ต้องมีความยาวขั้นต่ำ 8 ตัวอักษร</string>
 
     <!-- Onboard. -->
     <string name="onboard_title_1">การแจ้งเตือน</string>
@@ -33,6 +47,7 @@
     <string name="onboard_subtitle_2">ตรวจจับ URL ที่เป็นอันตรายตลอด 24 ชั่วโมง</string>
     <string name="onboard_title_3">การสแกนด้วยตนเอง</string>
     <string name="onboard_subtitle_3">สามารถสแกนลิงค์ด้วยตนเองเมื่อมีข้อสงสัย</string>
+    <string name="start_now">เริ่มเลย</string>
 
     <!-- Home. -->
     <string name="search">พิมพ์หรือวาง URL</string>

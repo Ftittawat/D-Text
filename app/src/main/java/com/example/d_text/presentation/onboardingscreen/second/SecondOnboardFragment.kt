@@ -6,27 +6,33 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.viewpager2.widget.ViewPager2
 import com.example.d_text.R
+import com.example.d_text.databinding.FragmentSecondOnboardBinding
 
 class SecondOnboardFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = SecondOnboardFragment()
-    }
-
-    private lateinit var viewModel: SecondOnboardViewModel
+    private lateinit var binding: FragmentSecondOnboardBinding
+    private lateinit var vm: SecondOnboardViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_second_onboard, container, false)
+        binding = FragmentSecondOnboardBinding.inflate(layoutInflater)
+
+        val viewPager = activity?.findViewById<ViewPager2>(R.id.ViewPager)
+
+        binding.nextButton.setOnClickListener {
+            viewPager?.currentItem = 2
+        }
+
+        return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(SecondOnboardViewModel::class.java)
-        // TODO: Use the ViewModel
+        vm = ViewModelProvider(this)[SecondOnboardViewModel::class.java]
     }
 
 }

@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -27,12 +28,14 @@ class SignInFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentSignInBinding.inflate(layoutInflater)
+        vm = ViewModelProvider(this)[SignInViewModel::class.java]
         return binding.root
+
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        vm = ViewModelProvider(this)[SignInViewModel::class.java]
+//        vm = ViewModelProvider(this)[SignInViewModel::class.java]
     }
 
 //    override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -51,12 +54,37 @@ class SignInFragment : Fragment() {
     }
 
     private fun setupView() {
-        watcher { validateEmail() }
+        emailWatcher { validateEmail() }
+        passwordWatcher { validatePassword() }
+
+        vm.email.observe(this) {
+
+        }
+        vm.password.observe(this) {
+
+        }
+        vm.errorEmail.observe(this) {
+            binding.emailLayout.error = vm.errorEmail.value
+            binding.emailLayout.errorContentDescription = vm.errorEmail.value
+            validateButton()
+        }
+        vm.errorPassword.observe(this) {
+            binding.passwordLayout.error = vm.errorPassword.value
+            binding.passwordLayout.errorContentDescription = vm.errorPassword.value
+            validateButton()
+        }
     }
 
     private fun setupButton() {
         binding.signInFragment.setOnClickListener {
             it.hideKeyboard()
+            validateEmail()
+            validatePassword()
+        }
+        binding.signInContainer.setOnClickListener {
+            it.hideKeyboard()
+            validateEmail()
+            validatePassword()
         }
         binding.noAccount.setOnClickListener {
             activity?.supportFragmentManager?.beginTransaction()
@@ -75,26 +103,33 @@ class SignInFragment : Fragment() {
                 ?.addToBackStack(null)
                 ?.commit()
         }
+        binding.signInButton.isEnabled = false
     }
 
-    private fun watcher(func: () -> Unit) {
+    private fun emailWatcher(func: () -> Unit) {
         binding.email.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
 
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+
             }
 
             override fun afterTextChanged(s: Editable?) {
                 func()
             }
         })
+    }
+
+    private fun passwordWatcher(func: () -> Unit) {
         binding.password.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+
             }
 
             override fun afterTextChanged(s: Editable?) {
@@ -104,7 +139,17 @@ class SignInFragment : Fragment() {
     }
 
     private fun validateEmail() {
+        vm.email.value = binding.email.text.toString()
         vm.errorEmail.value = vm.validationEmail(binding.email.text.toString())
+    }
+
+    private fun validatePassword() {
+        vm.password.value = binding.password.text.toString()
+        vm.errorPassword.value = vm.validationPassword(binding.password.text.toString())
+    }
+
+    private fun validateButton() {
+        binding.signInButton.isEnabled = vm.errorEmail.value.isNullOrEmpty() && vm.errorPassword.value.isNullOrEmpty() && !vm.email.value.isNullOrEmpty() && !vm.password.value.isNullOrEmpty()
     }
 
     private fun View.hideKeyboard() {

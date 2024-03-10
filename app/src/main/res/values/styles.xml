@@ -32,6 +32,35 @@
         <item name="boxCornerRadiusTopEnd">8dp</item>
         <item name="boxCornerRadiusTopStart">8dp</item>
         <item name="hintEnabled">false</item>
+        <item name="boxStrokeErrorColor">@color/red</item>
+        <item name="errorIconDrawable">@null</item>
+        <item name="errorTextAppearance">@style/ErrorStyle</item>
+        <item name="errorTextColor">@color/red</item>
+        <item name="errorEnabled">true</item>
+    </style>
+
+    <style name="EditPasswordLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+        <item name="android:fontFamily">@font/kanit</item>
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:textColorHint">@color/hint_text</item>
+        <item name="android:textSize">18sp</item>
+        <item name="boxStrokeColor">@color/blue_primary</item>
+        <item name="boxStrokeWidth">2dp</item>
+        <item name="boxStrokeWidthFocused">3dp</item>
+        <item name="boxBackgroundColor">@color/white</item>
+        <item name="boxBackgroundMode">outline</item>
+        <item name="boxCornerRadiusBottomEnd">8dp</item>
+        <item name="boxCornerRadiusBottomStart">8dp</item>
+        <item name="boxCornerRadiusTopEnd">8dp</item>
+        <item name="boxCornerRadiusTopStart">8dp</item>
+        <item name="hintEnabled">false</item>
+        <item name="boxStrokeErrorColor">@color/red</item>
+        <item name="errorIconDrawable">@null</item>
+        <item name="errorTextAppearance">@style/ErrorStyle</item>
+        <item name="errorTextColor">@color/red</item>
+        <item name="errorEnabled">true</item>
+        <item name="passwordToggleEnabled">true</item>
+        <item name="passwordToggleTint">@color/hint_text</item>
     </style>
 
     <style name="EditText.Search" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
@@ -68,6 +97,12 @@
         <item name="android:windowSoftInputMode">adjustResize</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:navigationBarColor">@android:color/transparent</item>
+    </style>
+
+    <style name="ErrorStyle" parent="TextAppearance.AppCompat">
+        <item name="android:fontFamily">@font/kanit</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/green</item>
     </style>
 
     <!-- Components. -->

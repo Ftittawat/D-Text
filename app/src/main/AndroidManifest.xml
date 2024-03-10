@@ -31,6 +31,11 @@
             android:theme="@style/Base.Theme.DText.Home" >
         </activity>
         <activity
+            android:name=".presentation.onboardingscreen.OnboardActivity"
+            android:exported="true"
+            android:theme="@style/Base.Theme.DText.Splash.Screen">
+        </activity>
+        <activity
             android:name=".presentation.welcomescreen.WelcomeScreenActivity"
             android:exported="true"
             android:theme="@style/Base.Theme.DText.Splash.Screen">

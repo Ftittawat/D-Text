@@ -14,6 +14,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.d_text.databinding.ActivityHomeBinding
 import com.example.d_text.presentation.core.HomeViewModelFactory
 import com.example.d_text.presentation.di.Injector
+import com.example.d_text.presentation.history.HistoryFragment
 import com.example.d_text.presentation.notification.NotificationFragment
 import com.example.d_text.presentation.onboardingscreen.first.FirstOnboardFragment
 import com.example.d_text.presentation.setting.SettingActivity
@@ -66,7 +67,8 @@ class HomeActivity : AppCompatActivity() {
             startActivity(intent)
         }
         binding.scanButton.setOnClickListener {
-
+            val historyFragment = HistoryFragment()
+            historyFragment.show(supportFragmentManager, "HistoryFragmentTag")
         }
     }
 
