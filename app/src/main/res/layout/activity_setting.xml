@@ -208,6 +208,7 @@
     </androidx.appcompat.widget.LinearLayoutCompat>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/version_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="30dp">
@@ -230,9 +231,10 @@
                 android:textColor="@color/text_secondary"/>
 
             <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/version"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="0.1.0"
+                android:text="@string/empty"
                 android:fontFamily="@font/kanit"
                 android:textSize="14sp"
                 android:textColor="@color/text_secondary"
@@ -241,5 +243,17 @@
         </androidx.appcompat.widget.LinearLayoutCompat>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/logout_button"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginHorizontal="30dp"
+        android:background="@drawable/logout_button"
+        android:text="@string/sing_out"
+        android:fontFamily="@font/kanit"
+        android:textColor="@color/white"
+        android:textSize="14sp"/>
 
 </androidx.appcompat.widget.LinearLayoutCompat>

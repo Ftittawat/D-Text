@@ -91,6 +91,30 @@
         <item name="android:textSize">12sp</item>
     </style>
 
+    <style name="result.title" parent="TextAppearance.AppCompat">
+        <item name="android:fontFamily">@font/kanit_medium</item>
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="result.title.secondary" parent="TextAppearance.AppCompat">
+        <item name="android:fontFamily">@font/kanit</item>
+        <item name="android:textColor">@color/text_secondary</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="result.text" parent="TextAppearance.AppCompat">
+        <item name="android:fontFamily">@font/kanit</item>
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="result.text.secondary" parent="TextAppearance.AppCompat">
+        <item name="android:fontFamily">@font/kanit</item>
+        <item name="android:textColor">@color/text_secondary</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
     <style name="FullScreenBottomSheetDialog" parent="Theme.Design.BottomSheetDialog">
         <item name="android:windowIsFloating">false</item>
         <item name="android:windowIsTranslucent">true</item>

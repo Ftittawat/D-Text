@@ -7,15 +7,15 @@ plugins {
 apply plugin: 'kotlin-kapt'
 
 android {
-    namespace 'com.example.d_text'
+    namespace 'com.senior.d_text'
     compileSdk 34
 
     defaultConfig {
-        applicationId "com.example.d_text"
+        applicationId "com.senior.d_text"
         minSdk 28
         targetSdk 34
         versionCode 1
-        versionName "1.0"
+        versionName "1.0-unreleased"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -29,7 +29,7 @@ android {
 
     buildFeatures {
         viewBinding true
-        dataBinding true
+        // dataBinding true
     }
 
     compileOptions {
@@ -89,6 +89,7 @@ dependencies {
     implementation("com.tbuonomo:dotsindicator:5.0")
 
     testImplementation 'junit:junit:4.13.2'
+    testImplementation "org.mockito.kotlin:mockito-kotlin:5.2.1"
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 }

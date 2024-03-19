@@ -1,0 +1,34 @@
+package com.senior.d_text.presentation
+
+import android.app.Application
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.content.Context
+import android.os.Build
+import com.senior.d_text.presentation.di.Injector
+import com.senior.d_text.presentation.di.core.AppComponent
+import com.senior.d_text.presentation.di.home.HomeSubComponent
+
+class App : Application(), Injector {
+    private lateinit var  appComponent: AppComponent
+
+    override fun onCreate() {
+        super.onCreate()
+        initNotificationChannel(applicationContext)
+    }
+
+    override fun createHomeSubComponent(): HomeSubComponent {
+        return appComponent.homeSubComponent().create()
+    }
+
+    fun initNotificationChannel(context: Context) {
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val id = "test_notification"
+            val name = "New Notification"
+            val importance = NotificationManager.IMPORTANCE_HIGH
+            val channel = NotificationChannel(id, name, importance)
+            val manager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            manager.createNotificationChannel(channel)
+        }
+    }
+}

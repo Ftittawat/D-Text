@@ -6,6 +6,8 @@
     <string name="title_home">-TEXT</string>
     <string name="tagline">Keeps You Safe</string>
     <string name="welcome_title">Security Guard for Mobile Phone</string>
+    <string name="empty">N/A</string>
+    <string name="ok">Ok</string>
 
     <!-- Account. -->
     <string name="sign_in">Sign In</string>
@@ -49,6 +51,8 @@
     <string name="onboard_title_3">Manual Scan</string>
     <string name="onboard_subtitle_3">You can scan links manually when in doubt</string>
     <string name="start_now">"Let's start"</string>
+    <string name="warning_SDK_34_1">Warning For Android 14</string>
+    <string name="warning_SDK_34_2">Application is not fully support for Android 14 (SDK Version  34)</string>
 
     <!-- Home. -->
     <string name="search">Type or paste a URL</string>
@@ -61,6 +65,31 @@
     <string name="suspicious">Suspicious Link</string>
     <string name="safe">Safe Link</string>
     <string name="no_information">No Information</string>
+
+    <!-- Result. -->
+    <string name="warning_1">*Please do not click on this link.</string>
+    <string name="warning_2">*Delete messages if possible.</string>
+    <string name="threat_type">Threat Type</string>
+    <string name="overview">Report Overview</string>
+    <string name="organization">Organization</string>
+    <string name="safe_link">This link is safe.</string>
+    <string name="browser">Go to Browser</string>
+    <string name="result_1">Checklist</string>
+    <string name="result_2">Google Web Risk</string>
+    <string name="result_3">Phishtank</string>
+    <string name="result_4">in the Database</string>
+    <string name="result_safe">Safe</string>
+    <string name="low">Low</string>
+    <string name="medium">Medium</string>
+    <string name="high">High</string>
+    <string name="found">Found</string>
+    <string name="not_found">Not Found</string>
+    <string name="source">Found In</string>
+
+    <!-- Threat Type. -->
+    <string name="malware">Malware</string>
+    <string name="phishing">Phishing</string>
+    <string name="spam">Spam</string>
 
     <!-- Setting. -->
     <string name="title_settings">Settings</string>

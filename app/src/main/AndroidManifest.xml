@@ -3,6 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools" >
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
 
     <application
         android:name=".presentation.App"
@@ -43,18 +46,7 @@
         <activity
             android:name=".presentation.authentication.AuthenticationActivity"
             android:exported="true"
-            android:theme="@style/Base.Theme.DText.Onboard.Screen"
-            android:windowSoftInputMode="adjustResize">
-        </activity>
-        <activity
-            android:name=".presentation.signIn.SignInActivity"
-            android:exported="true"
-            android:theme="@style/Base.Theme.DText.Onboard.Screen"
-            android:windowSoftInputMode="adjustResize">
-        </activity>
-        <activity
-            android:name=".presentation.signUp.SignUpActivity"
-            android:exported="true"
+            android:noHistory="true"
             android:theme="@style/Base.Theme.DText.Onboard.Screen"
             android:windowSoftInputMode="adjustResize">
         </activity>

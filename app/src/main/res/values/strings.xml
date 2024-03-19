@@ -5,6 +5,8 @@
     <string name="title_home">-TEXT</string>
     <string name="tagline">Keeps You Safe</string>
     <string name="welcome_title">Security Guard for Mobile Phone</string>
+    <string name="empty">N/A</string>
+    <string name="ok">ตกลง</string>
 
     <!-- Account. -->
     <string name="sign_in">เข้าสู่ระบบ</string>
@@ -48,6 +50,8 @@
     <string name="onboard_title_3">การสแกนด้วยตนเอง</string>
     <string name="onboard_subtitle_3">สามารถสแกนลิงค์ด้วยตนเองเมื่อมีข้อสงสัย</string>
     <string name="start_now">เริ่มเลย</string>
+    <string name="warning_SDK_34_1">แจ้งเตือนสำหรับ Android 14</string>
+    <string name="warning_SDK_34_2">การทำงานบางอย่างของแอปพลิเคชันอาจไม่รองบน Android 14 (SDK Version  34)</string>
 
     <!-- Home. -->
     <string name="search">พิมพ์หรือวาง URL</string>
@@ -60,6 +64,31 @@
     <string name="suspicious">ลิงค์ที่น่าสงสัย</string>
     <string name="safe">ลิงค์ปลอดภัย</string>
     <string name="no_information">ไม่มีข้อมูล</string>
+
+    <!-- Result. -->
+    <string name="warning_1">*กรุณาอย่าคลิกลิงค์นี้</string>
+    <string name="warning_2">*ลบข้อความถ้าเป็นไปได้</string>
+    <string name="threat_type">ประเภทภัยคุกคาม</string>
+    <string name="overview">ภาพรวมรายงาน</string>
+    <string name="organization">องค์กร</string>
+    <string name="safe_link">ลิงค์นี้ปลอดภัย</string>
+    <string name="browser">ไปยังบราวเซอร์</string>
+    <string name="result_1">Checklist</string>
+    <string name="result_2">Google Web Risk</string>
+    <string name="result_3">Phishtank</string>
+    <string name="result_4">ในฐานข้อมูล</string>
+    <string name="result_safe">ปลอดภัย</string>
+    <string name="low">ต่ำ</string>
+    <string name="medium">ปานกลาง</string>
+    <string name="high">สูง</string>
+    <string name="found">พบ</string>
+    <string name="not_found">ไม่พบ</string>
+    <string name="source">พบใน</string>
+
+    <!-- Threat Type. -->
+    <string name="malware">มัลแวร์</string>
+    <string name="phishing">ฟิชชิง</string>
+    <string name="spam">สแปม</string>
 
     <!-- Setting. -->
     <string name="title_settings">การตั้งค่า</string>
