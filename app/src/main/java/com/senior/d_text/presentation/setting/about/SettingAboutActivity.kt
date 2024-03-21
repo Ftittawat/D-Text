@@ -2,6 +2,7 @@ package com.senior.d_text.presentation.setting.about
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import com.senior.d_text.R
 import com.senior.d_text.databinding.ActivitySettingAboutBinding
 import javax.inject.Inject
@@ -10,11 +11,18 @@ class SettingAboutActivity : AppCompatActivity() {
 
     @Inject
     private lateinit var binding: ActivitySettingAboutBinding
+    private lateinit var vm: SettingAboutViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySettingAboutBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        vm = ViewModelProvider(this)[SettingAboutViewModel::class.java]
+    }
+
+    override fun onStart() {
+        super.onStart()
+        setupView()
     }
 
     override fun onResume() {
@@ -26,6 +34,10 @@ class SettingAboutActivity : AppCompatActivity() {
         binding.backButton.setOnClickListener {
             onBackPressed()
         }
+    }
+
+    private fun setupView() {
+        binding.version.text = vm.version
     }
 
     override fun onBackPressed() {

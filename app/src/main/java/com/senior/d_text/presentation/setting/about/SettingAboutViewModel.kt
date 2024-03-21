@@ -1,13 +1,11 @@
-package com.senior.d_text.presentation.setting
+package com.senior.d_text.presentation.setting.about
 
 import android.app.Application
-import androidx.lifecycle.ViewModel
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.AndroidViewModel
 
-class SettingViewModel(application: Application) : AndroidViewModel(application) {
+class SettingAboutViewModel(application: Application) : AndroidViewModel(application) {
 
     val version: String = getVersionName()
 
@@ -23,4 +21,5 @@ class SettingViewModel(application: Application) : AndroidViewModel(application)
             "N/A"
         }
     }
+
 }
