@@ -12,7 +12,6 @@ import javax.inject.Inject
 
 class NotificationFragment : BottomSheetDialogFragment() {
 
-    @Inject
     private lateinit var binding: FragmentNotificationBinding
 
     override fun onCreateView(
@@ -36,13 +35,10 @@ class NotificationFragment : BottomSheetDialogFragment() {
         setStyle(STYLE_NORMAL, R.style.FullScreenBottomSheetDialog)
         bottomSheet?.let {
             val behavior = BottomSheetBehavior.from(it)
-//            behavior.isDraggable = false
+            behavior.isDraggable = false
             behavior.state = BottomSheetBehavior.STATE_EXPANDED
         }
-    }
 
-    override fun onResume() {
-        super.onResume()
         setupButton()
     }
 

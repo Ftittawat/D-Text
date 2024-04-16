@@ -1,10 +1,9 @@
-package com.senior.d_text.presentation.Util
+package com.senior.d_text.presentation.util
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.isGone
 import androidx.core.view.isInvisible
 import androidx.fragment.app.DialogFragment
 import com.senior.d_text.R
@@ -59,11 +58,31 @@ class CustomDialogFragment() : DialogFragment() {
     }
 
     private fun setupButton() {
-        binding.confirmButton.setOnClickListener {
-            dismiss()
-        }
-        binding.cancelButton.setOnClickListener {
-            dismiss()
+        when (type) {
+            1 -> {
+                binding.confirmButton.setOnClickListener {
+                    dismiss()
+                }
+                binding.cancelButton.setOnClickListener {
+                    dismiss()
+                }
+            }
+            2 -> {
+                binding.confirmButton.setOnClickListener {
+                    dismiss()
+                }
+                binding.cancelButton.setOnClickListener {
+                    dismiss()
+                }
+            }
+            else -> {
+                binding.confirmButton.setOnClickListener {
+                    dismiss()
+                }
+                binding.cancelButton.setOnClickListener {
+                    dismiss()
+                }
+            }
         }
     }
 

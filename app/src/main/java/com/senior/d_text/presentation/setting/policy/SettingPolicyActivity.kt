@@ -8,7 +8,6 @@ import javax.inject.Inject
 
 class SettingPolicyActivity : AppCompatActivity() {
 
-    @Inject
     private lateinit var binding: ActivitySettingPolicyBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {

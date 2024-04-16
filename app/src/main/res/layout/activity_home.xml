@@ -140,6 +140,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/scan_button"/>
 
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/history_delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@+id/history_title"
+        app:layout_constraintBottom_toBottomOf="@+id/history_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="30dp"
+        android:background="@color/blank"
+        android:src="@drawable/baseline_delete_24"/>
+
     <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/history_layout"
         android:layout_width="match_parent"

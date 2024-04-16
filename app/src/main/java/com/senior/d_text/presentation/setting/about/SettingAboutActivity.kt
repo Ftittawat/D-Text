@@ -9,7 +9,6 @@ import javax.inject.Inject
 
 class SettingAboutActivity : AppCompatActivity() {
 
-    @Inject
     private lateinit var binding: ActivitySettingAboutBinding
     private lateinit var vm: SettingAboutViewModel
 

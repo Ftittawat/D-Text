@@ -11,9 +11,8 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.senior.d_text.R
 import com.senior.d_text.databinding.ActivityWelcomeBinding
-import com.senior.d_text.presentation.Util.CustomDialogFragment
+import com.senior.d_text.presentation.util.CustomDialogFragment
 import com.senior.d_text.presentation.authentication.AuthenticationActivity
-import com.senior.d_text.presentation.notification.NotificationFragment
 
 class WelcomeScreenActivity : AppCompatActivity() {
 

@@ -27,7 +27,7 @@ class SplashScreenActivity : AppCompatActivity() {
         // Log.d("log", "${onBoardFinished()}")
         if (onBoardFinished()) {
             Handler().postDelayed({
-                intent = Intent(this, WelcomeScreenActivity::class.java)
+                intent = Intent(this, HomeActivity::class.java)
                 startActivity(intent)
                 overridePendingTransition(R.anim.animate_fade_enter, R.anim.animate_fade_exit)
                 finish()

@@ -7,13 +7,21 @@ import android.content.Context
 import android.os.Build
 import com.senior.d_text.presentation.di.Injector
 import com.senior.d_text.presentation.di.core.AppComponent
+import com.senior.d_text.presentation.di.core.AppModule
+import com.senior.d_text.presentation.di.core.DaggerAppComponent
+import com.senior.d_text.presentation.di.core.RepositoryModule
 import com.senior.d_text.presentation.di.home.HomeSubComponent
 
 class App : Application(), Injector {
-    private lateinit var  appComponent: AppComponent
+
+    private lateinit var appComponent: AppComponent
 
     override fun onCreate() {
         super.onCreate()
+        appComponent = DaggerAppComponent.builder()
+            .appModule(AppModule(applicationContext))
+            .repositoryModule(RepositoryModule(applicationContext))
+            .build()
         initNotificationChannel(applicationContext)
     }
 
@@ -22,7 +30,7 @@ class App : Application(), Injector {
     }
 
     fun initNotificationChannel(context: Context) {
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val id = "test_notification"
             val name = "New Notification"
             val importance = NotificationManager.IMPORTANCE_HIGH

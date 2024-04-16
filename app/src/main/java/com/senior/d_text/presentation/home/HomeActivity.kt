@@ -4,6 +4,7 @@ import android.Manifest
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
@@ -11,33 +12,43 @@ import android.text.TextWatcher
 import android.util.Log
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.senior.d_text.R
+import com.senior.d_text.data.model.history.History
 import com.senior.d_text.databinding.ActivityHomeBinding
 import com.senior.d_text.presentation.core.HomeViewModelFactory
+import com.senior.d_text.presentation.core.OnItemClickListener
+import com.senior.d_text.presentation.di.Injector
 import com.senior.d_text.presentation.history.HistoryFragment
 import com.senior.d_text.presentation.notification.NotificationFragment
 import com.senior.d_text.presentation.setting.SettingActivity
 import javax.inject.Inject
+import javax.inject.Singleton
 
-class HomeActivity : AppCompatActivity() {
+class HomeActivity() : AppCompatActivity() {
 
     @Inject
     lateinit var factory: HomeViewModelFactory
     private lateinit var vm: HomeViewModel
     private lateinit var binding: ActivityHomeBinding
-
-    private val NOTIFICATION_PERMISSION_CODE = 1001
+    private  lateinit var adapter: HistoryAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
-//        (application as Injector).createHomeSubComponent()
-//            .inject(this)
-        vm = ViewModelProvider(this)[HomeViewModel::class.java]
+        (application as Injector).createHomeSubComponent()
+            .inject(this)
+        vm = ViewModelProvider(this, factory)[HomeViewModel::class.java]
+        requestPermissions()
+        initRecyclerView()
+
 //        Handler().postDelayed({
 //            val fragmentManager = supportFragmentManager
 //            val fragmentTransaction = fragmentManager.beginTransaction()
@@ -48,6 +59,7 @@ class HomeActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
+        setupView()
         searchWatcher { validateButton() }
     }
 
@@ -58,15 +70,26 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun setupView() {
-
+        Log.d("sms", "messages: init")
+        vm.startListeningForMessages()
+        vm.messages.observe(this) {
+            Log.d("sms", "messages: ${vm.messages.value}")
+            Log.d("sms", "url: ${vm.messagesUrl.value}")
+        }
+        vm.messagesUrl.observe(this) {
+            // Log.d("sms", "url: ${vm.messagesUrl.value}")
+        }
     }
 
     private fun setupButton() {
-//        binding.notificationIndicator.isVisible = true
+        // binding.notificationIndicator.isVisible = true
         binding.activity.setOnClickListener {
             it.hideKeyboard()
             binding.searchBox.clearFocus()
             validateButton()
+        }
+        binding.titleContainer.setOnClickListener {
+            Log.d("log", "click")
         }
         binding.notificationButton.setOnClickListener {
             val notificationFragment = NotificationFragment()
@@ -88,8 +111,13 @@ class HomeActivity : AppCompatActivity() {
             val bundle = Bundle()
             getSearchValue()
             bundle.putString("URL", vm.url.value.toString())
+            val testData = History( 0, vm.url.value.toString(), "safe", "web", "2024-04-16")
+            vm.saveHistory(testData)
             historyFragment.arguments = bundle
             historyFragment.show(supportFragmentManager, "HistoryFragmentTag")
+        }
+        binding.historyDelete.setOnClickListener {
+            vm.deleteAllHistory()
         }
         binding.scanButton.isEnabled = false
     }
@@ -129,6 +157,64 @@ class HomeActivity : AppCompatActivity() {
 //        manager.notify(id, notification)
 //    }
 
+    private fun requestPermissions() {
+        val permissions = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                arrayOf(
+                    Manifest.permission.INTERNET to INTERNET_REQUEST_CODE,
+                    Manifest.permission.POST_NOTIFICATIONS to POST_NOTIFICATIONS_REQUEST_CODE,
+                    Manifest.permission.VIBRATE to VIBRATE_REQUEST_CODE,
+                    Manifest.permission.FOREGROUND_SERVICE to FOREGROUND_SERVICE_REQUEST_CODE,
+                    Manifest.permission.RECEIVE_SMS to RECEIVE_SMS_REQUEST_CODE,
+                    Manifest.permission.READ_SMS to READ_SMS_REQUEST_CODE
+                )
+            } else {
+                arrayOf(
+                    Manifest.permission.INTERNET to INTERNET_REQUEST_CODE,
+                    Manifest.permission.VIBRATE to VIBRATE_REQUEST_CODE,
+                    Manifest.permission.FOREGROUND_SERVICE to FOREGROUND_SERVICE_REQUEST_CODE,
+                    Manifest.permission.RECEIVE_SMS to RECEIVE_SMS_REQUEST_CODE,
+                    Manifest.permission.READ_SMS to READ_SMS_REQUEST_CODE
+                )
+            }
+        } else  {
+            arrayOf(
+                Manifest.permission.INTERNET to INTERNET_REQUEST_CODE,
+                Manifest.permission.VIBRATE to VIBRATE_REQUEST_CODE,
+                Manifest.permission.RECEIVE_SMS to RECEIVE_SMS_REQUEST_CODE,
+                Manifest.permission.READ_SMS to READ_SMS_REQUEST_CODE
+            )
+        }
+
+//        permissions.forEach { (permission, requestCode) ->
+//            ActivityCompat.requestPermissions(this, arrayOf(permission), requestCode)
+//        }
+
+        permissions.forEach { (permission, requestCode) ->
+            if (ContextCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this, arrayOf(permission), requestCode)
+            }
+        }
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        when (requestCode) {
+            requestCode -> {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.isNotEmpty() && grantResults.all { it == PackageManager.PERMISSION_GRANTED }) {
+                    Log.d("log", "$requestCode : PERMISSION_GRANTED")
+                } else {
+                    Log.d("log", "$requestCode : PERMISSION_DENIED")
+                }
+                return
+            }
+            else -> {
+                // Handle other requestCode if any
+            }
+        }
+    }
+
     private fun checkVibratePermission(): Boolean {
         // Log.d("log", "checkVibratePermission: ")
         return ContextCompat.checkSelfPermission(
@@ -147,20 +233,53 @@ class HomeActivity : AppCompatActivity() {
     }
 
     // Handle the result of the permission request
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<String>,
-        grantResults: IntArray
-    ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+//    override fun onRequestPermissionsResult(
+//        requestCode: Int,
+//        permissions: Array<String>,
+//        grantResults: IntArray
+//    ) {
+//        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+//
+//        if (requestCode == NOTIFICATION_PERMISSION_CODE) {
+//            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+//                // Permission granted
+//                // Perform your tasks that may involve notifications here
+//            } else {
+//                // Permission denied
+//                // Handle the case where the user denies the permission
+//            }
+//        }
+//    }
 
-        if (requestCode == NOTIFICATION_PERMISSION_CODE) {
-            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                // Permission granted
-                // Perform your tasks that may involve notifications here
+    private fun initRecyclerView() {
+        binding.historyRecyclerview.layoutManager = LinearLayoutManager(this)
+        adapter = HistoryAdapter()
+        binding.historyRecyclerview.adapter = adapter
+        displayHistory()
+        adapter.setOnItemClickListener(object : OnItemClickListener {
+            override fun onItemClick(position: Int) {
+                //Toast.makeText(applicationContext, adapter.historyList[position].url, Toast.LENGTH_SHORT).show()
+                val historyFragment = HistoryFragment()
+                val bundle = Bundle()
+                getSearchValue()
+                bundle.putString("URL", adapter.historyList[position].url)
+                bundle.putString("RISK_LEVEL", adapter.historyList[position].risk_level)
+                bundle.putString("TYPE", adapter.historyList[position].type)
+                bundle.putString("DATE_TIME", adapter.historyList[position].date_time)
+                historyFragment.arguments = bundle
+                historyFragment.show(supportFragmentManager, "HistoryFragmentTag")
+            }
+        })
+    }
+
+    private fun displayHistory() {
+        val responseData = vm.getHistory()
+        responseData.observe(this) {
+            if (it != null) {
+                adapter.setList(it)
+                adapter.notifyDataSetChanged()
             } else {
-                // Permission denied
-                // Handle the case where the user denies the permission
+                Toast.makeText(applicationContext, "No Data", Toast.LENGTH_LONG).show()
             }
         }
     }
@@ -171,6 +290,16 @@ class HomeActivity : AppCompatActivity() {
 
     private fun validateButton() {
         binding.scanButton.isEnabled = !binding.searchBox.text.toString().isEmpty()
+    }
+
+    companion object {
+        const val NOTIFICATION_PERMISSION_CODE = 1001
+        const val INTERNET_REQUEST_CODE = 1002
+        const val POST_NOTIFICATIONS_REQUEST_CODE = 1003
+        const val VIBRATE_REQUEST_CODE = 1004
+        const val FOREGROUND_SERVICE_REQUEST_CODE = 1005
+        const val RECEIVE_SMS_REQUEST_CODE = 1006
+        const val READ_SMS_REQUEST_CODE = 1007
     }
 
 }

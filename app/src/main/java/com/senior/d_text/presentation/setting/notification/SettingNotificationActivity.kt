@@ -9,7 +9,6 @@ import javax.inject.Inject
 
 class SettingNotificationActivity : AppCompatActivity() {
 
-    @Inject
     private lateinit var binding: ActivitySettingNotificationBinding
     private lateinit var vm: SettingNotificationViewModel
 

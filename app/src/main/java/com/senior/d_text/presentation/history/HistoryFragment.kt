@@ -6,6 +6,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isGone
+import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -54,7 +56,60 @@ class HistoryFragment : BottomSheetDialogFragment() {
         }
 
         vm.url.value = arguments?.getString("URL","")
-        binding.url.text = vm.url.value.toString()
+        vm.riskLevel.value = arguments?.getString("RISK_LEVEL","")
+        vm.urlType.value = arguments?.getString("TYPE","")
+        vm.dateTime.value = arguments?.getString("DATE_TIME","")
+
+        binding.url.text = vm.url.value
+
+        when (vm.riskLevel.value) {
+            "safe" -> {
+                binding.riskLevelTitle.text = getText(R.string.safe)
+                val state = intArrayOf(R.attr.state_safe)
+                binding.resultIcon.setImageState(state, true)
+                binding.riskLevelLine.setImageState(state, true)
+                binding.warningText.isGone = true
+                binding.browserContainer.isVisible = true
+                binding.typeTitle.isGone = true
+                binding.typeResult.isGone = true
+                binding.organizationTitle.isVisible = true
+                binding.organizationResult.isVisible = true
+            }
+            "suspicious" -> {
+                binding.riskLevelTitle.text = getText(R.string.suspicious)
+                val state = intArrayOf(R.attr.state_suspicious)
+                binding.resultIcon.setImageState(state, true)
+                binding.riskLevelLine.setImageState(state, true)
+                binding.warningText.isVisible = true
+                binding.browserContainer.isGone = true
+                binding.typeTitle.isGone = true
+                binding.typeResult.isGone = true
+                binding.organizationTitle.isVisible = true
+                binding.organizationResult.isVisible = true
+            }
+            "unsafe" -> {
+                binding.riskLevelTitle.text = getText(R.string.unsafe)
+                val state = intArrayOf(R.attr.state_unsafe)
+                binding.resultIcon.setImageState(state, true)
+                binding.riskLevelLine.setImageState(state, true)
+                binding.warningText.isVisible = true
+                binding.browserContainer.isGone = true
+                binding.typeTitle.isVisible = true
+                binding.typeResult.isVisible = true
+                binding.organizationTitle.isGone = true
+                binding.organizationResult.isGone = true
+            }
+            else -> {
+                binding.riskLevelTitle.text = getText(R.string.no_information)
+                val state = intArrayOf(R.attr.state_no_information)
+                binding.resultIcon.setImageState(state, true)
+                binding.riskLevelLine.setImageState(state, true)
+                binding.warningText.isGone = true
+                binding.browserContainer.isGone = true
+                binding.typeContainer.isGone = true
+            }
+        }
+
     }
 
     private fun setupButton() {

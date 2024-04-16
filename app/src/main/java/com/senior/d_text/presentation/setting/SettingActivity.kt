@@ -17,7 +17,6 @@ import javax.inject.Inject
 
 class SettingActivity : AppCompatActivity() {
 
-    @Inject
     private lateinit var vm: SettingViewModel
     private lateinit var binding: ActivitySettingBinding
 
