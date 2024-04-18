@@ -1,19 +1,16 @@
 package com.senior.d_text.presentation.home
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
 import com.senior.d_text.data.model.history.History
 import com.senior.d_text.data.model.history.HistoryList
-import com.senior.d_text.data.model.message.SMSMessage
+import com.senior.d_text.data.model.message.ReceiveSMS
 import com.senior.d_text.domain.usecase.DeleteAllHistoryUseCase
 import com.senior.d_text.domain.usecase.GetHistoryUseCase
 import com.senior.d_text.domain.usecase.ListenForMessagesUseCase
 import com.senior.d_text.domain.usecase.SaveHistoryUseCase
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class HomeViewModel(
@@ -30,8 +27,8 @@ class HomeViewModel(
     var messagesSender = MutableLiveData("")
     var messagesBody = MutableLiveData("")
     var messagesUrl = MutableLiveData("")
-    private val _messages = MutableLiveData<List<SMSMessage>>()
-    val messages: MutableLiveData<List<SMSMessage>> = _messages
+    private val _messages = MutableLiveData<List<ReceiveSMS>>()
+    val messages: MutableLiveData<List<ReceiveSMS>> = _messages
 
     fun validationUrl(value: String): String {
         return if (!value.startsWith("http://") && !value.startsWith("https://")) {

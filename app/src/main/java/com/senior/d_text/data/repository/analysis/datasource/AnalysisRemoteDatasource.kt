@@ -1,4 +1,4 @@
-package com.senior.d_text.data.repository.history.datasource
+package com.senior.d_text.data.repository.analysis.datasource
 
 import com.senior.d_text.data.model.history.History
 import retrofit2.Response

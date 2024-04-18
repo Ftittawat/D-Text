@@ -22,7 +22,7 @@ interface DTextService {
 
     @FormUrlEncoded
     @POST("")
-    suspend fun postTest(
+    suspend fun postLogin(
         @Field("email") email: String,
         @Field("password") password: String
     ): Call<History>

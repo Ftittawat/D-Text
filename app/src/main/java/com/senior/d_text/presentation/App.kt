@@ -11,6 +11,9 @@ import com.senior.d_text.presentation.di.core.AppModule
 import com.senior.d_text.presentation.di.core.DaggerAppComponent
 import com.senior.d_text.presentation.di.core.RepositoryModule
 import com.senior.d_text.presentation.di.home.HomeSubComponent
+import com.senior.d_text.presentation.di.messagehistory.MessageHistorySubComponent
+import com.senior.d_text.presentation.di.messageService.MessageServiceSubComponent
+import com.senior.d_text.presentation.di.notificationService.NotificationServiceSubComponent
 
 class App : Application(), Injector {
 
@@ -27,6 +30,18 @@ class App : Application(), Injector {
 
     override fun createHomeSubComponent(): HomeSubComponent {
         return appComponent.homeSubComponent().create()
+    }
+
+    override fun createMessageHistorySubComponent(): MessageHistorySubComponent {
+        return appComponent.messageHistorySubComponent().create()
+    }
+
+    override fun createMessageService(): MessageServiceSubComponent {
+        return appComponent.messageServiceSubComponent().create()
+    }
+
+    override fun createNotificationService(): NotificationServiceSubComponent {
+        return appComponent.notificationServiceSubComponent().create()
     }
 
     fun initNotificationChannel(context: Context) {

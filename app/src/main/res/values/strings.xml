@@ -96,6 +96,7 @@
     <string name="setting_2">ช่วยเหลือ</string>
     <string name="title_privacy_policy">นโยบายความเป็นส่วนตัว</string>
     <string name="version">Version</string>
+    <string name="setting_message_history">ประวัติข้อความ</string>
     <string name="setting_notification">การแจ้งเตือน</string>
     <string name="setting_scan">การตรวจสอบอัตโนมัติ</string>
     <string name="setting_about">เกี่ยวกับ</string>

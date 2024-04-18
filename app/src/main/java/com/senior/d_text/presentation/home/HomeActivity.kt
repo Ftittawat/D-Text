@@ -15,8 +15,9 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.view.isGone
+import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.senior.d_text.R
@@ -29,7 +30,6 @@ import com.senior.d_text.presentation.history.HistoryFragment
 import com.senior.d_text.presentation.notification.NotificationFragment
 import com.senior.d_text.presentation.setting.SettingActivity
 import javax.inject.Inject
-import javax.inject.Singleton
 
 class HomeActivity() : AppCompatActivity() {
 
@@ -37,7 +37,7 @@ class HomeActivity() : AppCompatActivity() {
     lateinit var factory: HomeViewModelFactory
     private lateinit var vm: HomeViewModel
     private lateinit var binding: ActivityHomeBinding
-    private  lateinit var adapter: HistoryAdapter
+    private lateinit var adapter: HistoryAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -70,6 +70,8 @@ class HomeActivity() : AppCompatActivity() {
     }
 
     private fun setupView() {
+        binding.searchBox.clearFocus()
+        notificationIndicator(true)
         Log.d("sms", "messages: init")
         vm.startListeningForMessages()
         vm.messages.observe(this) {
@@ -87,9 +89,6 @@ class HomeActivity() : AppCompatActivity() {
             it.hideKeyboard()
             binding.searchBox.clearFocus()
             validateButton()
-        }
-        binding.titleContainer.setOnClickListener {
-            Log.d("log", "click")
         }
         binding.notificationButton.setOnClickListener {
             val notificationFragment = NotificationFragment()
@@ -158,33 +157,38 @@ class HomeActivity() : AppCompatActivity() {
 //    }
 
     private fun requestPermissions() {
-        val permissions = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                arrayOf(
-                    Manifest.permission.INTERNET to INTERNET_REQUEST_CODE,
-                    Manifest.permission.POST_NOTIFICATIONS to POST_NOTIFICATIONS_REQUEST_CODE,
-                    Manifest.permission.VIBRATE to VIBRATE_REQUEST_CODE,
-                    Manifest.permission.FOREGROUND_SERVICE to FOREGROUND_SERVICE_REQUEST_CODE,
-                    Manifest.permission.RECEIVE_SMS to RECEIVE_SMS_REQUEST_CODE,
-                    Manifest.permission.READ_SMS to READ_SMS_REQUEST_CODE
-                )
-            } else {
-                arrayOf(
-                    Manifest.permission.INTERNET to INTERNET_REQUEST_CODE,
-                    Manifest.permission.VIBRATE to VIBRATE_REQUEST_CODE,
-                    Manifest.permission.FOREGROUND_SERVICE to FOREGROUND_SERVICE_REQUEST_CODE,
-                    Manifest.permission.RECEIVE_SMS to RECEIVE_SMS_REQUEST_CODE,
-                    Manifest.permission.READ_SMS to READ_SMS_REQUEST_CODE
-                )
-            }
-        } else  {
-            arrayOf(
-                Manifest.permission.INTERNET to INTERNET_REQUEST_CODE,
-                Manifest.permission.VIBRATE to VIBRATE_REQUEST_CODE,
-                Manifest.permission.RECEIVE_SMS to RECEIVE_SMS_REQUEST_CODE,
-                Manifest.permission.READ_SMS to READ_SMS_REQUEST_CODE
-            )
-        }
+//        val permissions = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+//                arrayOf(
+//                    Manifest.permission.INTERNET to INTERNET_REQUEST_CODE,
+//                    Manifest.permission.POST_NOTIFICATIONS to POST_NOTIFICATIONS_REQUEST_CODE,
+//                    Manifest.permission.VIBRATE to VIBRATE_REQUEST_CODE,
+//                    Manifest.permission.FOREGROUND_SERVICE to FOREGROUND_SERVICE_REQUEST_CODE,
+//                    Manifest.permission.RECEIVE_SMS to RECEIVE_SMS_REQUEST_CODE,
+//                    Manifest.permission.READ_SMS to READ_SMS_REQUEST_CODE
+//                )
+//            } else {
+//                arrayOf(
+//                    Manifest.permission.INTERNET to INTERNET_REQUEST_CODE,
+//                    Manifest.permission.VIBRATE to VIBRATE_REQUEST_CODE,
+//                    Manifest.permission.FOREGROUND_SERVICE to FOREGROUND_SERVICE_REQUEST_CODE,
+//                    Manifest.permission.RECEIVE_SMS to RECEIVE_SMS_REQUEST_CODE,
+//                    Manifest.permission.READ_SMS to READ_SMS_REQUEST_CODE
+//                )
+//            }
+//        } else  {
+//            arrayOf(
+//                Manifest.permission.INTERNET to INTERNET_REQUEST_CODE,
+//                Manifest.permission.VIBRATE to VIBRATE_REQUEST_CODE,
+//                Manifest.permission.RECEIVE_SMS to RECEIVE_SMS_REQUEST_CODE,
+//                Manifest.permission.READ_SMS to READ_SMS_REQUEST_CODE
+//            )
+//        }
+
+        val permissions = arrayOf(
+            Manifest.permission.RECEIVE_SMS to RECEIVE_SMS_REQUEST_CODE,
+            Manifest.permission.READ_SMS to READ_SMS_REQUEST_CODE
+        )
 
 //        permissions.forEach { (permission, requestCode) ->
 //            ActivityCompat.requestPermissions(this, arrayOf(permission), requestCode)
@@ -262,10 +266,10 @@ class HomeActivity() : AppCompatActivity() {
                 val historyFragment = HistoryFragment()
                 val bundle = Bundle()
                 getSearchValue()
-                bundle.putString("URL", adapter.historyList[position].url)
-                bundle.putString("RISK_LEVEL", adapter.historyList[position].risk_level)
-                bundle.putString("TYPE", adapter.historyList[position].type)
-                bundle.putString("DATE_TIME", adapter.historyList[position].date_time)
+                bundle.putString("URL", adapter.getList(position).url)
+                bundle.putString("RISK_LEVEL", adapter.getList(position).risk_level)
+                bundle.putString("TYPE", adapter.getList(position).type)
+                bundle.putString("DATE_TIME", adapter.getList(position).date_time)
                 historyFragment.arguments = bundle
                 historyFragment.show(supportFragmentManager, "HistoryFragmentTag")
             }
@@ -281,6 +285,15 @@ class HomeActivity() : AppCompatActivity() {
             } else {
                 Toast.makeText(applicationContext, "No Data", Toast.LENGTH_LONG).show()
             }
+        }
+    }
+
+    private fun notificationIndicator(show: Boolean) {
+        if (show) {
+            binding.notificationIndicator.isVisible = true
+        }
+        else {
+            binding.notificationIndicator.isGone = true
         }
     }
 

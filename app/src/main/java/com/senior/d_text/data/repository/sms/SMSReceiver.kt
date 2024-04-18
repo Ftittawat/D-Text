@@ -6,7 +6,11 @@ import android.content.Intent
 import android.os.Bundle
 import android.provider.Telephony
 import android.telephony.SmsMessage
-import com.senior.d_text.data.model.message.SMSMessage
+import android.util.Log
+import com.senior.d_text.data.model.message.ReceiveSMS
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 //class SMSReceiver(private val listener: (SMSMessage) -> Unit) : BroadcastReceiver() {
 //    override fun onReceive(context: Context?, intent: Intent?) {
@@ -24,7 +28,7 @@ import com.senior.d_text.data.model.message.SMSMessage
 
 class SMSReceiver : BroadcastReceiver() {
 
-    private var listener: ((SMSMessage) -> Unit)? = null
+    private var listener: ((ReceiveSMS) -> Unit)? = null
 
     override fun onReceive(context: Context?, intent: Intent?) {
         if (intent?.action == Telephony.Sms.Intents.SMS_RECEIVED_ACTION) {
@@ -43,16 +47,22 @@ class SMSReceiver : BroadcastReceiver() {
                     val smsMessage = SmsMessage.createFromPdu(pdu as ByteArray)
                     val messageBody = smsMessage.messageBody ?: ""
                     val sender = smsMessage.originatingAddress ?: ""
+                    val timestampMillis = smsMessage.timestampMillis // Get timestamp in milliseconds
+                    val dateTime = SimpleDateFormat("dd-MM-yyyy HH:mm:ss", Locale.getDefault())
+                        .format(Date(timestampMillis))
+                    Log.d("logMessage", "onReceive-sender: $sender")
+                    Log.d("logMessage", "onReceive-messageBody: $messageBody")
 
                     val fullMessage = concatenateSmsParts(bundle)
+                    Log.d("logMessage", "onReceive-fullMessage: $fullMessage")
                     // url = extractUrl(messageBody)  ?: ""
-                    listener?.invoke(SMSMessage(sender, fullMessage))
+                    listener?.invoke(ReceiveSMS(sender, fullMessage, dateTime))
                 }
             }
         }
     }
 
-    fun setListener(listener: (SMSMessage) -> Unit) {
+    fun setListener(listener: (ReceiveSMS) -> Unit) {
         this.listener = listener
     }
 
@@ -63,6 +73,7 @@ class SMSReceiver : BroadcastReceiver() {
         for (i in pdus.indices) {
             messages[i] = SmsMessage.createFromPdu(pdus[i] as ByteArray)
             stringBuilder.append(messages[i]?.messageBody)
+            Log.d("logMessage", "concatenateSmsParts: $i: ${messages[i]?.messageBody}")
         }
         return stringBuilder.toString()
     }

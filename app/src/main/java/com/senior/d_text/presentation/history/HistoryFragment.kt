@@ -14,7 +14,6 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.senior.d_text.R
 import com.senior.d_text.databinding.FragmentHistoryBinding
 
-
 class HistoryFragment : BottomSheetDialogFragment() {
 
     private lateinit var vm: HistoryViewModel

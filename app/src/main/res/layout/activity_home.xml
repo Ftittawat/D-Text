@@ -90,7 +90,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/kanit_medium"
-            android:text="Keeps You Safe"
+            android:text="@string/tagline"
             android:textColor="@color/text_primary"
             android:textSize="16sp" />
 
@@ -149,7 +149,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginEnd="30dp"
         android:background="@color/blank"
-        android:src="@drawable/baseline_delete_24"/>
+        android:src="@drawable/round_delete_forever_24"/>
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/history_layout"
@@ -159,13 +159,13 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginHorizontal="30dp"
         android:layout_marginTop="10dp">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/history_recyclerview"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="26dp"/>
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 

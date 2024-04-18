@@ -1,7 +1,7 @@
-package com.senior.d_text.data.repository.history.datasourceImpl
+package com.senior.d_text.data.repository.analysis.datasourceImpl
 
 import com.senior.d_text.data.api.DTextService
-import com.senior.d_text.data.repository.history.datasource.AnalysisRemoteDatasource
+import com.senior.d_text.data.repository.analysis.datasource.AnalysisRemoteDatasource
 
 class AnalysisRemoteDatasourceImpl(
     private val dTextService: DTextService

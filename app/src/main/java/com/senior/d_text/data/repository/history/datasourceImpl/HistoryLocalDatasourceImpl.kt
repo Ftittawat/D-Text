@@ -26,4 +26,8 @@ class HistoryLocalDatasourceImpl(private val historyDao: HistoryDao):
             historyDao.deteteAllHistory()
         }
     }
+
+    override suspend fun deleteFirstHistory() {
+        TODO("Not yet implemented")
+    }
 }

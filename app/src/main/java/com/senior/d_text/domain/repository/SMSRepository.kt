@@ -1,7 +1,7 @@
 package com.senior.d_text.domain.repository
 
-import com.senior.d_text.data.model.message.SMSMessage
+import com.senior.d_text.data.model.message.ReceiveSMS
 
 interface SMSRepository {
-    fun listenForMessages(listener: (SMSMessage) -> Unit)
+    fun listenForMessages(listener: (ReceiveSMS) -> Unit)
 }

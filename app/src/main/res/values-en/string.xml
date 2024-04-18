@@ -97,6 +97,7 @@
     <string name="setting_2">Support</string>
     <string name="title_privacy_policy">Privacy Policy</string>
     <string name="version">Version</string>
+    <string name="setting_message_history">Message History</string>
     <string name="setting_notification">Notifications</string>
     <string name="setting_scan">Automatic Detections</string>
     <string name="setting_about">About</string>

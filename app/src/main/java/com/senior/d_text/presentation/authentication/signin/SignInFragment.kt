@@ -29,7 +29,6 @@ class SignInFragment : Fragment() {
         binding = FragmentSignInBinding.inflate(layoutInflater)
         vm = ViewModelProvider(this)[SignInViewModel::class.java]
         return binding.root
-
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

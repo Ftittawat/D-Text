@@ -13,8 +13,11 @@
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
     <uses-permission android:name="android.permission.RECEIVE_SMS" />
     <uses-permission android:name="android.permission.READ_SMS" />
-    <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES"
-        tools:ignore="QueryAllPackagesPermission"/>
+    <uses-permission android:name="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE"
+        tools:ignore="ProtectedPermissions" />
+
+    <!--    <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES"-->
+<!--        tools:ignore="QueryAllPackagesPermission"/>-->
 
     <application
         android:name=".presentation.App"
@@ -36,6 +39,16 @@
                 <action android:name="android.provider.Telephony.SMS_RECEIVED" />
             </intent-filter>
         </receiver>
+        <service
+            android:name=".presentation.service.NotificationService"
+            android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.service.notification.NotificationListenerService" />
+            </intent-filter>
+        </service>
+
+        <service android:name=".presentation.service.MessageService" />
 
         <activity
             android:name=".presentation.splashscreen.SplashScreenActivity"
@@ -83,6 +96,12 @@
         <activity
             android:name=".presentation.setting.SettingActivity"
             android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/Base.Theme.DText.Home">
+        </activity>
+        <activity
+            android:name=".presentation.setting.messagehistory.MessageHistoryActivity"
+            android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/Base.Theme.DText.Home">
         </activity>

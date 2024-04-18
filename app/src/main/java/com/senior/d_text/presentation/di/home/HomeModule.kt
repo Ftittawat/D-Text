@@ -12,7 +12,7 @@ import dagger.Provides
 class HomeModule {
     @HomeScope
     @Provides
-    fun provideMovieViewModelFactory(
+    fun provideHomeViewModelFactory(
         listenForMessagesUseCase : ListenForMessagesUseCase,
         getHistoryUseCase: GetHistoryUseCase,
         saveHistoryUseCase: SaveHistoryUseCase,

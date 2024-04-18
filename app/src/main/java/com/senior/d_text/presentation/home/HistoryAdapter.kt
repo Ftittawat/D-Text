@@ -6,13 +6,12 @@ import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.senior.d_text.data.model.history.History
-import com.senior.d_text.data.model.history.HistoryList
 import com.senior.d_text.databinding.ItemHistoryBinding
 import com.senior.d_text.presentation.core.OnItemClickListener
 
-class HistoryAdapter(): RecyclerView.Adapter<MyViewHolder>() {
+class HistoryAdapter(): RecyclerView.Adapter<HistoryViewHolder>() {
 
-    val historyList: ArrayList<History> = ArrayList()
+    private val historyList: ArrayList<History> = ArrayList()
     private lateinit var mListener: OnItemClickListener
 
     fun setList(history: List<History>) {
@@ -21,26 +20,30 @@ class HistoryAdapter(): RecyclerView.Adapter<MyViewHolder>() {
         historyList.reverse()
     }
 
+    fun getList(position: Int): History{
+        return historyList[position]
+    }
+
     fun setOnItemClickListener(listener: OnItemClickListener) {
         mListener = listener
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HistoryViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val binding = ItemHistoryBinding.inflate(layoutInflater, parent, false)
-        return MyViewHolder(binding, mListener)
+        return HistoryViewHolder(binding, mListener)
     }
 
     override fun getItemCount(): Int {
         return historyList.size
     }
 
-    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: HistoryViewHolder, position: Int) {
         holder.bind(historyList[position])
     }
 }
 
-class MyViewHolder(val binding: ItemHistoryBinding, listener: OnItemClickListener): RecyclerView.ViewHolder(binding.root) {
+class HistoryViewHolder(val binding: ItemHistoryBinding, listener: OnItemClickListener): RecyclerView.ViewHolder(binding.root) {
 
     init {
         binding.root.setOnClickListener {

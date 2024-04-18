@@ -10,6 +10,7 @@ import com.senior.d_text.R
 import com.senior.d_text.databinding.ActivitySettingBinding
 import com.senior.d_text.presentation.setting.about.SettingAboutActivity
 import com.senior.d_text.presentation.setting.autoscan.SettingAutoScanActivity
+import com.senior.d_text.presentation.setting.messagehistory.MessageHistoryActivity
 import com.senior.d_text.presentation.setting.notification.SettingNotificationActivity
 import com.senior.d_text.presentation.setting.policy.SettingPolicyActivity
 import com.senior.d_text.presentation.welcomescreen.WelcomeScreenActivity
@@ -44,6 +45,11 @@ class SettingActivity : AppCompatActivity() {
     private fun setupButton() {
         binding.backButton.setOnClickListener {
             onBackPressed()
+        }
+        binding.settingMessageHistory.setOnClickListener {
+            intent = Intent(this, MessageHistoryActivity::class.java)
+            startActivity(intent)
+            overridePendingTransition(R.anim.animate_slide_in_right, R.anim.animate_slide_out_left)
         }
         binding.settingNotification.setOnClickListener {
             intent = Intent(this, SettingNotificationActivity::class.java)
