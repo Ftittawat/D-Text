@@ -46,6 +46,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:gravity="center"
         app:layout_constraintBottom_toBottomOf="parent">
 
         <androidx.appcompat.widget.AppCompatButton
@@ -75,6 +76,19 @@
             android:textAllCaps="false"
             android:layout_marginHorizontal="30dp"
             android:layout_marginBottom="20dp"/>
+
+        <TextView
+            android:id="@+id/guest_mode"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/guest_mode"
+            android:fontFamily="@font/kanit"
+            android:textSize="16sp"
+            android:textColor="@color/white"
+            android:textAlignment="center"
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginBottom="16dp"/>
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 

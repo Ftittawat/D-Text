@@ -42,22 +42,23 @@ class NotificationService : Service() {
     override fun onCreate() {
         super.onCreate()
         (application as Injector).createNotificationService().inject(this)
-        val channelId = "NotificationForegroundServiceChannel"
+//        val channelId = "NotificationForegroundServiceChannel"
         val groupKey = "AutoDetect"
-        val channel = NotificationChannel(
-            channelId,
-            "Notification Foreground Service Channel",
-            NotificationManager.IMPORTANCE_DEFAULT
-        )
-        val notificationManager: NotificationManager =
-            getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-        notificationManager.createNotificationChannel(channel)
-        val notificationBuilder = NotificationCompat.Builder(this, "MyForegroundServiceChannel")
-            .setContentTitle("Notification Auto Scan")
-            .setContentText("Notification Auto Detection Service")
+//        val channel = NotificationChannel(
+//            channelId,
+//            "Notification Foreground Service Channel",
+//            NotificationManager.IMPORTANCE_DEFAULT
+//        )
+//        val notificationManager: NotificationManager =
+//            getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+//        notificationManager.createNotificationChannel(channel)
+        val notificationBuilder = NotificationCompat.Builder(this, "AutoDetectionService")
+            .setContentTitle(getString(R.string.notification_auto_scan_title))
+            .setContentText(getString(R.string.notification_auto_scan_des))
             .setSmallIcon(R.drawable.logo_blue)
+            .setGroup(groupKey)
         val notification = notificationBuilder.build()
-        startForeground(1, notification)
+        startForeground(2, notification)
     }
 
     override fun onBind(p0: Intent?): IBinder? {

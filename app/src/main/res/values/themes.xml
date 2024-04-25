@@ -53,6 +53,16 @@
         <item name="android:windowLightStatusBar">true</item>
     </style>
 
+    <style name="Base.Theme.DText.HomeWithDialog" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/blue_primary</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="background">@color/background</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">@color/background</item>
+        <item name="android:windowLightStatusBar">true</item>
+    </style>
+
     <style name="ThemeOverlay.DText.FullscreenContainer" parent="">
         <item name="fullscreenBackgroundColor">@color/light_blue_600</item>
         <item name="fullscreenTextColor">@color/light_blue_A200</item>

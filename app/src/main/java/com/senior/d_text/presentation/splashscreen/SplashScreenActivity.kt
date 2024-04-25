@@ -26,12 +26,22 @@ class SplashScreenActivity : AppCompatActivity() {
     private fun navigation() {
         // Log.d("log", "${onBoardFinished()}")
         if (onBoardFinished()) {
-            Handler().postDelayed({
-                intent = Intent(this, HomeActivity::class.java)
-                startActivity(intent)
-                overridePendingTransition(R.anim.animate_fade_enter, R.anim.animate_fade_exit)
-                finish()
-            }, 2000)
+            if (loadToken().isNullOrEmpty()) {
+                Handler().postDelayed({
+                    intent = Intent(this, HomeActivity::class.java)
+                    startActivity(intent)
+                    overridePendingTransition(R.anim.animate_fade_enter, R.anim.animate_fade_exit)
+                    finish()
+                }, 2000)
+            }
+            else {
+                Handler().postDelayed({
+                    intent = Intent(this, HomeActivity::class.java)
+                    startActivity(intent)
+                    overridePendingTransition(R.anim.animate_fade_enter, R.anim.animate_fade_exit)
+                    finish()
+                }, 2000)
+            }
         } else {
             Handler().postDelayed({
                 intent = Intent(this, OnboardActivity::class.java)
@@ -42,9 +52,19 @@ class SplashScreenActivity : AppCompatActivity() {
         }
     }
 
+    private fun loadGuest(): Boolean {
+        val sharePref = getSharedPreferences("account", Context.MODE_PRIVATE)
+        return sharePref.getBoolean("guest", false)
+    }
+
     private fun onBoardFinished(): Boolean {
         val sharePref = getSharedPreferences("onBoarding", Context.MODE_PRIVATE)
         // val finish: Boolean = sharePref.getBoolean("finish", false)
         return sharePref.getBoolean("finish", false)
+    }
+
+    private fun loadToken(): String? {
+        val sharePref = getSharedPreferences("account", Context.MODE_PRIVATE)
+        return sharePref.getString("token", null)
     }
 }

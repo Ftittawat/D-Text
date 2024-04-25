@@ -4,7 +4,6 @@ import android.app.Application
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
-import android.os.Build
 import com.senior.d_text.presentation.di.Injector
 import com.senior.d_text.presentation.di.core.AppComponent
 import com.senior.d_text.presentation.di.core.AppModule
@@ -14,6 +13,7 @@ import com.senior.d_text.presentation.di.home.HomeSubComponent
 import com.senior.d_text.presentation.di.messagehistory.MessageHistorySubComponent
 import com.senior.d_text.presentation.di.messageService.MessageServiceSubComponent
 import com.senior.d_text.presentation.di.notificationService.NotificationServiceSubComponent
+import com.senior.d_text.presentation.util.NotificationFactory
 
 class App : Application(), Injector {
 
@@ -25,7 +25,10 @@ class App : Application(), Injector {
             .appModule(AppModule(applicationContext))
             .repositoryModule(RepositoryModule(applicationContext))
             .build()
-        initNotificationChannel(applicationContext)
+//        notificationFactory.createNotificationChannel("MessageForegroundServiceChannel", "Message Foreground Service Channel")
+//        notificationFactory.createNotificationChannel("MessageForegroundServiceChannel", "Notification Foreground Service Channel")
+        NotificationFactory(applicationContext)
+            .createNotificationChannel("AutoDetectionService", "Auto Detection Service")
     }
 
     override fun createHomeSubComponent(): HomeSubComponent {
@@ -44,14 +47,14 @@ class App : Application(), Injector {
         return appComponent.notificationServiceSubComponent().create()
     }
 
-    fun initNotificationChannel(context: Context) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val id = "test_notification"
-            val name = "New Notification"
-            val importance = NotificationManager.IMPORTANCE_HIGH
-            val channel = NotificationChannel(id, name, importance)
-            val manager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-            manager.createNotificationChannel(channel)
-        }
+    fun initNotificationChannel() {
+        val channelId = "MessageForegroundServiceChannel"
+        val channel = NotificationChannel(
+            channelId,
+            "Message Foreground Service Channel",
+            NotificationManager.IMPORTANCE_DEFAULT
+        )
+        val notificationManager: NotificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        notificationManager.createNotificationChannel(channel)
     }
 }

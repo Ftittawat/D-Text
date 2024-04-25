@@ -24,7 +24,7 @@ class SignInViewModel(application: Application) : AndroidViewModel(application) 
         }
     }
 
-    fun  validationPassword(text: String): String {
+    fun validationPassword(text: String): String {
         return when {
             text.isEmpty() -> getString(R.string.error_empty_password)
             else -> ""

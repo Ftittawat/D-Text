@@ -7,6 +7,14 @@
     <string name="welcome_title">Security Guard for Mobile Phone</string>
     <string name="empty">N/A</string>
     <string name="ok">ตกลง</string>
+    <string name="cancel">ยกเลิก</string>
+    <string name="guest_mode"><u>โหมดผู้มาเยือน</u></string>
+
+    <!-- Dialog. -->
+    <string name="delete_dialog_title">ลบทั้งหมด</string>
+    <string name="delete_dialog_des">ต้องการลบทั้งหมดหรือไม่</string>
+    <string name="logout_dialog_title">ออกจากระบบ</string>
+    <string name="logout_dialog_des">ต้องการออกจากระบบหรือไม่</string>
 
     <!-- Account. -->
     <string name="sign_in">เข้าสู่ระบบ</string>
@@ -52,11 +60,15 @@
     <string name="start_now">เริ่มเลย</string>
     <string name="warning_SDK_34_1">แจ้งเตือนสำหรับ Android 14</string>
     <string name="warning_SDK_34_2">การทำงานบางอย่างของแอปพลิเคชันอาจไม่รองบน Android 14 (SDK Version  34)</string>
+    <string name="warning_dialog_1">ขออภัยในความไม่สะดวก</string>
+    <string name="warning_dialog_2">การรีเซ็ตรหัสผ่านไม่มาสามารถใช้งานได้ในขณะนี้</string>
 
     <!-- Home. -->
     <string name="search">พิมพ์หรือวาง URL</string>
     <string name="scan">แสกนลิงก์</string>
     <string name="history">ประวัติ</string>
+    <string name="detect_history">ประวัติการตรวจจับอัตโนมัติ</string>
+    <string name="clear_all"><u>ลบทั้งหมด</u></string>
 
     <!-- Risk Level. -->
     <string name="risk_level">ระดับภัยคุกคาม</string>
@@ -89,6 +101,12 @@
     <string name="malware">มัลแวร์</string>
     <string name="phishing">ฟิชชิง</string>
     <string name="spam">สแปม</string>
+
+    <!-- Notification. -->
+    <string name="message_auto_scan_title">การตรวจสอบข้อความ</string>
+    <string name="message_auto_scan_des">ระบบตรวจจับข้อความอัตโนมัติ</string>
+    <string name="notification_auto_scan_title">การตรวจสอบการแจ้งเตือน</string>
+    <string name="notification_auto_scan_des">ระบบตรวจจับการแจ้งเตือนอัตโนมัติ</string>
 
     <!-- Setting. -->
     <string name="title_settings">การตั้งค่า</string>

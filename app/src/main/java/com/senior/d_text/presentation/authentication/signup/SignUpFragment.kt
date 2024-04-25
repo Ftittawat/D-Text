@@ -106,9 +106,13 @@ class SignUpFragment : Fragment() {
                 ?.commit()
         }
         binding.signUpButton.setOnClickListener {
+            val fragment = AcceptPolicyFragment()
+            val bundle = Bundle()
+            bundle.putString("key", "value")
+            fragment.arguments
+
             activity?.supportFragmentManager?.beginTransaction()
-                ?.replace(R.id.fragment_container, AcceptPolicyFragment())
-                ?.addToBackStack(null)
+                ?.replace(R.id.fragment_container, fragment)
                 ?.commit()
         }
         binding.signUpButton.isEnabled = false

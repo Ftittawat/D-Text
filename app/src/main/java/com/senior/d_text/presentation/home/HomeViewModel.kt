@@ -56,7 +56,7 @@ class HomeViewModel(
             // Log.d("sms", "startListeningForMessages: ${_messages.value}")
         }
     }
-    private fun extractUrl(message: String): String? {
+    fun extractUrl(message: String): String? {
         val pattern = "(?i)\\b((?:https?://|www\\d{0,3}[.]|[a-z0-9.-]+[.][a-z]{2,4}/)(?:[^\\s()<>]+|\\(([^\\s()<>]+|(\\([^\\s()<>]+\\)))*\\))+(?:\\(([^\\s()<>]+|(\\([^\\s()<>]+\\)))*\\)|[^\\s`!()\\[\\]{};:'\".,<>?«»“”‘’]))".toRegex()
         val matchResult = pattern.find(message)
         return matchResult?.value

@@ -39,20 +39,21 @@ class MessageService : Service() {
         listenForMessagesUseCase = ListenForMessagesUseCase(smsRepository)
 
         Log.d("logMessages", "onCreate: MessageService")
-        val channelId = "MessageForegroundServiceChannel"
+//        val channelId = "MessageForegroundServiceChannel"
         val groupKey = "AutoDetect"
-        val channel = NotificationChannel(
-            channelId,
-            "Message Foreground Service Channel",
-            NotificationManager.IMPORTANCE_DEFAULT
-        )
-        val notificationManager: NotificationManager =
-            getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-        notificationManager.createNotificationChannel(channel)
-        val notificationBuilder = NotificationCompat.Builder(this, "MyForegroundServiceChannel")
-            .setContentTitle("Message Auto Scan")
-            .setContentText("Message Auto Detection Service")
+//        val channel = NotificationChannel(
+//            channelId,
+//            "Message Foreground Service Channel",
+//            NotificationManager.IMPORTANCE_DEFAULT
+//        )
+//        val notificationManager: NotificationManager =
+//            getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+//        notificationManager.createNotificationChannel(channel)
+        val notificationBuilder = NotificationCompat.Builder(this, "AutoDetectionService")
+            .setContentTitle(getString(R.string.message_auto_scan_title))
+            .setContentText(getString(R.string.message_auto_scan_des))
             .setSmallIcon(R.drawable.logo_blue)
+            .setGroup(groupKey)
         val notification = notificationBuilder.build()
         startForeground(1, notification)
     }

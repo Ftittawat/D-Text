@@ -8,6 +8,14 @@
     <string name="welcome_title">Security Guard for Mobile Phone</string>
     <string name="empty">N/A</string>
     <string name="ok">Ok</string>
+    <string name="cancel">Cancel</string>
+    <string name="guest_mode"><u>Guest Mode</u></string>
+
+    <!-- Dialog. -->
+    <string name="delete_dialog_title">Delete All Message</string>
+    <string name="delete_dialog_des">Are You Sure?</string>
+    <string name="logout_dialog_title">Logout</string>
+    <string name="logout_dialog_des">Are You Sure?</string>
 
     <!-- Account. -->
     <string name="sign_in">Sign In</string>
@@ -53,11 +61,15 @@
     <string name="start_now">"Let's start"</string>
     <string name="warning_SDK_34_1">Warning For Android 14</string>
     <string name="warning_SDK_34_2">Application is not fully support for Android 14 (SDK Version  34)</string>
+    <string name="warning_dialog_1">Sorry for the inconvenience</string>
+    <string name="warning_dialog_2">Password reset is not available at this time.</string>
 
     <!-- Home. -->
     <string name="search">Type or paste a URL</string>
     <string name="scan">Scan URL</string>
     <string name="history">History</string>
+    <string name="detect_history">Detect History</string>
+    <string name="clear_all"><u>ClearAll</u></string>
 
     <!-- Risk Level. -->
     <string name="risk_level">Risk Level</string>
@@ -90,6 +102,12 @@
     <string name="malware">Malware</string>
     <string name="phishing">Phishing</string>
     <string name="spam">Spam</string>
+
+    <!-- Notification. -->
+    <string name="message_auto_scan_title">Message Auto Scan</string>
+    <string name="message_auto_scan_des">Message Auto Detection Service</string>
+    <string name="notification_auto_scan_title">Notification Auto Scan</string>
+    <string name="notification_auto_scan_des">Notification Auto Detection Service</string>
 
     <!-- Setting. -->
     <string name="title_settings">Settings</string>

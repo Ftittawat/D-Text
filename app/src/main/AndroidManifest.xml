@@ -101,13 +101,13 @@
         </activity>
         <activity
             android:name=".presentation.setting.messagehistory.MessageHistoryActivity"
-            android:exported="false"
+            android:exported="true"
             android:screenOrientation="portrait"
-            android:theme="@style/Base.Theme.DText.Home">
+            android:theme="@style/Base.Theme.DText.HomeWithDialog">
         </activity>
         <activity
             android:name=".presentation.setting.notification.SettingNotificationActivity"
-            android:exported="false"
+            android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/Base.Theme.DText.Home">
         </activity>

@@ -44,6 +44,7 @@
         android:orientation="vertical">
 
         <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/setting_container_1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/box_rounded"
@@ -84,6 +85,7 @@
         </androidx.appcompat.widget.LinearLayoutCompat>
 
         <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/setting_title_1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="46dp"
@@ -95,6 +97,7 @@
             android:textColor="@color/text_primary"/>
 
         <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/setting_container_2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/box_rounded"
@@ -165,6 +168,7 @@
         </androidx.appcompat.widget.LinearLayoutCompat>
 
         <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/setting_title_2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="46dp"
@@ -176,6 +180,7 @@
             android:textColor="@color/text_primary"/>
 
         <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/setting_container_3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/box_rounded"

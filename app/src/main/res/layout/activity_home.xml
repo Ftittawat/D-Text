@@ -26,6 +26,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/notification_layout"
+            android:visibility="gone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"
@@ -53,6 +54,38 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginTop="3dp"
                 android:layout_marginEnd="3dp"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/detect_history_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/detect_history_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:background="@color/blank"
+                android:src="@drawable/round_history_24" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/detect_history_indicator"
+                android:layout_width="8dp"
+                android:layout_height="8dp"
+                android:visibility="visible"
+                android:background="@drawable/notification_indicator"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="1dp"
+                android:layout_marginEnd="1dp"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -108,7 +141,8 @@
         android:text=""
         android:background="@drawable/input_textbox"
         android:drawableStart="@drawable/round_search_24"
-        android:drawablePadding="8dp"/>
+        android:drawablePadding="8dp"
+        android:focusedByDefault="false"/>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/scan_button"
@@ -142,6 +176,7 @@
 
     <androidx.appcompat.widget.AppCompatImageButton
         android:id="@+id/history_delete"
+        android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="@+id/history_title"
@@ -150,6 +185,20 @@
         android:layout_marginEnd="30dp"
         android:background="@color/blank"
         android:src="@drawable/round_delete_forever_24"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/clear_history_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@+id/history_title"
+        app:layout_constraintBottom_toBottomOf="@+id/history_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="32dp"
+        android:text="@string/clear_all"
+        android:fontFamily="@font/kanit_medium"
+        android:textAlignment="center"
+        android:textColor="@color/text_secondary"
+        android:textSize="12sp"/>
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/history_layout"

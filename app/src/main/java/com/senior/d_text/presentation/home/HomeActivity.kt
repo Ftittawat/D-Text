@@ -13,6 +13,7 @@ import android.util.Log
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.view.isGone
@@ -23,8 +24,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.senior.d_text.R
 import com.senior.d_text.data.model.history.History
 import com.senior.d_text.databinding.ActivityHomeBinding
+import com.senior.d_text.databinding.DialogConfirmDeleteBinding
+import com.senior.d_text.presentation.authentication.signin.SignInFragment
+import com.senior.d_text.presentation.authentication.signup.SignUpFragment
 import com.senior.d_text.presentation.core.HomeViewModelFactory
 import com.senior.d_text.presentation.core.OnItemClickListener
+import com.senior.d_text.presentation.detecthistory.DetectHistoryFragment
 import com.senior.d_text.presentation.di.Injector
 import com.senior.d_text.presentation.history.HistoryFragment
 import com.senior.d_text.presentation.notification.NotificationFragment
@@ -70,14 +75,11 @@ class HomeActivity() : AppCompatActivity() {
     }
 
     private fun setupView() {
-        binding.searchBox.clearFocus()
-        notificationIndicator(true)
-        Log.d("sms", "messages: init")
-        vm.startListeningForMessages()
-        vm.messages.observe(this) {
-            Log.d("sms", "messages: ${vm.messages.value}")
-            Log.d("sms", "url: ${vm.messagesUrl.value}")
+        val guest = intent.extras?.getBoolean("guest", false)
+        if (guest == true) {
+            binding.detectHistoryLayout.isGone = true
         }
+        notificationIndicator(true)
         vm.messagesUrl.observe(this) {
             // Log.d("sms", "url: ${vm.messagesUrl.value}")
         }
@@ -85,22 +87,28 @@ class HomeActivity() : AppCompatActivity() {
 
     private fun setupButton() {
         // binding.notificationIndicator.isVisible = true
+        val guest = intent.extras?.getBoolean("guest", false)
         binding.activity.setOnClickListener {
             it.hideKeyboard()
             binding.searchBox.clearFocus()
             validateButton()
         }
-        binding.notificationButton.setOnClickListener {
-            val notificationFragment = NotificationFragment()
-//            val bundle = Bundle()
-//            binding.notificationIndicator.isGone = true
-//            bundle.putString("test", "NotificationFragmentTest")
-//            bundle.putInt("test2", 500)
-//            notificationFragment.arguments = bundle
-            notificationFragment.show(supportFragmentManager, "NotificationFragmentTag")
+//        binding.notificationButton.setOnClickListener {
+//            val notificationFragment = NotificationFragment()
+////            val bundle = Bundle()
+////            binding.notificationIndicator.isGone = true
+////            bundle.putString("test", "NotificationFragmentTest")
+////            bundle.putInt("test2", 500)
+////            notificationFragment.arguments = bundle
+//            notificationFragment.show(supportFragmentManager, "NotificationFragmentTag")
+//        }
+        binding.detectHistoryButton.setOnClickListener {
+            val detectHistoryFragment = DetectHistoryFragment()
+            detectHistoryFragment.show(supportFragmentManager, "DetectHistoryFragmentTag")
         }
         binding.settingButton.setOnClickListener {
             intent = Intent(this, SettingActivity::class.java)
+            intent.putExtra("guest", guest)
             startActivity(intent)
             overridePendingTransition(R.anim.animate_slide_in_right, R.anim.animate_slide_out_left)
         }
@@ -115,8 +123,11 @@ class HomeActivity() : AppCompatActivity() {
             historyFragment.arguments = bundle
             historyFragment.show(supportFragmentManager, "HistoryFragmentTag")
         }
-        binding.historyDelete.setOnClickListener {
-            vm.deleteAllHistory()
+//        binding.historyDelete.setOnClickListener {
+//            vm.deleteAllHistory()
+//        }
+        binding.clearHistoryButton.setOnClickListener {
+            showConfirmDialog()
         }
         binding.scanButton.isEnabled = false
     }
@@ -187,7 +198,8 @@ class HomeActivity() : AppCompatActivity() {
 
         val permissions = arrayOf(
             Manifest.permission.RECEIVE_SMS to RECEIVE_SMS_REQUEST_CODE,
-            Manifest.permission.READ_SMS to READ_SMS_REQUEST_CODE
+            Manifest.permission.READ_SMS to READ_SMS_REQUEST_CODE,
+            Manifest.permission.BIND_NOTIFICATION_LISTENER_SERVICE to BIND_NOTIFICATION_LISTENER_SERVICE
         )
 
 //        permissions.forEach { (permission, requestCode) ->
@@ -288,6 +300,23 @@ class HomeActivity() : AppCompatActivity() {
         }
     }
 
+    private fun showConfirmDialog() {
+        val dialogBinding: DialogConfirmDeleteBinding = DialogConfirmDeleteBinding.inflate(layoutInflater)
+        val builder = AlertDialog.Builder(this, R.style.Theme_AlertDialog)
+        builder.setView(dialogBinding.root)
+
+        val dialog = builder.create()
+        dialog.show()
+
+        dialogBinding.confirmButton.setOnClickListener {
+            vm.deleteAllHistory()
+            dialog.dismiss()
+        }
+        dialogBinding.cancelButton.setOnClickListener {
+            dialog.dismiss()
+        }
+    }
+
     private fun notificationIndicator(show: Boolean) {
         if (show) {
             binding.notificationIndicator.isVisible = true
@@ -313,6 +342,7 @@ class HomeActivity() : AppCompatActivity() {
         const val FOREGROUND_SERVICE_REQUEST_CODE = 1005
         const val RECEIVE_SMS_REQUEST_CODE = 1006
         const val READ_SMS_REQUEST_CODE = 1007
+        const val BIND_NOTIFICATION_LISTENER_SERVICE = 1008
     }
 
 }

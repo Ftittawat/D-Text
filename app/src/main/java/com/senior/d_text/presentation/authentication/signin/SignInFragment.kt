@@ -1,6 +1,7 @@
 package com.senior.d_text.presentation.authentication.signin
 
 import android.content.Context
+import android.content.Intent
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.text.Editable
@@ -10,11 +11,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
+import androidx.appcompat.app.AlertDialog
+import androidx.core.view.isInvisible
+import androidx.core.view.isVisible
 import com.senior.d_text.R
+import com.senior.d_text.databinding.DialogConfirmDeleteBinding
 import com.senior.d_text.databinding.FragmentSignInBinding
 import com.senior.d_text.presentation.authentication.acceptpolicy.AcceptPolicyFragment
 import com.senior.d_text.presentation.authentication.resetpassword.first_step.ResetPasswordFirstStepFragment
 import com.senior.d_text.presentation.authentication.signup.SignUpFragment
+import com.senior.d_text.presentation.home.HomeActivity
+import com.senior.d_text.presentation.util.CustomDialogFragment
 
 class SignInFragment : Fragment() {
 
@@ -30,16 +37,6 @@ class SignInFragment : Fragment() {
         vm = ViewModelProvider(this)[SignInViewModel::class.java]
         return binding.root
     }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-//        vm = ViewModelProvider(this)[SignInViewModel::class.java]
-    }
-
-//    override fun onActivityCreated(savedInstanceState: Bundle?) {
-//        super.onActivityCreated(savedInstanceState)
-////        vm = ViewModelProvider(this).get(SignInViewModel::class.java)
-//    }
 
     override fun onStart() {
         super.onStart()
@@ -90,16 +87,26 @@ class SignInFragment : Fragment() {
                 ?.commit()
         }
         binding.signInButton.setOnClickListener {
-            activity?.supportFragmentManager?.beginTransaction()
-                ?.replace(R.id.fragment_container, AcceptPolicyFragment())
-                ?.addToBackStack(null)
-                ?.commit()
+//            activity?.supportFragmentManager?.beginTransaction()
+//                ?.replace(R.id.fragment_container, AcceptPolicyFragment())
+//                ?.addToBackStack(null)
+//                ?.commit()
+            val intent = Intent(activity, HomeActivity::class.java)
+            // intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY)
+            startActivity(intent)
+            activity?.overridePendingTransition(R.anim.animate_fade_enter, R.anim.animate_fade_exit)
         }
         binding.forgotPassword.setOnClickListener {
-            activity?.supportFragmentManager?.beginTransaction()
-                ?.replace(R.id.fragment_container, ResetPasswordFirstStepFragment())
-                ?.addToBackStack(null)
-                ?.commit()
+//            activity?.supportFragmentManager?.beginTransaction()
+//                ?.replace(R.id.fragment_container, ResetPasswordFirstStepFragment())
+//                ?.addToBackStack(null)
+//                ?.commit()
+            val customDialogFragment = CustomDialogFragment()
+//            customDialogFragment.type = 3
+            customDialogFragment.setTitle(getString(R.string.warning_dialog_1))
+            customDialogFragment.setDescription(getString(R.string.warning_dialog_2))
+            customDialogFragment.setConfirmButton()
+            customDialogFragment.show(activity?.supportFragmentManager!!, "CustomDialogFragment")
         }
         binding.signInButton.isEnabled = false
     }

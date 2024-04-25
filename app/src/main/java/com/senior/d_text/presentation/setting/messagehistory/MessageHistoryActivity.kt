@@ -1,12 +1,15 @@
 package com.senior.d_text.presentation.setting.messagehistory
 
+import android.content.Context
 import android.os.Bundle
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.senior.d_text.R
 import com.senior.d_text.databinding.ActivitySettingMessageHistoryBinding
+import com.senior.d_text.databinding.DialogConfirmDeleteBinding
 import com.senior.d_text.presentation.core.MessageHistoryViewModelFactory
 import com.senior.d_text.presentation.di.Injector
 import javax.inject.Inject
@@ -42,9 +45,45 @@ class MessageHistoryActivity(): AppCompatActivity() {
         binding.backButton.setOnClickListener {
             onBackPressed()
         }
-        binding.deleteButton.setOnClickListener {
-            vm.deleteAllMessageHistory()
+//        binding.deleteButton.setOnClickListener {
+//            vm.deleteAllMessageHistory()
+//        }
+        binding.clearHistoryButton.setOnClickListener {
+            showConfirmDialog()
+            //vm.deleteAllMessageHistory()
         }
+    }
+
+    private fun showConfirmDialog() {
+        val dialogBinding: DialogConfirmDeleteBinding = DialogConfirmDeleteBinding.inflate(layoutInflater)
+        val builder = AlertDialog.Builder(this, R.style.Theme_AlertDialog)
+        builder.setView(dialogBinding.root)
+
+        val dialog = builder.create()
+        dialog.show()
+
+        dialogBinding.confirmButton.setOnClickListener {
+            //vm.deleteAllMessageHistory()
+            dialog.dismiss()
+        }
+        dialogBinding.cancelButton.setOnClickListener {
+            dialog.dismiss()
+        }
+
+//        val builder = AlertDialog.Builder(this, R.style.Theme_AlertDialog)
+//
+//        builder.setTitle(R.string.continue_title)
+//        builder.setMessage("Are you Sure?")
+//        builder.setPositiveButton("OK") { dialog, _ ->
+//            //vm.deleteAllMessageHistory()
+//            dialog.dismiss()
+//        }
+//        builder.setNegativeButton("CANCEL") { dialog, _ ->
+//            //vm.deleteAllMessageHistory()
+//            dialog.dismiss()
+//        }
+//        val dialog = builder.create()
+//        dialog.show()
     }
 
     private fun initRecyclerView() {

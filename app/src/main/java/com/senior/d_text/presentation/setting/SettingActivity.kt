@@ -4,10 +4,14 @@ import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.window.OnBackInvokedDispatcher
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isGone
 import androidx.lifecycle.ViewModelProvider
 import com.senior.d_text.R
 import com.senior.d_text.databinding.ActivitySettingBinding
+import com.senior.d_text.databinding.DialogConfirmDeleteBinding
+import com.senior.d_text.databinding.DialogConfirmLogoutBinding
 import com.senior.d_text.presentation.setting.about.SettingAboutActivity
 import com.senior.d_text.presentation.setting.autoscan.SettingAutoScanActivity
 import com.senior.d_text.presentation.setting.messagehistory.MessageHistoryActivity
@@ -40,6 +44,12 @@ class SettingActivity : AppCompatActivity() {
 
     private fun setupView() {
         binding.version.text = vm.version
+        val guest = intent.extras?.getBoolean("guest", false)
+        if (guest == true) {
+            binding.settingContainer1.isGone = true
+            binding.settingTitle1.isGone = true
+            binding.settingContainer2.isGone = true
+        }
     }
 
     private fun setupButton() {
@@ -81,8 +91,26 @@ class SettingActivity : AppCompatActivity() {
             overridePendingTransition(R.anim.animate_slide_in_right, R.anim.animate_slide_out_left)
         }
         binding.logoutButton.setOnClickListener {
+            showLogoutDialog()
+        }
+    }
+
+    private fun showLogoutDialog() {
+        val dialogBinding: DialogConfirmLogoutBinding = DialogConfirmLogoutBinding.inflate(layoutInflater)
+        val builder = AlertDialog.Builder(this, R.style.Theme_AlertDialog)
+        builder.setView(dialogBinding.root)
+
+        val dialog = builder.create()
+        dialog.show()
+
+        dialogBinding.confirmButton.setOnClickListener {
+            dialog.dismiss()
+            // vm.accountLogout()
             intent = Intent(this, WelcomeScreenActivity::class.java)
             startActivity(intent)
+        }
+        dialogBinding.cancelButton.setOnClickListener {
+            dialog.dismiss()
         }
     }
 

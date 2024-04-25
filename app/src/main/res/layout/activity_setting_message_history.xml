@@ -39,11 +39,25 @@
             android:id="@+id/delete_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:visibility="gone"
             android:background="@color/blank"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/round_delete_forever_24" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/clear_history_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:text="@string/clear_all"
+            android:fontFamily="@font/kanit_medium"
+            android:textAlignment="center"
+            android:textColor="@color/text_secondary"
+            android:textSize="12sp"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -1,4 +1,4 @@
-package com.senior.d_text.presentation.home
+package com.senior.d_text.presentation.detecthistory
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -7,7 +7,7 @@ import com.senior.d_text.data.model.notification.Notification
 import com.senior.d_text.databinding.ItemNotificationBinding
 import com.senior.d_text.presentation.core.OnItemClickListener
 
-class NotificationAdapter(): RecyclerView.Adapter<NotificationViewHolder>() {
+class DetectHistoryAdapter: RecyclerView.Adapter<DetectHistoryViewHolder>() {
 
     private val notificationList: ArrayList<Notification> = ArrayList()
     private lateinit var mListener: OnItemClickListener
@@ -26,23 +26,25 @@ class NotificationAdapter(): RecyclerView.Adapter<NotificationViewHolder>() {
         mListener = listener
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NotificationViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DetectHistoryViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val binding = ItemNotificationBinding.inflate(layoutInflater, parent, false)
-        return NotificationViewHolder(binding, mListener)
+        return DetectHistoryViewHolder(binding, mListener)
     }
 
     override fun getItemCount(): Int {
         return notificationList.size
     }
 
-    override fun onBindViewHolder(holder: NotificationViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: DetectHistoryViewHolder, position: Int) {
         holder.bind(notificationList[position])
     }
-
 }
 
-class NotificationViewHolder(val binding: ItemNotificationBinding, listener: OnItemClickListener): RecyclerView.ViewHolder(binding.root) {
+class DetectHistoryViewHolder(
+    val binding: ItemNotificationBinding,
+    listener: OnItemClickListener
+): RecyclerView.ViewHolder(binding.root) {
 
     init {
         binding.root.setOnClickListener {
@@ -56,4 +58,5 @@ class NotificationViewHolder(val binding: ItemNotificationBinding, listener: OnI
     fun bind(notification: Notification) {
 
     }
+
 }
