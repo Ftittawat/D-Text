@@ -1,18 +1,27 @@
 package com.senior.d_text.data.repository.notificationReceiver
 
-import android.service.notification.NotificationListenerService
-import android.service.notification.StatusBarNotification
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
+import android.util.Log
+import com.senior.d_text.data.model.notification.ReceiveNotification
 
-class NotificationReceiver: NotificationListenerService() {
-    override fun onNotificationPosted(sbn: StatusBarNotification?) {
-        super.onNotificationPosted(sbn)
-        sbn?.let {
-            val packageName = it.packageName
-            val notification = it.notification
+class NotificationReceiver: BroadcastReceiver() {
+
+    private var listener: ((ReceiveNotification) -> Unit)? = null
+
+    override fun onReceive(context: Context?, intent: Intent?) {
+        if (intent?.action == "com.senior.ACTION_CUSTOM_INTENT") {
+            Log.d("NotiResult", "onReceive: ")
+            val packageName = intent.getStringExtra("packageName")
+            val title = intent.getStringExtra("title")
+            val text = intent.getStringExtra("text")
+            listener?.invoke(ReceiveNotification(0,packageName?:"", title?:"", text?:"", "2024-04-28"))
         }
     }
 
-    override fun onNotificationRemoved(sbn: StatusBarNotification?) {
-        super.onNotificationRemoved(sbn)
+    fun setListener(listener: (ReceiveNotification) -> Unit) {
+        this.listener = listener
     }
+
 }

@@ -13,8 +13,11 @@
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
     <uses-permission android:name="android.permission.RECEIVE_SMS" />
     <uses-permission android:name="android.permission.READ_SMS" />
-    <uses-permission android:name="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE"
-        tools:ignore="ProtectedPermissions" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+<!--    <uses-permission android:name="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE"-->
+<!--        tools:ignore="ProtectedPermissions" />-->
+    <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" />
 
     <!--    <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES"-->
 <!--        tools:ignore="QueryAllPackagesPermission"/>-->
@@ -29,6 +32,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.DText"
+        android:usesCleartextTraffic="true"
         tools:targetApi="31" >
 
         <receiver
@@ -39,8 +43,17 @@
                 <action android:name="android.provider.Telephony.SMS_RECEIVED" />
             </intent-filter>
         </receiver>
+
+        <receiver android:name=".data.repository.notificationReceiver.NotificationReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.senior.ACTION_CUSTOM_INTENT"/>
+            </intent-filter>
+        </receiver>
+
         <service
-            android:name=".presentation.service.NotificationService"
+            android:name=".data.repository.notificationReceiver.NotificationListener"
             android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE"
             android:exported="true">
             <intent-filter>
@@ -49,6 +62,7 @@
         </service>
 
         <service android:name=".presentation.service.MessageService" />
+        <service android:name=".presentation.service.NotificationService" />
 
         <activity
             android:name=".presentation.splashscreen.SplashScreenActivity"
@@ -101,7 +115,13 @@
         </activity>
         <activity
             android:name=".presentation.setting.messagehistory.MessageHistoryActivity"
-            android:exported="true"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Base.Theme.DText.HomeWithDialog">
+        </activity>
+        <activity
+            android:name=".presentation.setting.notificationhistory.NotificationHistoryActivity"
+            android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/Base.Theme.DText.HomeWithDialog">
         </activity>

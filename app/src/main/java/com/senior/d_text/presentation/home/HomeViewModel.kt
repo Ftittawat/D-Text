@@ -1,5 +1,6 @@
 package com.senior.d_text.presentation.home
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
@@ -7,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.senior.d_text.data.model.history.History
 import com.senior.d_text.data.model.history.HistoryList
 import com.senior.d_text.data.model.message.ReceiveSMS
+import com.senior.d_text.domain.usecase.AnalysisUrlUseCase
 import com.senior.d_text.domain.usecase.DeleteAllHistoryUseCase
 import com.senior.d_text.domain.usecase.GetHistoryUseCase
 import com.senior.d_text.domain.usecase.ListenForMessagesUseCase
@@ -17,7 +19,8 @@ class HomeViewModel(
     private val listenForMessagesUseCase: ListenForMessagesUseCase,
     private val getHistoryUseCase: GetHistoryUseCase,
     private val saveHistoryUseCase: SaveHistoryUseCase,
-    private val deleteAllHistoryUseCase: DeleteAllHistoryUseCase
+    private val deleteAllHistoryUseCase: DeleteAllHistoryUseCase,
+    private val analysisUrlUseCase: AnalysisUrlUseCase
     ): ViewModel() {
 
     var url = MutableLiveData("")
@@ -74,6 +77,12 @@ class HomeViewModel(
 
     fun deleteAllHistory() = viewModelScope.launch {
         deleteAllHistoryUseCase.execute()
+    }
+
+    fun checkUrl() = liveData {
+        val analysisResult = analysisUrlUseCase.execute(url.value.toString())
+        Log.d("analysisResult", "checkUrl: $analysisResult")
+        emit(analysisResult)
     }
 
 }

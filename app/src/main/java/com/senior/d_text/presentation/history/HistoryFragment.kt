@@ -3,6 +3,7 @@ package com.senior.d_text.presentation.history
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -57,14 +58,18 @@ class HistoryFragment : BottomSheetDialogFragment() {
         vm.url.value = arguments?.getString("URL","")
         vm.riskLevel.value = arguments?.getString("RISK_LEVEL","")
         vm.urlType.value = arguments?.getString("TYPE","")
+        vm.orgName.value = arguments?.getString("ORG_NAME","")
         vm.dateTime.value = arguments?.getString("DATE_TIME","")
 
         binding.url.text = vm.url.value
+
+        Log.d("analysisResult", "setupView: ${vm.riskLevel.value}")
 
         when (vm.riskLevel.value) {
             "safe" -> {
                 binding.riskLevelTitle.text = getText(R.string.safe)
                 val state = intArrayOf(R.attr.state_safe)
+                binding.organizationResult.text = vm.orgName.value
                 binding.resultIcon.setImageState(state, true)
                 binding.riskLevelLine.setImageState(state, true)
                 binding.warningText.isGone = true
@@ -77,6 +82,7 @@ class HistoryFragment : BottomSheetDialogFragment() {
             "suspicious" -> {
                 binding.riskLevelTitle.text = getText(R.string.suspicious)
                 val state = intArrayOf(R.attr.state_suspicious)
+                binding.organizationResult.text = vm.orgName.value
                 binding.resultIcon.setImageState(state, true)
                 binding.riskLevelLine.setImageState(state, true)
                 binding.warningText.isVisible = true

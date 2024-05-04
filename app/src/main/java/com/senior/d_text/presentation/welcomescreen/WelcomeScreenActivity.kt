@@ -37,6 +37,7 @@ class WelcomeScreenActivity : AppCompatActivity() {
 
     private fun setupButton() {
         binding.signInButton.setOnClickListener {
+            Log.d("auth", "WelcomeScreenActivity: signInButton")
             intent = Intent(this, AuthenticationActivity::class.java)
             intent.putExtra("sign_in", true)
             intent.putExtra("guest", false)
@@ -46,6 +47,7 @@ class WelcomeScreenActivity : AppCompatActivity() {
         }
 
         binding.signUpButton.setOnClickListener {
+            Log.d("auth", "WelcomeScreenActivity: signUpButton")
             intent = Intent(this, AuthenticationActivity::class.java)
             intent.putExtra("sign_in", false)
             intent.putExtra("guest", false)

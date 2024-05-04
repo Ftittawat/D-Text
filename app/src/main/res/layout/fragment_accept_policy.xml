@@ -20,6 +20,7 @@
 
             <androidx.appcompat.widget.AppCompatImageButton
                 android:id="@+id/back_button"
+                android:visibility="gone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toTopOf="parent"

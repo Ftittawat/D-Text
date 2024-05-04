@@ -1,18 +1,24 @@
 package com.senior.d_text.presentation.di.core
 
 import android.content.Context
+import com.senior.d_text.data.repository.analysis.AnalysisRepositoryImpl
+import com.senior.d_text.data.repository.analysis.datasource.AnalysisRemoteDatasource
 import com.senior.d_text.data.repository.authentication.AuthenticationRepositoryImpl
 import com.senior.d_text.data.repository.authentication.datasource.AuthenticationRemoteDataSource
 import com.senior.d_text.data.repository.history.HistoryRepositoryImpl
 import com.senior.d_text.data.repository.history.datasource.HistoryLocalDatasource
 import com.senior.d_text.data.repository.message.MessageRepositoryImpl
 import com.senior.d_text.data.repository.message.datasource.MessageLocalDatasource
+import com.senior.d_text.data.repository.notificationHistory.NotificationHistoryRepositoryImpl
+import com.senior.d_text.data.repository.notificationHistory.datasource.NotificationHistoryLocalDatasource
 import com.senior.d_text.data.repository.notificationReceiver.NotificationReceiverRepositoryImpl
 import com.senior.d_text.data.repository.notificationReceiver.datasource.NotificationReceiverDatasource
 import com.senior.d_text.data.repository.sms.SMSRepositoryImpl
+import com.senior.d_text.domain.repository.AnalysisRepository
 import com.senior.d_text.domain.repository.AuthenticationRepository
 import com.senior.d_text.domain.repository.HistoryRepository
 import com.senior.d_text.domain.repository.MessageRepository
+import com.senior.d_text.domain.repository.NotificationHistoryRepository
 import com.senior.d_text.domain.repository.NotificationReceiverRepository
 import com.senior.d_text.domain.repository.NotificationRepository
 import com.senior.d_text.domain.repository.SMSRepository
@@ -51,6 +57,16 @@ class RepositoryModule(private val context: Context) {
 
     @Singleton
     @Provides
+    fun provideNotificationHistoryRepository(
+        notificationHistoryLocalDatasource: NotificationHistoryLocalDatasource
+    ): NotificationHistoryRepository {
+        return NotificationHistoryRepositoryImpl(
+            notificationHistoryLocalDatasource
+        )
+    }
+
+    @Singleton
+    @Provides
     fun provideAuthenticationRepository(
         authenticationRemoteDataSource: AuthenticationRemoteDataSource
     ): AuthenticationRepository {
@@ -62,10 +78,17 @@ class RepositoryModule(private val context: Context) {
     @Singleton
     @Provides
     fun provideNotificationReceiverRepository(
-        notificationReceiverDatasource: NotificationReceiverDatasource
     ): NotificationReceiverRepository {
-        return NotificationReceiverRepositoryImpl(
-            notificationReceiverDatasource
+        return NotificationReceiverRepositoryImpl(context)
+    }
+
+    @Singleton
+    @Provides
+    fun provideAnalysisRepository(
+        analysisRemoteDatasource: AnalysisRemoteDatasource
+    ): AnalysisRepository {
+        return AnalysisRepositoryImpl(
+            analysisRemoteDatasource
         )
     }
 

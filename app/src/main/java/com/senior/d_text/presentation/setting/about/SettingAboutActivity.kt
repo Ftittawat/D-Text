@@ -1,6 +1,10 @@
 package com.senior.d_text.presentation.setting.about
 
+import android.app.Notification
 import android.os.Bundle
+import android.service.notification.NotificationListenerService
+import android.service.notification.StatusBarNotification
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.senior.d_text.R
@@ -45,3 +49,21 @@ class SettingAboutActivity : AppCompatActivity() {
     }
 
 }
+
+//class MyNotificationListenerService : NotificationListenerService() {
+//
+//    override fun onListenerConnected() {
+//        super.onListenerConnected()
+//        Log.d("Notification", "Connected to notification service")
+//    }
+//
+//    override fun onNotificationPosted(sb: StatusBarNotification?) {
+//        super.onNotificationPosted(sb)
+//        Log.d("Notification", "Notification posted: ${sb?.notification?.tickerText}")
+//    }
+//
+//    override fun onNotificationRemoved(sb: StatusBarNotification?) {
+//        super.onNotificationRemoved(sb)
+//        Log.d("Notification", "Notification removed: ${sb?.notification?.tickerText}")
+//    }
+//}

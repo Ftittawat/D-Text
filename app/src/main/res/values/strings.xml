@@ -21,6 +21,9 @@
     <string name="sign_up">ลงทะเบียน</string>
     <string name="sing_out">ออกจากระบบ</string>
     <string name="email">อีเมล</string>
+    <string name="username">ชื่อผู้ใช้</string>
+    <string name="error_username_1">ไม่พบชื่อผู้ใช้</string>
+    <string name="error_username_2">ชื่อผู้ใช้นี้ถูกใช้แล้ว</string>
     <string name="password">รหัสผ่าน</string>
     <string name="confirm_password">ยืนยันรหัสผ่าน</string>
     <string name="phone">เบอร์โทร</string>
@@ -30,11 +33,16 @@
     <string name="no_account">คุณยังไม่มีบัญชี?</string>
     <string name="have_account">คุณมีบัญชีแล้ว?</string>
     <string name="accept_policy">ยอมรับเงื่อนไขทั้งหมด</string>
+    <string name="accept_policy_2">ยอมรับ</string>
+    <string name="accept_policy_3"><u>นโยบายการคุ้มครองข้อมูลส่วนบุคคล</u></string>
     <string name="continue_title">ดำเนินการต่อ</string>
     <string name="reset_title">รีเซ็ตรหัสผ่าน</string>
     <string name="enter_email">กรอกอีเมลของคุณ</string>
     <string name="enter_otp">กรอกรหัส OTP</string>
     <string name="new_password">กรอกรหัสผ่านใหม่</string>
+    <string name="signin_success">เข้าสู่ระบบสำเร็จ</string>
+    <string name="signup_success">ลงทะเบียนสำเร็จ</string>
+    <string name="error_email_1">อีเมลนี้ถูกใช้แล้ว</string>
     <string name="error_empty_email">กรุณากรอกข้อมูล</string>
     <string name="error_format">รูปแบบอีเมลไม่ถูกต้อง</string>
     <string name="error_empty_password">กรุณากรอกข้อมูล</string>
@@ -107,6 +115,10 @@
     <string name="message_auto_scan_des">ระบบตรวจจับข้อความอัตโนมัติ</string>
     <string name="notification_auto_scan_title">การตรวจสอบการแจ้งเตือน</string>
     <string name="notification_auto_scan_des">ระบบตรวจจับการแจ้งเตือนอัตโนมัติ</string>
+    <string name="notification_safe_title">ตรวจพบลิงก์ที่ปลอดภัย</string>
+    <string name="notification_suspicious_title">ตรวจพบลิงก์ที่น่าสงสัย</string>
+    <string name="notification_unsafe_title">ตรวจพบลิงก์ที่ไม่ปลอดภัย</string>
+    <string name="notification_no_info_title">ตรวจพบลิงก์ที่ไม่มีข้อมูล</string>
 
     <!-- Setting. -->
     <string name="title_settings">การตั้งค่า</string>
@@ -115,6 +127,7 @@
     <string name="title_privacy_policy">นโยบายความเป็นส่วนตัว</string>
     <string name="version">Version</string>
     <string name="setting_message_history">ประวัติข้อความ</string>
+    <string name="setting_notification_history">ประวัติการแจ้งเตือน</string>
     <string name="setting_notification">การแจ้งเตือน</string>
     <string name="setting_scan">การตรวจสอบอัตโนมัติ</string>
     <string name="setting_about">เกี่ยวกับ</string>

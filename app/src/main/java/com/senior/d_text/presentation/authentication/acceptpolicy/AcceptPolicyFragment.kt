@@ -43,6 +43,7 @@ class AcceptPolicyFragment : Fragment() {
             binding.continueButton.isEnabled = isChecked
         }
         binding.continueButton.setOnClickListener {
+            vm.policyAccept()
             val intent = Intent(activity, HomeActivity::class.java)
             // intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY)
             startActivity(intent)

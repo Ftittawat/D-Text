@@ -11,20 +11,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
-import androidx.appcompat.app.AlertDialog
-import androidx.core.view.isInvisible
+import android.widget.Toast
+import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import com.senior.d_text.R
-import com.senior.d_text.databinding.DialogConfirmDeleteBinding
 import com.senior.d_text.databinding.FragmentSignInBinding
 import com.senior.d_text.presentation.authentication.acceptpolicy.AcceptPolicyFragment
-import com.senior.d_text.presentation.authentication.resetpassword.first_step.ResetPasswordFirstStepFragment
 import com.senior.d_text.presentation.authentication.signup.SignUpFragment
+import com.senior.d_text.presentation.core.SignInViewModelFactory
+import com.senior.d_text.presentation.di.Injector
 import com.senior.d_text.presentation.home.HomeActivity
 import com.senior.d_text.presentation.util.CustomDialogFragment
+import javax.inject.Inject
 
-class SignInFragment : Fragment() {
+class SignInFragment() : Fragment() {
 
+    @Inject
+    lateinit var factory: SignInViewModelFactory
     private lateinit var vm: SignInViewModel
     private lateinit var binding: FragmentSignInBinding
 
@@ -34,8 +37,14 @@ class SignInFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentSignInBinding.inflate(layoutInflater)
-        vm = ViewModelProvider(this)[SignInViewModel::class.java]
         return binding.root
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        (activity?.application as Injector).createSignInSubComponent()
+            .inject(this)
+        vm = ViewModelProvider(this, factory)[SignInViewModel::class.java]
     }
 
     override fun onStart() {
@@ -68,6 +77,43 @@ class SignInFragment : Fragment() {
             binding.passwordLayout.errorContentDescription = vm.errorPassword.value
             validateButton()
         }
+//        vm.error.observe(this) {
+//            if (vm.error.value.isNullOrEmpty()) {
+//                binding.error.isGone = true
+//            }
+//            else {
+//                binding.error.isVisible = true
+//                binding.error.text = vm.error.value
+//            }
+//        }
+        vm.error.observe(this) { error ->
+            if (error == "Success") {
+                binding.error.isGone = true
+                Toast.makeText(context, getText(R.string.signin_success), Toast.LENGTH_LONG).show()
+                if (vm.checkPolicy()) {
+                    val intent = Intent(activity, HomeActivity::class.java)
+                    startActivity(intent)
+                    activity?.overridePendingTransition(R.anim.animate_fade_enter, R.anim.animate_fade_exit)
+                }
+                else {
+                    val fragment = AcceptPolicyFragment()
+                    activity?.supportFragmentManager?.beginTransaction()
+                        ?.replace(R.id.fragment_container, fragment)
+                        ?.commit()
+                }
+            }
+            else if (error == "incorrect password") {
+                binding.error.isGone = true
+                vm.errorPassword.value = getString(R.string.error_incorrect_password)
+            }
+            else if (error == "record not found") {
+                binding.error.isGone = true
+                vm.errorEmail.value = getString(R.string.error_username_1)
+            }
+            else {
+                binding.error.isGone = true
+            }
+        }
     }
 
     private fun setupButton() {
@@ -91,10 +137,16 @@ class SignInFragment : Fragment() {
 //                ?.replace(R.id.fragment_container, AcceptPolicyFragment())
 //                ?.addToBackStack(null)
 //                ?.commit()
-            val intent = Intent(activity, HomeActivity::class.java)
-            // intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY)
-            startActivity(intent)
-            activity?.overridePendingTransition(R.anim.animate_fade_enter, R.anim.animate_fade_exit)
+            it.hideKeyboard()
+            vm.signInWithUsername()
+//            Log.d("auth", "setupButton: ${vm.error.value.toString()}")
+//            Log.d("auth", "setupButton: ${vm.error.value.isNullOrEmpty()}")
+//            if (vm.error.value.isNullOrEmpty()) {
+//                val intent = Intent(activity, HomeActivity::class.java)
+//                // intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY)
+//                startActivity(intent)
+//                activity?.overridePendingTransition(R.anim.animate_fade_enter, R.anim.animate_fade_exit)
+//            }
         }
         binding.forgotPassword.setOnClickListener {
 //            activity?.supportFragmentManager?.beginTransaction()
@@ -107,6 +159,9 @@ class SignInFragment : Fragment() {
             customDialogFragment.setDescription(getString(R.string.warning_dialog_2))
             customDialogFragment.setConfirmButton()
             customDialogFragment.show(activity?.supportFragmentManager!!, "CustomDialogFragment")
+        }
+        binding.googleAccount.setOnClickListener {
+
         }
         binding.signInButton.isEnabled = false
     }

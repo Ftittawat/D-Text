@@ -36,14 +36,14 @@
                 style="@style/EditTextLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp">
+                android:layout_marginTop="16dp">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/email"
                     style="@style/EditText.Auth"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:hint="@string/email"
+                    android:hint="@string/username"
                     android:inputType="textEmailAddress"
                     android:paddingVertical="18dp"
                     android:text="" />
@@ -69,11 +69,21 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/error"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/error_confirm_password"
+                android:fontFamily="@font/kanit"
+                android:textSize="14sp"
+                android:textAlignment="center"
+                android:textColor="@color/red" />
+
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/sign_in_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
                 android:background="@drawable/continue_button"
                 android:enabled="false"
                 android:fontFamily="@font/kanit"
@@ -81,7 +91,8 @@
                 android:textAlignment="center"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:layout_marginTop="8dp"/>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"

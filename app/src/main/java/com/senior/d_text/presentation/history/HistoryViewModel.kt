@@ -8,5 +8,6 @@ class HistoryViewModel : ViewModel() {
     val url = MutableLiveData("")
     val riskLevel = MutableLiveData("")
     val urlType = MutableLiveData("")
+    val orgName = MutableLiveData("")
     val dateTime = MutableLiveData("")
 }

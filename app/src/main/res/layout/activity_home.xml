@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/activity"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.home.HomeActivity"
-    android:background="@color/background">
+    android:background="@color/background"
+    tools:context=".presentation.home.HomeActivity">
 
-<!--    <androidx.fragment.app.FragmentContainerView-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"-->
-<!--        android:id="@+id/fragmentContainer"/>-->
+    <!--    <androidx.fragment.app.FragmentContainerView-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="match_parent"-->
+    <!--        android:id="@+id/fragmentContainer"/>-->
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/action_bar_container"
@@ -26,34 +26,34 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/notification_layout"
-            android:visibility="gone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <androidx.appcompat.widget.AppCompatImageButton
                 android:id="@+id/notification_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
                 android:background="@color/blank"
-                android:src="@drawable/round_notifications_24" />
+                android:src="@drawable/round_notifications_24"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/notification_indicator"
                 android:layout_width="7dp"
                 android:layout_height="7dp"
-                android:visibility="gone"
-                android:background="@drawable/notification_indicator"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginTop="3dp"
-                android:layout_marginEnd="3dp"/>
+                android:layout_marginEnd="3dp"
+                android:background="@drawable/notification_indicator"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -61,31 +61,31 @@
             android:id="@+id/detect_history_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <androidx.appcompat.widget.AppCompatImageButton
                 android:id="@+id/detect_history_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
                 android:background="@color/blank"
-                android:src="@drawable/round_history_24" />
+                android:src="@drawable/round_history_24"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/detect_history_indicator"
                 android:layout_width="8dp"
                 android:layout_height="8dp"
-                android:visibility="visible"
-                android:background="@drawable/notification_indicator"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginTop="1dp"
-                android:layout_marginEnd="1dp"/>
+                android:layout_marginEnd="1dp"
+                android:background="@drawable/notification_indicator"
+                android:visibility="visible"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -93,11 +93,11 @@
             android:id="@+id/setting_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
+            android:background="@color/blank"
+            android:src="@drawable/round_more_horiz_24"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:background="@color/blank"
-            android:src="@drawable/round_more_horiz_24" />
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -105,9 +105,9 @@
         android:id="@+id/title_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="bottom"
         android:layout_marginHorizontal="30dp"
         android:layout_marginTop="20dp"
+        android:gravity="bottom"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/action_bar_container">
@@ -115,8 +115,8 @@
         <androidx.appcompat.widget.AppCompatImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/logo_text_blue"
-            android:layout_marginBottom="5dp"/>
+            android:layout_marginBottom="5dp"
+            android:src="@drawable/logo_text_blue" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/subtitle"
@@ -131,102 +131,115 @@
 
     <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/search_box"
+        style="@style/EditText.Search"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_marginHorizontal="30dp"
-        android:layout_marginTop="10dp"
-        app:layout_constraintTop_toBottomOf="@id/title_container"
-        style="@style/EditText.Search"
-        android:hint="@string/search"
-        android:text=""
+        android:layout_marginTop="20dp"
         android:background="@drawable/input_textbox"
         android:drawableStart="@drawable/round_search_24"
         android:drawablePadding="8dp"
-        android:focusedByDefault="false"/>
+        android:focusedByDefault="false"
+        android:hint="@string/search"
+        android:text=""
+        app:layout_constraintTop_toBottomOf="@id/title_container"
+        tools:layout_editor_absoluteX="-30dp" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/scan_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginTop="10dp"
         android:background="@drawable/primary_button"
-        android:text="@string/scan"
         android:fontFamily="@font/kanit"
-        android:textColor="@color/white"
-        android:textSize="16sp"
+        android:text="@string/scan"
         android:textAlignment="center"
         android:textAllCaps="false"
-        android:layout_marginTop="10dp"
-        android:layout_marginHorizontal="30dp"
-        app:layout_constraintTop_toBottomOf="@id/search_box"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@id/search_box" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/history_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="10dp"
         android:fontFamily="@font/kanit_medium"
         android:text="@string/history"
         android:textColor="@color/text_primary"
         android:textSize="24sp"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="10dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/scan_button"/>
+        app:layout_constraintTop_toBottomOf="@id/scan_button" />
 
     <androidx.appcompat.widget.AppCompatImageButton
         android:id="@+id/history_delete"
-        android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="@+id/history_title"
-        app:layout_constraintBottom_toBottomOf="@+id/history_title"
-        app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginEnd="30dp"
         android:background="@color/blank"
-        android:src="@drawable/round_delete_forever_24"/>
+        android:src="@drawable/round_delete_forever_24"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/history_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/history_title" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/clear_history_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="@+id/history_title"
-        app:layout_constraintBottom_toBottomOf="@+id/history_title"
-        app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginEnd="32dp"
-        android:text="@string/clear_all"
         android:fontFamily="@font/kanit_medium"
+        android:text="@string/clear_all"
         android:textAlignment="center"
         android:textColor="@color/text_secondary"
-        android:textSize="12sp"/>
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/history_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/history_title" />
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/history_layout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/history_title"
+        android:layout_marginTop="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="10dp">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/history_title">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/history_recyclerview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginHorizontal="26dp"/>
+            android:layout_marginHorizontal="26dp" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 
-<!--    <androidx.appcompat.widget.AppCompatTextView-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:fontFamily="@font/kanit_medium"-->
-<!--        android:text="@string/suspicious"-->
-<!--        android:textColor="@color/text_primary"-->
-<!--        android:textSize="24sp"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@id/history_title"/>-->
+    <!--    <androidx.appcompat.widget.AppCompatTextView-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:fontFamily="@font/kanit_medium"-->
+    <!--        android:text="@string/suspicious"-->
+    <!--        android:textColor="@color/text_primary"-->
+    <!--        android:textSize="24sp"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintTop_toBottomOf="@id/history_title"/>-->
+
+    <com.google.android.material.progressindicator.CircularProgressIndicator
+        android:id="@+id/progress_circular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:indeterminate="true"
+        app:indicatorColor="@color/blue_primary"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

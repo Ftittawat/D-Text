@@ -1,8 +1,9 @@
 package com.senior.d_text.data.repository.analysis.datasource
 
+import com.senior.d_text.data.model.analysis.AnalysisUrl
 import com.senior.d_text.data.model.history.History
 import retrofit2.Response
 
 interface AnalysisRemoteDatasource {
-    suspend fun analysisUrl(): Response<History>
+    suspend fun analysisUrl(url: String): Response<AnalysisUrl>
 }

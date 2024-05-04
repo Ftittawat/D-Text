@@ -2,16 +2,25 @@ package com.senior.d_text.presentation.authentication.signin
 
 import android.app.Application
 import android.content.Context
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.liveData
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.viewModelScope
 import com.senior.d_text.R
+import com.senior.d_text.data.model.authentication.Result
+import com.senior.d_text.domain.usecase.SignInUseCase
+import kotlinx.coroutines.launch
 
-class SignInViewModel(application: Application) : AndroidViewModel(application) {
+class SignInViewModel (
+    private val application: Application,
+    private val signInUseCase: SignInUseCase
+) : AndroidViewModel(application) {
 
     val email = MutableLiveData("")
     val errorEmail = MutableLiveData("")
     val password = MutableLiveData("")
     val errorPassword = MutableLiveData("")
+    val error = MutableLiveData("")
 
     private val sharePref = application.getSharedPreferences("account", Context.MODE_PRIVATE)
 
@@ -19,7 +28,7 @@ class SignInViewModel(application: Application) : AndroidViewModel(application) 
         val regexEmail = android.util.Patterns.EMAIL_ADDRESS
         return when {
             text.isEmpty() -> getString(R.string.error_empty_email)
-            !regexEmail.matcher(text).matches() -> getString(R.string.error_format)
+            //!regexEmail.matcher(text).matches() -> getString(R.string.error_format)
             else -> ""
         }
     }
@@ -31,22 +40,44 @@ class SignInViewModel(application: Application) : AndroidViewModel(application) 
         }
     }
 
-//    fun validationPassword(text: String) : String {
-//
-//    }
+    fun signInWithUsername() = viewModelScope.launch {
+        val response = signInUseCase.execute(email.value.toString(), password.value.toString())
+        when (response) {
+            is Result.Success -> {
+                val account = response.data!!
+                error.value = "Success"
+                saveToken(account.userTokenResponse.id)
+            }
+            is Result.Error -> {
+                error.value = response.message
+            }
+        }
+    }
 
     private fun getString(resId: Int): String {
         val context: Context = getApplication<Application>().applicationContext
         return context.getString(resId)
     }
 
-    private fun saveToken() {
+    private fun saveToken(token: String) {
         val editor = sharePref.edit()
-        editor.putString("token", "")
+        editor.putString("token", token)
         editor.apply()
     }
 
-    private fun loadToken(): String? {
-        return sharePref.getString("token", "")
+    fun saveUserToken(id: String, access_token: String, refresh_token: String) {
+        val editor = sharePref.edit()
+        editor.putString("token_id", id)
+        editor.putString("access_token", access_token)
+        editor.putString("refresh_token", refresh_token)
+        editor.apply()
+    }
+
+    fun loadToken(): String? {
+        return sharePref.getString("token", null)
+    }
+
+    fun checkPolicy(): Boolean {
+        return sharePref.getBoolean("policy", false)
     }
 }

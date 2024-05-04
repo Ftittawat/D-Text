@@ -1,5 +1,6 @@
 package com.senior.d_text.presentation.setting
 
+import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
@@ -12,16 +13,21 @@ import com.senior.d_text.R
 import com.senior.d_text.databinding.ActivitySettingBinding
 import com.senior.d_text.databinding.DialogConfirmDeleteBinding
 import com.senior.d_text.databinding.DialogConfirmLogoutBinding
+import com.senior.d_text.presentation.core.SettingViewModelFactory
+import com.senior.d_text.presentation.di.Injector
 import com.senior.d_text.presentation.setting.about.SettingAboutActivity
 import com.senior.d_text.presentation.setting.autoscan.SettingAutoScanActivity
 import com.senior.d_text.presentation.setting.messagehistory.MessageHistoryActivity
 import com.senior.d_text.presentation.setting.notification.SettingNotificationActivity
+import com.senior.d_text.presentation.setting.notificationhistory.NotificationHistoryActivity
 import com.senior.d_text.presentation.setting.policy.SettingPolicyActivity
 import com.senior.d_text.presentation.welcomescreen.WelcomeScreenActivity
 import javax.inject.Inject
 
 class SettingActivity : AppCompatActivity() {
 
+    @Inject
+    lateinit var factory: SettingViewModelFactory
     private lateinit var vm: SettingViewModel
     private lateinit var binding: ActivitySettingBinding
 
@@ -29,7 +35,9 @@ class SettingActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivitySettingBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        vm = ViewModelProvider(this)[SettingViewModel::class.java]
+        (application as Injector).createSettingSubComponent()
+            .inject(this)
+        vm = ViewModelProvider(this, factory)[SettingViewModel::class.java]
     }
 
     override fun onStart() {
@@ -58,6 +66,11 @@ class SettingActivity : AppCompatActivity() {
         }
         binding.settingMessageHistory.setOnClickListener {
             intent = Intent(this, MessageHistoryActivity::class.java)
+            startActivity(intent)
+            overridePendingTransition(R.anim.animate_slide_in_right, R.anim.animate_slide_out_left)
+        }
+        binding.settingNotificationHistory.setOnClickListener {
+            intent = Intent(this, NotificationHistoryActivity::class.java)
             startActivity(intent)
             overridePendingTransition(R.anim.animate_slide_in_right, R.anim.animate_slide_out_left)
         }
@@ -105,13 +118,17 @@ class SettingActivity : AppCompatActivity() {
 
         dialogBinding.confirmButton.setOnClickListener {
             dialog.dismiss()
-            // vm.accountLogout()
+            vm.removeToken()
             intent = Intent(this, WelcomeScreenActivity::class.java)
             startActivity(intent)
         }
         dialogBinding.cancelButton.setOnClickListener {
             dialog.dismiss()
         }
+    }
+
+    private fun signOut() {
+
     }
 
     override fun onBackPressed() {

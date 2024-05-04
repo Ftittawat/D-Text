@@ -5,6 +5,7 @@ import androidx.room.Room
 import com.senior.d_text.data.db.DTextDatabase
 import com.senior.d_text.data.db.HistoryDao
 import com.senior.d_text.data.db.MessageDao
+import com.senior.d_text.data.db.NotificationHistoryDao
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -27,5 +28,11 @@ class DataBaseModule {
     @Provides
     fun provideMessageDao(dTextDatabase: DTextDatabase): MessageDao {
         return dTextDatabase.messageDao()
+    }
+
+    @Singleton
+    @Provides
+    fun provideNotificationHistoryDao(dTextDatabase: DTextDatabase): NotificationHistoryDao {
+        return dTextDatabase.notificationHistoryDao()
     }
 }

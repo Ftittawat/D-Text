@@ -20,7 +20,7 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
-        buildConfigField "String","BASE_URL","\"https://localhost:3000/api\""
+        buildConfigField "String","BASE_URL","\"http://localhost:9999/\""
         buildConfigField "String","API_KEY","\"apikey\""
     }
 

@@ -7,14 +7,23 @@ import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.AndroidViewModel
+import com.senior.d_text.domain.usecase.SignOutUseCase
+import javax.inject.Inject
 
-class SettingViewModel(application: Application) : AndroidViewModel(application) {
+class SettingViewModel @Inject constructor (
+    private val application: Application,
+    private val signOutUseCase: SignOutUseCase
+) : AndroidViewModel(application) {
 
     private val sharePref = application.getSharedPreferences("account", Context.MODE_PRIVATE)
 
     val version: String = getVersionName()
 
-    fun accountLogout() {
+     fun loadToken(): String? {
+        return sharePref.getString("token", null)
+    }
+
+    fun removeToken() {
         val editor = sharePref.edit()
         editor.putString("token", null)
         editor.apply()

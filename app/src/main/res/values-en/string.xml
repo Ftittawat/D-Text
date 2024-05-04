@@ -22,6 +22,9 @@
     <string name="sign_up">Sign Up</string>
     <string name="sing_out">Sign Out</string>
     <string name="email">E-mail</string>
+    <string name="username">Username</string>
+    <string name="error_username_1">Username not Found</string>
+    <string name="error_username_2">This Username has been Used.</string>
     <string name="password">Password</string>
     <string name="confirm_password">Confirm Password</string>
     <string name="phone">Phone</string>
@@ -31,11 +34,16 @@
     <string name="no_account">Don’t have an account?</string>
     <string name="have_account">Have an account?</string>
     <string name="accept_policy">Accept all terms</string>
+    <string name="accept_policy_2">Accept</string>
+    <string name="accept_policy_3"><u>Personal Data Protection Policy</u></string>
     <string name="continue_title">Continue</string>
     <string name="reset_title">Reset Password</string>
     <string name="enter_email">Enter your Email</string>
     <string name="enter_otp">Enter OTP</string>
     <string name="new_password">Enter new Password</string>
+    <string name="signin_success">Sign-In Success</string>
+    <string name="signup_success">Sign-Up Success</string>
+    <string name="error_email_1">This Email has been Used.</string>
     <string name="error_empty_email">Please enter your Email.</string>
     <string name="error_format">Invalid Format.</string>
     <string name="error_empty_password">Please enter your Password.</string>
@@ -108,6 +116,10 @@
     <string name="message_auto_scan_des">Message Auto Detection Service</string>
     <string name="notification_auto_scan_title">Notification Auto Scan</string>
     <string name="notification_auto_scan_des">Notification Auto Detection Service</string>
+    <string name="notification_safe_title">Safe Link Detect</string>
+    <string name="notification_suspicious_title">Suspicious Link Detect</string>
+    <string name="notification_unsafe_title">Unsafe Link Detect</string>
+    <string name="notification_no_info_title">No Information Detect</string>
 
     <!-- Setting. -->
     <string name="title_settings">Settings</string>
@@ -115,7 +127,8 @@
     <string name="setting_2">Support</string>
     <string name="title_privacy_policy">Privacy Policy</string>
     <string name="version">Version</string>
-    <string name="setting_message_history">Message History</string>
+    <string name="setting_message_history">Messages History</string>
+    <string name="setting_notification_history">Notifications History</string>
     <string name="setting_notification">Notifications</string>
     <string name="setting_scan">Automatic Detections</string>
     <string name="setting_about">About</string>

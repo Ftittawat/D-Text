@@ -8,6 +8,7 @@ import com.senior.d_text.databinding.ActivityAuthenticationBinding
 import com.senior.d_text.presentation.authentication.signin.SignInFragment
 import com.senior.d_text.presentation.authentication.signup.SignUpFragment
 import com.senior.d_text.presentation.core.AuthenticationViewModelFactory
+import com.senior.d_text.presentation.di.Injector
 import javax.inject.Inject
 
 class AuthenticationActivity : AppCompatActivity() {
@@ -21,6 +22,8 @@ class AuthenticationActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityAuthenticationBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        (application as Injector).createAuthenticationSubComponent()
+            .inject(this)
         vm = ViewModelProvider(this)[AuthenticationViewModel::class.java]
     }
 

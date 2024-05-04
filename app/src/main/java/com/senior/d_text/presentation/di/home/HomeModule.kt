@@ -1,5 +1,6 @@
 package com.senior.d_text.presentation.di.home
 
+import com.senior.d_text.domain.usecase.AnalysisUrlUseCase
 import com.senior.d_text.domain.usecase.DeleteAllHistoryUseCase
 import com.senior.d_text.domain.usecase.GetHistoryUseCase
 import com.senior.d_text.domain.usecase.ListenForMessagesUseCase
@@ -16,13 +17,15 @@ class HomeModule {
         listenForMessagesUseCase : ListenForMessagesUseCase,
         getHistoryUseCase: GetHistoryUseCase,
         saveHistoryUseCase: SaveHistoryUseCase,
-        deleteAllHistoryUseCase: DeleteAllHistoryUseCase
+        deleteAllHistoryUseCase: DeleteAllHistoryUseCase,
+        analysisUrlUseCase: AnalysisUrlUseCase
     ): HomeViewModelFactory {
         return HomeViewModelFactory(
             listenForMessagesUseCase,
             getHistoryUseCase,
             saveHistoryUseCase,
-            deleteAllHistoryUseCase
+            deleteAllHistoryUseCase,
+            analysisUrlUseCase
         )
     }
 

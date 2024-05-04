@@ -4,10 +4,20 @@ import android.app.Application
 import android.content.Context
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.senior.d_text.R
+import com.senior.d_text.data.model.authentication.Result
+import com.senior.d_text.domain.usecase.SignUpUseCase
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class SignUpViewModel(application: Application) : AndroidViewModel(application) {
+class SignUpViewModel @Inject constructor (
+    private val application: Application,
+    private val signUpUseCase: SignUpUseCase
+): AndroidViewModel(application) {
 
+    val username = MutableLiveData("")
+    val errorUsername = MutableLiveData("")
     val email = MutableLiveData("")
     val errorEmail = MutableLiveData("")
     val phone = MutableLiveData("")
@@ -16,8 +26,17 @@ class SignUpViewModel(application: Application) : AndroidViewModel(application) 
     val errorPassword = MutableLiveData("")
     val confirmPassword = MutableLiveData("")
     val errorConfirmPassword = MutableLiveData("")
+    val error = MutableLiveData("")
 
     private val sharePref = application.getSharedPreferences("account", Context.MODE_PRIVATE)
+
+
+    fun validationUserName(text: String): String {
+        return when {
+            text.isEmpty() -> getString((R.string.error_empty_email))
+            else -> ""
+        }
+    }
 
     fun validationEmail(text: String): String {
         val regexEmail = android.util.Patterns.EMAIL_ADDRESS
@@ -67,19 +86,38 @@ class SignUpViewModel(application: Application) : AndroidViewModel(application) 
         }
     }
 
+    fun signUpWithUsername() = viewModelScope.launch {
+        val response = signUpUseCase.execute(
+            username.value.toString(),
+            email.value.toString(),
+            password.value.toString(),
+            phone.value.toString()
+        )
+        when (response) {
+            is Result.Success -> {
+                val account = response.data!!
+                error.value = "Success"
+                saveToken(account.userTokenResponse.id)
+            }
+            is Result.Error -> {
+                error.value = response.message
+            }
+        }
+    }
+
     private fun getString(resId: Int): String {
         val context: Context = getApplication<Application>().applicationContext
         return context.getString(resId)
     }
 
-    private fun saveToken() {
+    private fun saveToken(token: String) {
         val editor = sharePref.edit()
-        editor.putString("token", "")
+        editor.putString("token", token)
         editor.apply()
     }
 
-    private fun loadToken(): String? {
-        return sharePref.getString("token", "")
+    fun loadToken(): String? {
+        return sharePref.getString("token", null)
     }
 
     companion object {
