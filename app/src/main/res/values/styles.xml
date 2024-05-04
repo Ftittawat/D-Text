@@ -32,6 +32,35 @@
         <item name="boxCornerRadiusTopEnd">8dp</item>
         <item name="boxCornerRadiusTopStart">8dp</item>
         <item name="hintEnabled">false</item>
+        <item name="boxStrokeErrorColor">@color/red</item>
+        <item name="errorIconDrawable">@null</item>
+        <item name="errorTextAppearance">@style/ErrorStyle</item>
+        <item name="errorTextColor">@color/red</item>
+        <item name="errorEnabled">true</item>
+    </style>
+
+    <style name="EditPasswordLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+        <item name="android:fontFamily">@font/kanit</item>
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:textColorHint">@color/hint_text</item>
+        <item name="android:textSize">18sp</item>
+        <item name="boxStrokeColor">@color/blue_primary</item>
+        <item name="boxStrokeWidth">2dp</item>
+        <item name="boxStrokeWidthFocused">3dp</item>
+        <item name="boxBackgroundColor">@color/white</item>
+        <item name="boxBackgroundMode">outline</item>
+        <item name="boxCornerRadiusBottomEnd">8dp</item>
+        <item name="boxCornerRadiusBottomStart">8dp</item>
+        <item name="boxCornerRadiusTopEnd">8dp</item>
+        <item name="boxCornerRadiusTopStart">8dp</item>
+        <item name="hintEnabled">false</item>
+        <item name="boxStrokeErrorColor">@color/red</item>
+        <item name="errorIconDrawable">@null</item>
+        <item name="errorTextAppearance">@style/ErrorStyle</item>
+        <item name="errorTextColor">@color/red</item>
+        <item name="errorEnabled">true</item>
+        <item name="passwordToggleEnabled">true</item>
+        <item name="passwordToggleTint">@color/hint_text</item>
     </style>
 
     <style name="EditText.Search" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
@@ -62,12 +91,42 @@
         <item name="android:textSize">12sp</item>
     </style>
 
+    <style name="result.title" parent="TextAppearance.AppCompat">
+        <item name="android:fontFamily">@font/kanit_medium</item>
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="result.title.secondary" parent="TextAppearance.AppCompat">
+        <item name="android:fontFamily">@font/kanit</item>
+        <item name="android:textColor">@color/text_secondary</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="result.text" parent="TextAppearance.AppCompat">
+        <item name="android:fontFamily">@font/kanit</item>
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="result.text.secondary" parent="TextAppearance.AppCompat">
+        <item name="android:fontFamily">@font/kanit</item>
+        <item name="android:textColor">@color/text_secondary</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
     <style name="FullScreenBottomSheetDialog" parent="Theme.Design.BottomSheetDialog">
         <item name="android:windowIsFloating">false</item>
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowSoftInputMode">adjustResize</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:navigationBarColor">@android:color/transparent</item>
+    </style>
+
+    <style name="ErrorStyle" parent="TextAppearance.AppCompat">
+        <item name="android:fontFamily">@font/kanit</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/green</item>
     </style>
 
     <!-- Components. -->
@@ -81,6 +140,12 @@
     <style name="Theme.CheckBox" parent="Theme.AppCompat.Light">
         <item name="colorAccent">@color/blue_primary</item>
         <item name="android:textColorSecondary">@color/text_secondary</item>
+    </style>
+
+    <style name="Theme.AlertDialog" parent="Theme.AppCompat.DayNight.Dialog.Alert">
+        <item name="android:windowBackground">@drawable/box_rounded</item>
+        <item name="android:windowMinWidthMajor">65%</item>
+        <item name="android:windowMinWidthMinor">80%</item>
     </style>
 
 </resources>

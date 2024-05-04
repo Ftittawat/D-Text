@@ -5,12 +5,25 @@
     <string name="title_home">-TEXT</string>
     <string name="tagline">Keeps You Safe</string>
     <string name="welcome_title">Security Guard for Mobile Phone</string>
+    <string name="empty">N/A</string>
+    <string name="ok">ตกลง</string>
+    <string name="cancel">ยกเลิก</string>
+    <string name="guest_mode"><u>โหมดผู้มาเยือน</u></string>
+
+    <!-- Dialog. -->
+    <string name="delete_dialog_title">ลบทั้งหมด</string>
+    <string name="delete_dialog_des">ต้องการลบทั้งหมดหรือไม่</string>
+    <string name="logout_dialog_title">ออกจากระบบ</string>
+    <string name="logout_dialog_des">ต้องการออกจากระบบหรือไม่</string>
 
     <!-- Account. -->
     <string name="sign_in">เข้าสู่ระบบ</string>
     <string name="sign_up">ลงทะเบียน</string>
     <string name="sing_out">ออกจากระบบ</string>
     <string name="email">อีเมล</string>
+    <string name="username">ชื่อผู้ใช้</string>
+    <string name="error_username_1">ไม่พบชื่อผู้ใช้</string>
+    <string name="error_username_2">ชื่อผู้ใช้นี้ถูกใช้แล้ว</string>
     <string name="password">รหัสผ่าน</string>
     <string name="confirm_password">ยืนยันรหัสผ่าน</string>
     <string name="phone">เบอร์โทร</string>
@@ -20,11 +33,30 @@
     <string name="no_account">คุณยังไม่มีบัญชี?</string>
     <string name="have_account">คุณมีบัญชีแล้ว?</string>
     <string name="accept_policy">ยอมรับเงื่อนไขทั้งหมด</string>
+    <string name="accept_policy_2">ยอมรับ</string>
+    <string name="accept_policy_3"><u>นโยบายการคุ้มครองข้อมูลส่วนบุคคล</u></string>
     <string name="continue_title">ดำเนินการต่อ</string>
     <string name="reset_title">รีเซ็ตรหัสผ่าน</string>
     <string name="enter_email">กรอกอีเมลของคุณ</string>
     <string name="enter_otp">กรอกรหัส OTP</string>
     <string name="new_password">กรอกรหัสผ่านใหม่</string>
+    <string name="signin_success">เข้าสู่ระบบสำเร็จ</string>
+    <string name="signup_success">ลงทะเบียนสำเร็จ</string>
+    <string name="error_email_1">อีเมลนี้ถูกใช้แล้ว</string>
+    <string name="error_empty_email">กรุณากรอกข้อมูล</string>
+    <string name="error_format">รูปแบบอีเมลไม่ถูกต้อง</string>
+    <string name="error_empty_password">กรุณากรอกข้อมูล</string>
+    <string name="error_incorrect_password">รหัสผ่านไม่ถูกต้อง</string>
+    <string name="error_notmatch_password">รหัสผ่านไม่ตรงกัน</string>
+    <string name="error_confirm_password">กรุณากรอกข้อมูล</string>
+    <string name="error_empty_phone">กรุณากรอกข้อมูล</string>
+    <string name="error_format_phone">รูปแบบเบอร์โทรศัพท์ไม่ถูกต้อง</string>
+    <string name="error_password_uppercase">ต้องมีอักษรตัวพิมพ์ใหญ่อย่างน้อยหนึ่งตัว</string>
+    <string name="error_password_lowercase">ต้องมีอักษรตัวพิมพ์เล็กอย่างน้อยหนึ่งตัว</string>
+    <string name="error_password_digit">ต้องมีอักษรตัวเลขอย่างน้อยหนึ่งตัว</string>
+    <string name="error_password_special_character">ต้องมี @#$%^&amp;_+=! อย่างน้อยหนึ่งตัว</string>
+    <string name="error_password_whitespace">ไม่อนุญาตให้มีช่องว่าง</string>
+    <string name="error_password_min">ต้องมีความยาวขั้นต่ำ 8 ตัวอักษร</string>
 
     <!-- Onboard. -->
     <string name="onboard_title_1">การแจ้งเตือน</string>
@@ -33,11 +65,18 @@
     <string name="onboard_subtitle_2">ตรวจจับ URL ที่เป็นอันตรายตลอด 24 ชั่วโมง</string>
     <string name="onboard_title_3">การสแกนด้วยตนเอง</string>
     <string name="onboard_subtitle_3">สามารถสแกนลิงค์ด้วยตนเองเมื่อมีข้อสงสัย</string>
+    <string name="start_now">เริ่มเลย</string>
+    <string name="warning_SDK_34_1">แจ้งเตือนสำหรับ Android 14</string>
+    <string name="warning_SDK_34_2">การทำงานบางอย่างของแอปพลิเคชันอาจไม่รองบน Android 14 (SDK Version  34)</string>
+    <string name="warning_dialog_1">ขออภัยในความไม่สะดวก</string>
+    <string name="warning_dialog_2">การรีเซ็ตรหัสผ่านไม่มาสามารถใช้งานได้ในขณะนี้</string>
 
     <!-- Home. -->
     <string name="search">พิมพ์หรือวาง URL</string>
     <string name="scan">แสกนลิงก์</string>
     <string name="history">ประวัติ</string>
+    <string name="detect_history">ประวัติการตรวจจับอัตโนมัติ</string>
+    <string name="clear_all"><u>ลบทั้งหมด</u></string>
 
     <!-- Risk Level. -->
     <string name="risk_level">ระดับภัยคุกคาม</string>
@@ -46,12 +85,49 @@
     <string name="safe">ลิงค์ปลอดภัย</string>
     <string name="no_information">ไม่มีข้อมูล</string>
 
+    <!-- Result. -->
+    <string name="warning_1">*กรุณาอย่าคลิกลิงค์นี้</string>
+    <string name="warning_2">*ลบข้อความถ้าเป็นไปได้</string>
+    <string name="threat_type">ประเภทภัยคุกคาม</string>
+    <string name="overview">ภาพรวมรายงาน</string>
+    <string name="organization">องค์กร</string>
+    <string name="safe_link">ลิงค์นี้ปลอดภัย</string>
+    <string name="browser">ไปยังบราวเซอร์</string>
+    <string name="result_1">Checklist</string>
+    <string name="result_2">Google Web Risk</string>
+    <string name="result_3">Phishtank</string>
+    <string name="result_4">ในฐานข้อมูล</string>
+    <string name="result_safe">ปลอดภัย</string>
+    <string name="low">ต่ำ</string>
+    <string name="medium">ปานกลาง</string>
+    <string name="high">สูง</string>
+    <string name="found">พบ</string>
+    <string name="not_found">ไม่พบ</string>
+    <string name="source">พบใน</string>
+
+    <!-- Threat Type. -->
+    <string name="malware">มัลแวร์</string>
+    <string name="phishing">ฟิชชิง</string>
+    <string name="spam">สแปม</string>
+
+    <!-- Notification. -->
+    <string name="message_auto_scan_title">การตรวจสอบข้อความ</string>
+    <string name="message_auto_scan_des">ระบบตรวจจับข้อความอัตโนมัติ</string>
+    <string name="notification_auto_scan_title">การตรวจสอบการแจ้งเตือน</string>
+    <string name="notification_auto_scan_des">ระบบตรวจจับการแจ้งเตือนอัตโนมัติ</string>
+    <string name="notification_safe_title">ตรวจพบลิงก์ที่ปลอดภัย</string>
+    <string name="notification_suspicious_title">ตรวจพบลิงก์ที่น่าสงสัย</string>
+    <string name="notification_unsafe_title">ตรวจพบลิงก์ที่ไม่ปลอดภัย</string>
+    <string name="notification_no_info_title">ตรวจพบลิงก์ที่ไม่มีข้อมูล</string>
+
     <!-- Setting. -->
     <string name="title_settings">การตั้งค่า</string>
     <string name="setting_1">ทั่วไป</string>
     <string name="setting_2">ช่วยเหลือ</string>
     <string name="title_privacy_policy">นโยบายความเป็นส่วนตัว</string>
     <string name="version">Version</string>
+    <string name="setting_message_history">ประวัติข้อความ</string>
+    <string name="setting_notification_history">ประวัติการแจ้งเตือน</string>
     <string name="setting_notification">การแจ้งเตือน</string>
     <string name="setting_scan">การตรวจสอบอัตโนมัติ</string>
     <string name="setting_about">เกี่ยวกับ</string>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item app:state_safe="true" android:drawable="@drawable/safe_line" />
+    <item app:state_suspicious="true" android:drawable="@drawable/suspicious_line" />
+    <item app:state_unsafe="true" android:drawable="@drawable/unsafe_line" />
+    <item android:drawable="@drawable/noinformation_line" />
+</selector>

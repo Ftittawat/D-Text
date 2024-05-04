@@ -20,6 +20,7 @@
 
             <androidx.appcompat.widget.AppCompatImageButton
                 android:id="@+id/back_button"
+                android:visibility="gone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toTopOf="parent"
@@ -307,6 +308,7 @@
                 android:textColor="@color/white"
                 android:textSize="14sp"
                 android:textAlignment="center"
+                android:textAllCaps="false"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />

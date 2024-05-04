@@ -6,12 +6,25 @@
     <string name="title_home">-TEXT</string>
     <string name="tagline">Keeps You Safe</string>
     <string name="welcome_title">Security Guard for Mobile Phone</string>
+    <string name="empty">N/A</string>
+    <string name="ok">Ok</string>
+    <string name="cancel">Cancel</string>
+    <string name="guest_mode"><u>Guest Mode</u></string>
+
+    <!-- Dialog. -->
+    <string name="delete_dialog_title">Delete All Message</string>
+    <string name="delete_dialog_des">Are You Sure?</string>
+    <string name="logout_dialog_title">Logout</string>
+    <string name="logout_dialog_des">Are You Sure?</string>
 
     <!-- Account. -->
     <string name="sign_in">Sign In</string>
     <string name="sign_up">Sign Up</string>
     <string name="sing_out">Sign Out</string>
     <string name="email">E-mail</string>
+    <string name="username">Username</string>
+    <string name="error_username_1">Username not Found</string>
+    <string name="error_username_2">This Username has been Used.</string>
     <string name="password">Password</string>
     <string name="confirm_password">Confirm Password</string>
     <string name="phone">Phone</string>
@@ -21,11 +34,30 @@
     <string name="no_account">Don’t have an account?</string>
     <string name="have_account">Have an account?</string>
     <string name="accept_policy">Accept all terms</string>
+    <string name="accept_policy_2">Accept</string>
+    <string name="accept_policy_3"><u>Personal Data Protection Policy</u></string>
     <string name="continue_title">Continue</string>
     <string name="reset_title">Reset Password</string>
     <string name="enter_email">Enter your Email</string>
     <string name="enter_otp">Enter OTP</string>
     <string name="new_password">Enter new Password</string>
+    <string name="signin_success">Sign-In Success</string>
+    <string name="signup_success">Sign-Up Success</string>
+    <string name="error_email_1">This Email has been Used.</string>
+    <string name="error_empty_email">Please enter your Email.</string>
+    <string name="error_format">Invalid Format.</string>
+    <string name="error_empty_password">Please enter your Password.</string>
+    <string name="error_incorrect_password">Password Incorrect.</string>
+    <string name="error_notmatch_password">"Passwords don't match."</string>
+    <string name="error_confirm_password">Please confirm your Password.</string>
+    <string name="error_empty_phone">Please enter your Phone Number.</string>
+    <string name="error_format_phone">Invalid Format.</string>
+    <string name="error_password_uppercase">Must contain at least one uppercase letter.</string>
+    <string name="error_password_lowercase">Must contain at least one lowercase letter.</string>
+    <string name="error_password_digit">Must contain at least one digit.</string>
+    <string name="error_password_special_character">Must have @#$%^&amp;_+=! at least one.</string>
+    <string name="error_password_whitespace">No whitespace allowed.</string>
+    <string name="error_password_min">Minimum length of 8 characters.</string>
 
     <!-- Onboard. -->
     <string name="onboard_title_1">Notifications</string>
@@ -34,11 +66,18 @@
     <string name="onboard_subtitle_2">Detect Dangerous URLs 24/7</string>
     <string name="onboard_title_3">Manual Scan</string>
     <string name="onboard_subtitle_3">You can scan links manually when in doubt</string>
+    <string name="start_now">"Let's start"</string>
+    <string name="warning_SDK_34_1">Warning For Android 14</string>
+    <string name="warning_SDK_34_2">Application is not fully support for Android 14 (SDK Version  34)</string>
+    <string name="warning_dialog_1">Sorry for the inconvenience</string>
+    <string name="warning_dialog_2">Password reset is not available at this time.</string>
 
     <!-- Home. -->
     <string name="search">Type or paste a URL</string>
     <string name="scan">Scan URL</string>
     <string name="history">History</string>
+    <string name="detect_history">Detect History</string>
+    <string name="clear_all"><u>ClearAll</u></string>
 
     <!-- Risk Level. -->
     <string name="risk_level">Risk Level</string>
@@ -47,12 +86,49 @@
     <string name="safe">Safe Link</string>
     <string name="no_information">No Information</string>
 
+    <!-- Result. -->
+    <string name="warning_1">*Please do not click on this link.</string>
+    <string name="warning_2">*Delete messages if possible.</string>
+    <string name="threat_type">Threat Type</string>
+    <string name="overview">Report Overview</string>
+    <string name="organization">Organization</string>
+    <string name="safe_link">This link is safe.</string>
+    <string name="browser">Go to Browser</string>
+    <string name="result_1">Checklist</string>
+    <string name="result_2">Google Web Risk</string>
+    <string name="result_3">Phishtank</string>
+    <string name="result_4">in the Database</string>
+    <string name="result_safe">Safe</string>
+    <string name="low">Low</string>
+    <string name="medium">Medium</string>
+    <string name="high">High</string>
+    <string name="found">Found</string>
+    <string name="not_found">Not Found</string>
+    <string name="source">Found In</string>
+
+    <!-- Threat Type. -->
+    <string name="malware">Malware</string>
+    <string name="phishing">Phishing</string>
+    <string name="spam">Spam</string>
+
+    <!-- Notification. -->
+    <string name="message_auto_scan_title">Message Auto Scan</string>
+    <string name="message_auto_scan_des">Message Auto Detection Service</string>
+    <string name="notification_auto_scan_title">Notification Auto Scan</string>
+    <string name="notification_auto_scan_des">Notification Auto Detection Service</string>
+    <string name="notification_safe_title">Safe Link Detect</string>
+    <string name="notification_suspicious_title">Suspicious Link Detect</string>
+    <string name="notification_unsafe_title">Unsafe Link Detect</string>
+    <string name="notification_no_info_title">No Information Detect</string>
+
     <!-- Setting. -->
     <string name="title_settings">Settings</string>
     <string name="setting_1">General</string>
     <string name="setting_2">Support</string>
     <string name="title_privacy_policy">Privacy Policy</string>
     <string name="version">Version</string>
+    <string name="setting_message_history">Messages History</string>
+    <string name="setting_notification_history">Notifications History</string>
     <string name="setting_notification">Notifications</string>
     <string name="setting_scan">Automatic Detections</string>
     <string name="setting_about">About</string>

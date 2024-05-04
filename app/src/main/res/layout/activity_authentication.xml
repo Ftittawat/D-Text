@@ -8,7 +8,7 @@
         android:id="@+id/fragment_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/bottom_box_rounded"
-        android:layout_marginTop="8dp"/>
+        android:layout_marginTop="8dp"
+        android:background="@drawable/bottom_box_rounded"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
