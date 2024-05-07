@@ -3,7 +3,9 @@ package com.senior.d_text.presentation.di.messageService
 import com.senior.d_text.domain.repository.AnalysisRepository
 import com.senior.d_text.domain.repository.MessageRepository
 import com.senior.d_text.domain.repository.NotificationRepository
+import com.senior.d_text.domain.repository.SMSRepository
 import com.senior.d_text.domain.usecase.AnalysisUrlMessageServiceUseCase
+import com.senior.d_text.domain.usecase.ListenForMessagesUseCase
 import com.senior.d_text.domain.usecase.SaveMessageUseCase
 import com.senior.d_text.domain.usecase.SaveNotificationForMessageUseCase
 import dagger.Module
@@ -11,6 +13,14 @@ import dagger.Provides
 
 @Module
 class MessageServiceModule {
+
+    @Provides
+    fun provideListenForMessagesUseCase(
+        smsRepository: SMSRepository
+    ): ListenForMessagesUseCase {
+        return ListenForMessagesUseCase(smsRepository)
+    }
+
     @Provides
     fun provideSaveMessage(
         messageRepository: MessageRepository

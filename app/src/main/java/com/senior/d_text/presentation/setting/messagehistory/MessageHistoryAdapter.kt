@@ -42,7 +42,7 @@ class MessageHistoryViewHolder(
 
     fun bind(message: Message) {
         binding.cardTitle.text = message.sender
-        binding.cardDescription.text = message.text
+        binding.cardDescription1.text = message.text
         binding.cardDatetime.text = message.date_time
     }
 }

@@ -3,11 +3,10 @@ package com.senior.d_text
 import com.senior.d_text.presentation.authentication.signin.SignInFragment
 import com.senior.d_text.presentation.authentication.signin.SignInViewModel
 import org.junit.Assert
-import org.junit.Before
 import org.junit.Test
 import org.mockito.Mock
 
-class SignInActivityUnitTest {
+class SignInFragmentUnitTest {
 
     @Mock
     private lateinit var view: SignInFragment

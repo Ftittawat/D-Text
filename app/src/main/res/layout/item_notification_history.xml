@@ -25,33 +25,38 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/card_title"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="https:www.google.com"
                 android:fontFamily="@font/kanit"
                 android:textColor="@color/text_primary"
                 android:textSize="16sp"
-                android:textAlignment="center"/>
+                android:textAlignment="textStart"
+                android:maxLines="1"/>
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/card_description_1"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Google LLC"
                 android:fontFamily="@font/kanit"
                 android:textColor="@color/text_primary"
+                android:textAlignment="textStart"
                 android:textSize="14sp"
-                android:maxLines="3"/>
+                android:maxLines="3"
+                android:ellipsize="end"/>
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/card_description_2"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Google LLC"
                 android:fontFamily="@font/kanit"
                 android:textColor="@color/text_primary"
+                android:textAlignment="textStart"
                 android:textSize="12sp"
-                android:maxLines="3"/>
+                android:maxLines="1"
+                android:ellipsize="end"/>
 
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="wrap_content"

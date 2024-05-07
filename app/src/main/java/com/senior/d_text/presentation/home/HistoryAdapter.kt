@@ -64,8 +64,13 @@ class HistoryViewHolder(val binding: ItemHistoryBinding, listener: OnItemClickLi
 
     fun bind(history: History) {
         binding.cardTitle.text = history.url
-        binding.cardDescription.text = history.type
         binding.cardDatetime.text = history.date_time
+        if (history.type.isEmpty()) {
+            binding.cardDescription.isGone = true
+        } else {
+            binding.cardDescription.isVisible = true
+            binding.cardDescription.text = history.type
+        }
         when (history.risk_level) {
             "unsafe" -> {
                 binding.unsafe.isVisible = true

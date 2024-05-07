@@ -18,7 +18,6 @@ class HomeModule {
     @Provides
     fun provideHomeViewModelFactory(
         application: Application,
-        listenForMessagesUseCase : ListenForMessagesUseCase,
         getHistoryUseCase: GetHistoryUseCase,
         saveHistoryUseCase: SaveHistoryUseCase,
         deleteAllHistoryUseCase: DeleteAllHistoryUseCase,
@@ -28,7 +27,6 @@ class HomeModule {
     ): HomeViewModelFactory {
         return HomeViewModelFactory(
             application,
-            listenForMessagesUseCase,
             getHistoryUseCase,
             saveHistoryUseCase,
             deleteAllHistoryUseCase,

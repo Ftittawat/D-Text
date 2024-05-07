@@ -20,7 +20,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginHorizontal="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="8dp"
             android:layout_marginVertical="5dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -141,23 +142,29 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/card_title"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="https:www.google.com"
                 android:fontFamily="@font/kanit"
                 android:textColor="@color/text_primary"
                 android:textSize="16sp"
-                android:textAlignment="center"/>
+                android:textAlignment="textStart"
+                android:layout_marginEnd="8dp"
+                android:maxLines="1"
+                android:ellipsize="end"/>
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/card_description"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Google LLC"
                 android:fontFamily="@font/kanit"
                 android:textColor="@color/text_primary"
                 android:textSize="14sp"
-                android:textAlignment="center"/>
+                android:textAlignment="textStart"
+                android:layout_marginEnd="8dp"
+                android:maxLines="1"
+                android:ellipsize="end"/>
 
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="wrap_content"

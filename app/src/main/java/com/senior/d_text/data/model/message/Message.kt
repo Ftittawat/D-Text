@@ -13,6 +13,8 @@ data class Message (
     val sender: String,
     @SerializedName("text")
     val text: String,
+    @SerializedName("url")
+    val url: String,
     @SerializedName("date_time")
     val date_time: String,
 ): Serializable

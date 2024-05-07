@@ -1,17 +1,22 @@
 package com.senior.d_text.presentation.service
 
+import android.Manifest
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.app.Service
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.IBinder
 import android.service.notification.NotificationListenerService
 import android.service.notification.StatusBarNotification
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
+import androidx.core.content.ContextCompat
 import com.senior.d_text.R
 import com.senior.d_text.data.model.Result
 import com.senior.d_text.data.model.analysis.AnalysisUrl
@@ -74,8 +79,16 @@ class NotificationService : Service() {
             .setGroup(groupKey)
         val notification = notificationBuilder.build()
         startForeground(2, notification)
-        val intent = Intent("android.settings.ACTION_NOTIFICATION_LISTENER_SETTINGS")
-        startActivity(intent)
+        //val intent = Intent("android.settings.ACTION_NOTIFICATION_LISTENER_SETTINGS")
+        //startActivity(intent)
+
+        val n = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (!n.isNotificationPolicyAccessGranted) {
+                val intent = Intent("android.settings.ACTION_NOTIFICATION_LISTENER_SETTINGS")
+                startActivity(intent)
+            }
+        }
     }
 
     override fun onBind(p0: Intent?): IBinder? {
@@ -200,4 +213,5 @@ class NotificationService : Service() {
         const val SAFE = "safe"
         const val NO_INFORMATION = "noinformation"
     }
+
 }

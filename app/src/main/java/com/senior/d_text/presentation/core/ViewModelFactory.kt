@@ -29,7 +29,6 @@ import com.senior.d_text.presentation.setting.notificationhistory.NotificationHi
 
 class HomeViewModelFactory(
     private val application: Application,
-    private val listenForMessagesUseCase: ListenForMessagesUseCase,
     private val getHistoryUseCase: GetHistoryUseCase,
     private val saveHistoryUseCase: SaveHistoryUseCase,
     private val deleteAllHistoryUseCase: DeleteAllHistoryUseCase,
@@ -40,7 +39,6 @@ class HomeViewModelFactory(
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return HomeViewModel(
             application,
-            listenForMessagesUseCase,
             getHistoryUseCase,
             saveHistoryUseCase,
             deleteAllHistoryUseCase,

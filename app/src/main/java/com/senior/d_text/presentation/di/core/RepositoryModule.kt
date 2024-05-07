@@ -39,6 +39,12 @@ class RepositoryModule(private val context: Context) {
 
     @Singleton
     @Provides
+    fun provideNotificationReceiverRepository(): NotificationReceiverRepository {
+        return NotificationReceiverRepositoryImpl(context)
+    }
+
+    @Singleton
+    @Provides
     fun provideHistoryRepository(
         historyLocalDatasource: HistoryLocalDatasource
     ): HistoryRepository {
@@ -85,13 +91,6 @@ class RepositoryModule(private val context: Context) {
         return AuthenticationRepositoryImpl(
             authenticationRemoteDataSource
         )
-    }
-
-    @Singleton
-    @Provides
-    fun provideNotificationReceiverRepository(
-    ): NotificationReceiverRepository {
-        return NotificationReceiverRepositoryImpl(context)
     }
 
     @Singleton

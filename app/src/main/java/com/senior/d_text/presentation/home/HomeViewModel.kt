@@ -23,7 +23,6 @@ import kotlinx.coroutines.launch
 
 class HomeViewModel(
     private val application: Application,
-    private val listenForMessagesUseCase: ListenForMessagesUseCase,
     private val getHistoryUseCase: GetHistoryUseCase,
     private val saveHistoryUseCase: SaveHistoryUseCase,
     private val deleteAllHistoryUseCase: DeleteAllHistoryUseCase,
@@ -59,18 +58,6 @@ class HomeViewModel(
         }
     }
 
-    fun startListeningForMessages() {
-        listenForMessagesUseCase { message ->
-            messagesSender.value = message.sender
-            messagesBody.value = message.messageBody
-            messagesUrl.value = extractUrl(messagesBody.value.toString())
-            val currentMessages = _messages.value?.toMutableList() ?: mutableListOf()
-            currentMessages.add(message)
-            _messages.postValue(currentMessages)
-            // Log.d("sms", "startListeningForMessages: $currentMessages")
-            // Log.d("sms", "startListeningForMessages: ${_messages.value}")
-        }
-    }
     fun extractUrl(message: String): String? {
         val pattern = "(?i)\\b((?:https?://|www\\d{0,3}[.]|[a-z0-9.-]+[.][a-z]{2,4}/)(?:[^\\s()<>]+|\\(([^\\s()<>]+|(\\([^\\s()<>]+\\)))*\\))+(?:\\(([^\\s()<>]+|(\\([^\\s()<>]+\\)))*\\)|[^\\s`!()\\[\\]{};:'\".,<>?«»“”‘’]))".toRegex()
         val matchResult = pattern.find(message)

@@ -1,8 +1,12 @@
 package com.senior.d_text
 
+import android.app.Application
+import com.senior.d_text.domain.usecase.AnalysisUrlUseCase
 import com.senior.d_text.domain.usecase.DeleteAllHistoryUseCase
+import com.senior.d_text.domain.usecase.DeleteHistoryUseCase
 import com.senior.d_text.domain.usecase.GetHistoryUseCase
 import com.senior.d_text.domain.usecase.ListenForMessagesUseCase
+import com.senior.d_text.domain.usecase.RefreshUseCase
 import com.senior.d_text.domain.usecase.SaveHistoryUseCase
 import com.senior.d_text.presentation.authentication.signin.SignInFragment
 import com.senior.d_text.presentation.authentication.signin.SignInViewModel
@@ -20,19 +24,24 @@ class HomeActivityUnitTest {
 
     private lateinit var vm: HomeViewModel
 
-    private val listenForMessagesUseCase: ListenForMessagesUseCase = mockk()
     private val getHistoryUseCase: GetHistoryUseCase = mockk()
     private val saveHistoryUseCase: SaveHistoryUseCase = mockk()
     private val deleteAllHistoryUseCase: DeleteAllHistoryUseCase = mockk()
+    private val application: Application = mockk()
+    private val deleteHistoryUseCase: DeleteHistoryUseCase = mockk()
+    private val analysisUrlUseCase: AnalysisUrlUseCase = mockk()
+    private val refreshUseCase: RefreshUseCase = mockk()
 
     @Before
     fun setup() {
         vm = HomeViewModel(
-            listenForMessagesUseCase,
+            application,
             getHistoryUseCase,
             saveHistoryUseCase,
-            deleteAllHistoryUseCase
-        )
+            deleteAllHistoryUseCase,
+            deleteHistoryUseCase,
+            analysisUrlUseCase,
+            refreshUseCase)
     }
 
     @Test

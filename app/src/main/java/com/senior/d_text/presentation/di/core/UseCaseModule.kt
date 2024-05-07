@@ -31,11 +31,6 @@ import dagger.Provides
 class UseCaseModule {
 
     @Provides
-    fun provideListenForMessagesUseCase(smsRepository: SMSRepository): ListenForMessagesUseCase {
-        return ListenForMessagesUseCase((smsRepository))
-    }
-
-    @Provides
     fun provideGetHistoryUseCase(historyRepository: HistoryRepository): GetHistoryUseCase {
         return GetHistoryUseCase(historyRepository)
     }

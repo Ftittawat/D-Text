@@ -37,26 +37,25 @@ import javax.inject.Inject
 
 class MessageService : Service() {
 
+    @Inject
     lateinit var listenForMessagesUseCase: ListenForMessagesUseCase
-    private lateinit var smsRepository: SMSRepository
     @Inject
     lateinit var saveMessageUseCase: SaveMessageUseCase
     @Inject
     lateinit var saveNotificationForMessageUseCase: SaveNotificationForMessageUseCase
     @Inject
     lateinit var analysisUrlMessageServiceUseCase: AnalysisUrlMessageServiceUseCase
-    private lateinit var apiKey: UserToken
 
+    private lateinit var apiKey: UserToken
     private var lastMessage: ReceiveSMS? = null
-    private var newMessage: ReceiveSMS? = null
     private var error: String = ""
 
     override fun onCreate() {
         super.onCreate()
         (application as Injector).createMessageService()
             .inject(this)
-        smsRepository = SMSRepositoryImpl(applicationContext)
-        listenForMessagesUseCase = ListenForMessagesUseCase(smsRepository)
+        // smsRepository = SMSRepositoryImpl(applicationContext)
+        // listenForMessagesUseCase = ListenForMessagesUseCase(smsRepository)
         apiKey = loadUserToken()
 
         Log.d("logMessages", "onCreate: MessageService")
@@ -195,7 +194,7 @@ class MessageService : Service() {
     }
 
     private fun saveMessageHistory(message: ReceiveSMS) {
-        val saveMessage = Message(0, message.sender, message.messageBody, message.dateTime)
+        val saveMessage = Message(0, message.sender, message.messageBody, message.url, message.dateTime)
         CoroutineScope(Dispatchers.IO).launch {
             saveMessageUseCase.execute(saveMessage)
         }
@@ -204,13 +203,6 @@ class MessageService : Service() {
     private fun saveNotification(notification: Notification) {
         CoroutineScope(Dispatchers.IO).launch {
             saveNotificationForMessageUseCase.execute(notification)
-        }
-    }
-
-    private fun testSaveMessageHistory() {
-        val saveMessage = Message(0, "+66910363409", "message.messageBody message.messageBody message.messageBody message.messageBody message.messageBody","17/04/2024 12:30:21")
-        CoroutineScope(Dispatchers.IO).launch {
-            saveMessageUseCase.execute(saveMessage)
         }
     }
 

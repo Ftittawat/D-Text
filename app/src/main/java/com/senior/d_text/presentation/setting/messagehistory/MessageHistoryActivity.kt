@@ -64,7 +64,7 @@ class MessageHistoryActivity(): AppCompatActivity() {
         dialog.show()
 
         dialogBinding.confirmButton.setOnClickListener {
-            //vm.deleteAllMessageHistory()
+            vm.deleteAllMessageHistory()
             dialog.dismiss()
         }
         dialogBinding.cancelButton.setOnClickListener {
