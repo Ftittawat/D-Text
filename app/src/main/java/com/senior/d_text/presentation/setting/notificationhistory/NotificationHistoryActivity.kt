@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.senior.d_text.R
 import com.senior.d_text.databinding.ActivitySettingNotificationHistoryBinding
+import com.senior.d_text.databinding.DialogConfirmDeleteAllBinding
 import com.senior.d_text.databinding.DialogConfirmDeleteBinding
 import com.senior.d_text.presentation.core.NotificationHistoryViewModelFactory
 import com.senior.d_text.presentation.di.Injector
@@ -43,7 +44,7 @@ class NotificationHistoryActivity(): AppCompatActivity() {
             onBackPressed()
         }
         binding.clearHistoryButton.setOnClickListener {
-            showConfirmDialog()
+            showConfirmDeleteAllDialog()
         }
     }
 
@@ -66,9 +67,8 @@ class NotificationHistoryActivity(): AppCompatActivity() {
         }
     }
 
-    private fun showConfirmDialog() {
-        val dialogBinding: DialogConfirmDeleteBinding =
-            DialogConfirmDeleteBinding.inflate(layoutInflater)
+    private fun showConfirmDeleteAllDialog() {
+        val dialogBinding: DialogConfirmDeleteAllBinding = DialogConfirmDeleteAllBinding.inflate(layoutInflater)
         val builder = AlertDialog.Builder(this, R.style.Theme_AlertDialog)
         builder.setView(dialogBinding.root)
 

@@ -2,10 +2,10 @@ package com.senior.d_text.presentation.di.messageService
 
 import com.senior.d_text.domain.repository.AnalysisRepository
 import com.senior.d_text.domain.repository.MessageRepository
+import com.senior.d_text.domain.repository.NotificationRepository
 import com.senior.d_text.domain.usecase.AnalysisUrlMessageServiceUseCase
-import com.senior.d_text.domain.usecase.AnalysisUrlUseCase
 import com.senior.d_text.domain.usecase.SaveMessageUseCase
-import com.senior.d_text.presentation.core.MessageServiceViewModelFactory
+import com.senior.d_text.domain.usecase.SaveNotificationForMessageUseCase
 import dagger.Module
 import dagger.Provides
 
@@ -16,6 +16,13 @@ class MessageServiceModule {
         messageRepository: MessageRepository
     ): SaveMessageUseCase {
         return SaveMessageUseCase(messageRepository)
+    }
+
+    @Provides
+    fun provideSaveNotificationForMessageUseCase(
+        notificationRepository: NotificationRepository
+    ): SaveNotificationForMessageUseCase {
+        return SaveNotificationForMessageUseCase(notificationRepository)
     }
 
 //    @Provides

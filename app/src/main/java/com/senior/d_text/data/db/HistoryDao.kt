@@ -22,4 +22,6 @@ interface HistoryDao {
     @Query("DELETE FROM history WHERE id = (SELECT id FROM history ORDER BY id LIMIT 1)")
     fun deleteFirstHistory()
 
+    @Query("DELETE FROM history WHERE id = :inputId")
+    fun deleteNotification(inputId: Int)
 }

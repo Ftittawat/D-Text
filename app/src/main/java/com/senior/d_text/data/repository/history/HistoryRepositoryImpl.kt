@@ -21,4 +21,8 @@ class HistoryRepositoryImpl(
         historyLocalDatasource.clearAll()
     }
 
+    override suspend fun deleteHistory(id: Int) {
+        historyLocalDatasource.deleteHistory(id)
+    }
+
 }

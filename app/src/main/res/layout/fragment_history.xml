@@ -256,40 +256,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/checklist_title"
-                    style="@style/result.text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="12dp"
-                    android:text="@string/result_1"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/overview_title" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/checklist_result_description"
-                    style="@style/result.text.secondary"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    android:layout_marginEnd="8dp"
-                    android:text="@string/risk_level"
-                    app:layout_constraintEnd_toStartOf="@+id/checklist_result"
-                    app:layout_constraintTop_toBottomOf="@id/overview_title" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/checklist_result"
-                    style="@style/result.text.secondary"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    android:layout_marginEnd="16dp"
-                    android:text="@string/no_information"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/overview_title" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/google_web_title"
+                    android:id="@+id/google_title"
                     style="@style/result.text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -297,21 +264,21 @@
                     android:layout_marginTop="8dp"
                     android:text="@string/result_2"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/checklist_title" />
+                    app:layout_constraintTop_toBottomOf="@id/overview_title" />
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/google_web_result_description"
+                    android:id="@+id/google_result_description"
                     style="@style/result.text.secondary"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="8dp"
                     android:text="@string/risk_level"
-                    app:layout_constraintEnd_toStartOf="@+id/google_web_result"
-                    app:layout_constraintTop_toBottomOf="@id/checklist_result_description" />
+                    app:layout_constraintEnd_toStartOf="@+id/google_result"
+                    app:layout_constraintTop_toBottomOf="@id/overview_title" />
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/google_web_result"
+                    android:id="@+id/google_result"
                     style="@style/result.text.secondary"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -319,10 +286,200 @@
                     android:layout_marginEnd="16dp"
                     android:text="@string/no_information"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/checklist_result" />
+                    app:layout_constraintTop_toBottomOf="@id/overview_title" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/checklist_title"
+                    style="@style/result.text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/result_1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/google_title" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/checklist_result_description"
+                    style="@style/result.text.secondary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:text="@string/risk_level"
+                    app:layout_constraintEnd_toStartOf="@+id/checklist_result"
+                    app:layout_constraintTop_toBottomOf="@id/google_title" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/checklist_result"
+                    style="@style/result.text.secondary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:text="@string/no_information"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/google_title" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/checklist_1_title"
+                    style="@style/result.text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="4dp"
+                    android:text="@string/checklist_1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/checklist_title" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/checklist_1_result"
+                    style="@style/result.text.secondary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginEnd="16dp"
+                    android:text="@string/no_information"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/checklist_title" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/checklist_2_title"
+                    style="@style/result.text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="4dp"
+                    android:text="@string/checklist_2"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/checklist_1_title" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/checklist_2_result"
+                    style="@style/result.text.secondary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginEnd="16dp"
+                    android:text="@string/no_information"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/checklist_1_title" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/checklist_3_title"
+                    style="@style/result.text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="4dp"
+                    android:text="@string/checklist_3"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/checklist_2_title" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/checklist_3_result"
+                    style="@style/result.text.secondary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginEnd="16dp"
+                    android:text="@string/no_information"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/checklist_2_title" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/checklist_4_title"
+                    style="@style/result.text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="4dp"
+                    android:text="@string/checklist_4"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/checklist_3_title" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/checklist_4_result"
+                    style="@style/result.text.secondary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginEnd="16dp"
+                    android:text="@string/no_information"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/checklist_3_title" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/checklist_5_title"
+                    style="@style/result.text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="12dp"
+                    android:text="@string/checklist_5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/checklist_4_title"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/checklist_5_result"
+                    style="@style/result.text.secondary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="12dp"
+                    android:text="@string/no_information"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/checklist_4_title"
+                    app:layout_constraintBottom_toBottomOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/google_web_title"
+                    android:visibility="gone"
+                    style="@style/result.text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="12dp"
+                    android:text="@string/result_2"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/checklist_5_title"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/google_web_result_description"
+                    android:visibility="gone"
+                    style="@style/result.text.secondary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="12dp"
+                    android:text="@string/risk_level"
+                    app:layout_constraintEnd_toStartOf="@+id/google_web_result"
+                    app:layout_constraintTop_toBottomOf="@id/checklist_5_title"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/google_web_result"
+                    android:visibility="gone"
+                    style="@style/result.text.secondary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="12dp"
+                    android:text="@string/no_information"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/checklist_5_title"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/phishtank_web_title"
+                    android:visibility="gone"
                     style="@style/result.text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -336,6 +493,7 @@
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/phishtank_result_description"
+                    android:visibility="gone"
                     style="@style/result.text.secondary"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -348,6 +506,7 @@
                     app:layout_constraintTop_toBottomOf="@id/google_web_result_description" />
 
                 <androidx.appcompat.widget.AppCompatTextView
+                    android:visibility="gone"
                     android:id="@+id/phishtank_web_result"
                     style="@style/result.text.secondary"
                     android:layout_width="wrap_content"

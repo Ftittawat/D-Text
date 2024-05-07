@@ -5,6 +5,7 @@
     <color name="blank">#00FFFFFF</color>
     <color name="blue_primary">#FF1766FF</color>
     <color name="background">#FFF9F9F9</color>
+    <color name="background_secondary">#FFF9F9F9</color>
     <color name="red">#FFEC4C4C</color>
     <color name="yellow">#FFFFCF70</color>
     <color name="green">#FF36AE7C</color>

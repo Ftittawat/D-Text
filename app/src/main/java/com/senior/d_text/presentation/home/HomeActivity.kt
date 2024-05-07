@@ -22,13 +22,17 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.senior.d_text.R
 import com.senior.d_text.data.model.history.History
 import com.senior.d_text.databinding.ActivityHomeBinding
+import com.senior.d_text.databinding.DialogConfirmDeleteAllBinding
 import com.senior.d_text.databinding.DialogConfirmDeleteBinding
+import com.senior.d_text.presentation.autoscan.AutoScanActivity
 import com.senior.d_text.presentation.core.HomeViewModelFactory
 import com.senior.d_text.presentation.core.OnItemClickListener
+import com.senior.d_text.presentation.core.OnItemClickListenerDelBtn
 import com.senior.d_text.presentation.detecthistory.DetectHistoryFragment
 import com.senior.d_text.presentation.di.Injector
 import com.senior.d_text.presentation.history.HistoryFragment
 import com.senior.d_text.presentation.setting.SettingActivity
+import com.senior.d_text.presentation.util.CalculateUrlType
 import com.senior.d_text.presentation.util.GuestState
 import com.senior.d_text.presentation.util.LoggedInState
 import com.senior.d_text.presentation.util.StateContext
@@ -83,7 +87,7 @@ class HomeActivity() : AppCompatActivity() {
 
     private fun setupButton() {
         // binding.notificationIndicator.isVisible = true
-        val guest = intent.extras?.getBoolean("guest", false)
+        // val guest = intent.extras?.getBoolean("guest", false)
         binding.activity.setOnClickListener {
             it.hideKeyboard()
             binding.searchBox.clearFocus()
@@ -99,12 +103,14 @@ class HomeActivity() : AppCompatActivity() {
 //            notificationFragment.show(supportFragmentManager, "NotificationFragmentTag")
 //        }
         binding.detectHistoryButton.setOnClickListener {
-            val detectHistoryFragment = DetectHistoryFragment()
-            detectHistoryFragment.show(supportFragmentManager, "DetectHistoryFragmentTag")
+            // val detectHistoryFragment = DetectHistoryFragment()
+            // detectHistoryFragment.show(supportFragmentManager, "DetectHistoryFragmentTag")
+            intent = Intent(this, AutoScanActivity::class.java)
+            startActivity(intent)
+            overridePendingTransition(R.anim.animate_slide_in_left, R.anim.animate_slide_out_right)
         }
         binding.settingButton.setOnClickListener {
             intent = Intent(this, SettingActivity::class.java)
-            intent.putExtra("guest", guest)
             startActivity(intent)
             overridePendingTransition(R.anim.animate_slide_in_right, R.anim.animate_slide_out_left)
         }
@@ -126,7 +132,7 @@ class HomeActivity() : AppCompatActivity() {
 //            vm.deleteAllHistory()
 //        }
         binding.clearHistoryButton.setOnClickListener {
-            showConfirmDialog()
+            showConfirmDeleteAllDialog()
         }
         binding.scanButton.isEnabled = false
     }
@@ -271,18 +277,25 @@ class HomeActivity() : AppCompatActivity() {
         adapter = HistoryAdapter()
         binding.historyRecyclerview.adapter = adapter
         displayHistory()
-        adapter.setOnItemClickListener(object : OnItemClickListener {
+        adapter.setOnItemClickListener(object : OnItemClickListenerDelBtn {
             override fun onItemClick(position: Int) {
                 //Toast.makeText(applicationContext, adapter.historyList[position].url, Toast.LENGTH_SHORT).show()
+                Log.d("log", "onItemClick: ${adapter.getList(position)}")
                 val historyFragment = HistoryFragment()
                 val bundle = Bundle()
-                getSearchValue()
-                bundle.putString("URL", adapter.getList(position).url)
-                bundle.putString("RISK_LEVEL", adapter.getList(position).risk_level)
-                bundle.putString("TYPE", adapter.getList(position).type)
-                bundle.putString("DATE_TIME", adapter.getList(position).date_time)
+                bundle.putSerializable("LINK_DATA", adapter.getList(position))
+//                bundle.putString("URL", adapter.getList(position).url)
+//                bundle.putString("RISK_LEVEL", adapter.getList(position).risk_level)
+//                bundle.putString("ORG_NAME", adapter.getList(position).type)
+//                bundle.putString("DATE_TIME", adapter.getList(position).date_time)
                 historyFragment.arguments = bundle
                 historyFragment.show(supportFragmentManager, "HistoryFragmentTag")
+            }
+
+            override fun onDeleteClick(position: Int) {
+                val id = adapter.getList(position).id
+                // vm.deleteHistory(id)
+                showConfirmDeleteDialog(id)
             }
         })
     }
@@ -308,13 +321,31 @@ class HomeActivity() : AppCompatActivity() {
             if (it != null) {
                 val historyFragment = HistoryFragment()
                 val bundle = Bundle()
-                bundle.putString("URL", vm.url.value.toString())
-                bundle.putString("RISK_LEVEL", it.urlType)
-                bundle.putString("ORG_NAME", it.registrarName)
+                val riskLevel = CalculateUrlType().calculate(it.dtextResult.urlType, it.webriskResult.urlType)
+                val orgName = vm.validateOrgName(it.dtextResult.organzName, it.dtextResult.registrarName)
+                val type = vm.checkOrgName(riskLevel, orgName, it.webriskResult.urlThreatType)
                 val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
                 val currentTime = LocalDateTime.now().format(formatter)
-                val saveData = History( 0, vm.url.value.toString(), it.urlType, it.registrarName, currentTime)
+                val saveData = History(
+                    0,
+                    vm.url.value.toString(),
+                    riskLevel,
+                    it.dtextResult.urlType,
+                    it.webriskResult.urlType,
+                    type,
+                    currentTime,
+                    it.dtextResult.domainAgeDay,
+                    it.dtextResult.hasForm,
+                    it.dtextResult.hasIframe,
+                    it.dtextResult.hasShortened,
+                    it.dtextResult.hasSsl,
+                    it.dtextResult.urlScore
+                )
                 vm.saveHistory(saveData)
+//                bundle.putString("URL", vm.url.value.toString())
+//                bundle.putString("RISK_LEVEL", riskLevel)
+//                bundle.putString("ORG_NAME", orgName)
+                bundle.putSerializable("LINK_DATA", saveData)
                 historyFragment.arguments = bundle
                 historyFragment.show(supportFragmentManager, "HistoryFragmentTag")
                 showLoadingIndicator(false)
@@ -329,8 +360,26 @@ class HomeActivity() : AppCompatActivity() {
         }
     }
 
-    private fun showConfirmDialog() {
+    private fun showConfirmDeleteDialog(id: Int) {
         val dialogBinding: DialogConfirmDeleteBinding = DialogConfirmDeleteBinding.inflate(layoutInflater)
+        val builder = AlertDialog.Builder(this, R.style.Theme_AlertDialog)
+        builder.setView(dialogBinding.root)
+
+        val dialog = builder.create()
+        dialog.show()
+
+        dialogBinding.confirmButton.setOnClickListener {
+            vm.deleteHistory(id)
+            dialog.dismiss()
+            Toast.makeText(applicationContext, getText(R.string.delete_success), Toast.LENGTH_SHORT).show()
+        }
+        dialogBinding.cancelButton.setOnClickListener {
+            dialog.dismiss()
+        }
+    }
+
+    private fun showConfirmDeleteAllDialog() {
+        val dialogBinding: DialogConfirmDeleteAllBinding = DialogConfirmDeleteAllBinding.inflate(layoutInflater)
         val builder = AlertDialog.Builder(this, R.style.Theme_AlertDialog)
         builder.setView(dialogBinding.root)
 

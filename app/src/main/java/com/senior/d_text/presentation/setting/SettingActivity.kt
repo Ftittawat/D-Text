@@ -118,17 +118,14 @@ class SettingActivity : AppCompatActivity() {
 
         dialogBinding.confirmButton.setOnClickListener {
             dialog.dismiss()
-            vm.removeToken()
+            vm.signOut()
             intent = Intent(this, WelcomeScreenActivity::class.java)
             startActivity(intent)
+            // overridePendingTransition(R.anim.animate_fade_enter, R.anim.animate_fade_exit)
         }
         dialogBinding.cancelButton.setOnClickListener {
             dialog.dismiss()
         }
-    }
-
-    private fun signOut() {
-
     }
 
     override fun onBackPressed() {

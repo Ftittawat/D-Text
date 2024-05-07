@@ -1,6 +1,5 @@
 package com.senior.d_text.presentation.service
 
-import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.app.Service
@@ -10,26 +9,30 @@ import android.os.IBinder
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationCompat
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.liveData
 import com.senior.d_text.R
+import com.senior.d_text.data.model.Result
+import com.senior.d_text.data.model.analysis.AnalysisUrl
+import com.senior.d_text.data.model.authentication.UserToken
 import com.senior.d_text.data.model.message.Message
 import com.senior.d_text.data.model.message.ReceiveSMS
+import com.senior.d_text.data.model.notification.Notification
 import com.senior.d_text.data.model.setting.NotificationSetting
 import com.senior.d_text.data.repository.sms.SMSRepositoryImpl
 import com.senior.d_text.domain.repository.SMSRepository
 import com.senior.d_text.domain.usecase.AnalysisUrlMessageServiceUseCase
-import com.senior.d_text.domain.usecase.AnalysisUrlUseCase
 import com.senior.d_text.domain.usecase.ListenForMessagesUseCase
 import com.senior.d_text.domain.usecase.SaveMessageUseCase
-import com.senior.d_text.presentation.authentication.signin.SignInViewModel
-import com.senior.d_text.presentation.core.MessageServiceViewModelFactory
+import com.senior.d_text.domain.usecase.SaveNotificationForMessageUseCase
 import com.senior.d_text.presentation.di.Injector
 import com.senior.d_text.presentation.home.HomeActivity
+import com.senior.d_text.presentation.home.HomeViewModel
+import com.senior.d_text.presentation.util.CalculateUrlType
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 import javax.inject.Inject
 
 class MessageService : Service() {
@@ -39,10 +42,14 @@ class MessageService : Service() {
     @Inject
     lateinit var saveMessageUseCase: SaveMessageUseCase
     @Inject
+    lateinit var saveNotificationForMessageUseCase: SaveNotificationForMessageUseCase
+    @Inject
     lateinit var analysisUrlMessageServiceUseCase: AnalysisUrlMessageServiceUseCase
+    private lateinit var apiKey: UserToken
 
     private var lastMessage: ReceiveSMS? = null
     private var newMessage: ReceiveSMS? = null
+    private var error: String = ""
 
     override fun onCreate() {
         super.onCreate()
@@ -50,6 +57,7 @@ class MessageService : Service() {
             .inject(this)
         smsRepository = SMSRepositoryImpl(applicationContext)
         listenForMessagesUseCase = ListenForMessagesUseCase(smsRepository)
+        apiKey = loadUserToken()
 
         Log.d("logMessages", "onCreate: MessageService")
 //        val channelId = "MessageForegroundServiceChannel"
@@ -103,20 +111,39 @@ class MessageService : Service() {
     }
 
     private fun checkUrl(url: String) = GlobalScope.launch(Dispatchers.IO) {
+        val response = analysisUrlMessageServiceUseCase.execute(url, apiKey.access_token!!)
+        when (response) {
+            is Result.Success -> {
+                val data = response.data!!
+                displayResult(data)
+            }
+            is Result.Error -> {
+                error = response.message
+            }
+        }
+    }
+
+    private fun displayResult(result: AnalysisUrl) {
         val notificationSetting = loadNotificationSetting()
-        val analysisResult = analysisUrlMessageServiceUseCase.execute(url)!!
-        if (analysisResult.urlType == SAFE && notificationSetting.safe) {
-            notify(analysisResult.urlType, analysisResult.url)
+        val checklist = result.dtextResult
+        val google = result.webriskResult
+        val type = CalculateUrlType().calculate(checklist.urlType, google.urlType)
+        val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
+        val currentTime = LocalDateTime.now().format(formatter)
+        if (type == SAFE && notificationSetting.safe) {
+            notify(type, checklist.url)
         }
-        else if (analysisResult.urlType == SUSPICIOUS && notificationSetting.suspicious) {
-            notify(analysisResult.urlType, analysisResult.url)
+        else if (type == SUSPICIOUS && notificationSetting.suspicious) {
+            notify(type, checklist.url)
         }
-        else if (analysisResult.urlType == UNSAFE && notificationSetting.unsafe) {
-            notify(analysisResult.urlType, analysisResult.url)
+        else if (type == UNSAFE && notificationSetting.unsafe) {
+            notify(type, checklist.url)
         }
-        else if (analysisResult.urlType == NO_INFORMATION && notificationSetting.no_information) {
-            notify(analysisResult.urlType, analysisResult.url)
+        else if (type == NO_INFORMATION && notificationSetting.no_information) {
+            notify(type, checklist.url)
         }
+        val notificationData = Notification(0, checklist.url, type, getString(R.string.source_message), getString(R.string.source_message), currentTime)
+        saveNotification(notificationData)
     }
 
 //    fun checkUrl() = liveData {
@@ -129,9 +156,9 @@ class MessageService : Service() {
         val notificationId = 1101
         val channelId = "AutoDetectionService"
         val title = when (urlType) {
-            "safe" -> getString(R.string.notification_safe_title)
-            "suspicious" -> getString(R.string.notification_suspicious_title)
-            "unsafe" -> getString(R.string.notification_unsafe_title)
+            SAFE -> getString(R.string.notification_safe_title)
+            SUSPICIOUS -> getString(R.string.notification_suspicious_title)
+            UNSAFE -> getString(R.string.notification_unsafe_title)
             else -> getString(R.string.notification_no_info_title)
         }
 
@@ -150,7 +177,8 @@ class MessageService : Service() {
     }
 
     private fun loadNotificationSetting(): NotificationSetting {
-        val sharePref = application.getSharedPreferences("Setting_Notification", AppCompatActivity.MODE_PRIVATE)
+        val sharePref =
+            application.getSharedPreferences("Setting_Notification", AppCompatActivity.MODE_PRIVATE)
         val safe = sharePref.getBoolean(SAFE, false)
         val suspicious = sharePref.getBoolean(SUSPICIOUS, false)
         val unsafe = sharePref.getBoolean(UNSAFE, false)
@@ -158,10 +186,24 @@ class MessageService : Service() {
         return NotificationSetting(unsafe, suspicious, safe, noInformation)
     }
 
+    private fun loadUserToken(): UserToken {
+        val sharePref = applicationContext.getSharedPreferences("account", Context.MODE_PRIVATE)
+        val tokenId = sharePref.getString("token_id", "")
+        val accessToken = sharePref.getString("access_token", "")
+        val refreshToken = sharePref.getString("refresh_token", "")
+        return UserToken(tokenId, accessToken, refreshToken)
+    }
+
     private fun saveMessageHistory(message: ReceiveSMS) {
         val saveMessage = Message(0, message.sender, message.messageBody, message.dateTime)
         CoroutineScope(Dispatchers.IO).launch {
             saveMessageUseCase.execute(saveMessage)
+        }
+    }
+
+    private fun saveNotification(notification: Notification) {
+        CoroutineScope(Dispatchers.IO).launch {
+            saveNotificationForMessageUseCase.execute(notification)
         }
     }
 
@@ -177,7 +219,7 @@ class MessageService : Service() {
         const val UNSAFE = "unsafe"
         const val SUSPICIOUS = "suspicious"
         const val SAFE = "safe"
-        const val NO_INFORMATION = "no_information"
+        const val NO_INFORMATION = "noinformation"
     }
 
 }

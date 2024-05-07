@@ -6,7 +6,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.senior.d_text.R
-import com.senior.d_text.data.model.authentication.Result
+import com.senior.d_text.data.model.Result
 import com.senior.d_text.domain.usecase.SignUpUseCase
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -97,7 +97,7 @@ class SignUpViewModel @Inject constructor (
             is Result.Success -> {
                 val account = response.data!!
                 error.value = "Success"
-                saveToken(account.userTokenResponse.id)
+                saveUserToken(account.userTokenResponse.id, account.userTokenResponse.accessToken, account.userTokenResponse.refreshToken)
             }
             is Result.Error -> {
                 error.value = response.message
@@ -113,6 +113,14 @@ class SignUpViewModel @Inject constructor (
     private fun saveToken(token: String) {
         val editor = sharePref.edit()
         editor.putString("token", token)
+        editor.apply()
+    }
+
+    private fun saveUserToken(id: String, access_token: String, refresh_token: String) {
+        val editor = sharePref.edit()
+        editor.putString("token_id", id)
+        editor.putString("access_token", access_token)
+        editor.putString("refresh_token", refresh_token)
         editor.apply()
     }
 

@@ -3,6 +3,7 @@ package com.senior.d_text.presentation.di.core
 import com.senior.d_text.presentation.di.authentication.AuthenticationSubcomponent
 import com.senior.d_text.presentation.di.authentication.signin.SignInSubComponent
 import com.senior.d_text.presentation.di.authentication.signup.SignUpSubComponent
+import com.senior.d_text.presentation.di.autoscan.AutoScanSubComponent
 import com.senior.d_text.presentation.di.home.HomeSubComponent
 import com.senior.d_text.presentation.di.messagehistory.MessageHistorySubComponent
 import com.senior.d_text.presentation.di.messageService.MessageServiceSubComponent
@@ -32,4 +33,5 @@ interface AppComponent {
     fun signInSubComponent(): SignInSubComponent.Factory
     fun signUpSubComponent(): SignUpSubComponent.Factory
     fun settingSubComponent(): SettingSubComponent.Factory
+    fun autoScanSubComponent(): AutoScanSubComponent.Factory
 }

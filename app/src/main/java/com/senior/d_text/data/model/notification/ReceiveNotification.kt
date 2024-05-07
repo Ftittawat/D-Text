@@ -15,6 +15,8 @@ data class ReceiveNotification(
     val title: String,
     @SerializedName("text")
     val text: String,
+    @SerializedName("url")
+    val url: String,
     @SerializedName("dateTime")
     var dateTime: String
 ): Serializable

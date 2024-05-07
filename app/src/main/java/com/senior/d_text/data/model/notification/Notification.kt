@@ -13,8 +13,6 @@ data class Notification(
     val url: String,
     @SerializedName("risk_level")
     val risk_level: String,
-    @SerializedName("type")
-    val type: String,
     @SerializedName("application")
     val application: String,
     @SerializedName("source")

@@ -9,4 +9,5 @@ interface HistoryLocalDatasource {
     fun getHistoryFromDB(): Flow<List<History>>
     suspend fun clearAll()
     suspend fun deleteFirstHistory()
+    suspend fun deleteHistory(id: Int)
 }

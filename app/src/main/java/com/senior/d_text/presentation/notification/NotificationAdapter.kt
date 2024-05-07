@@ -2,6 +2,8 @@ package com.senior.d_text.presentation.notification
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.view.isGone
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.senior.d_text.data.model.notification.Notification
 import com.senior.d_text.databinding.ItemNotificationBinding
@@ -54,6 +56,35 @@ class NotificationViewHolder(val binding: ItemNotificationBinding, listener: OnI
     }
 
     fun bind(notification: Notification) {
-
+        binding.title.text = notification.url
+        binding.location.text = notification.application
+        binding.appType.text = notification.source
+        binding.time.text = notification.date_time
+        when (notification.risk_level) {
+            "unsafe" -> {
+                binding.unsafe.isVisible = true
+                binding.suspicious.isGone = true
+                binding.safe.isGone = true
+                binding.noInformation.isGone = true
+            }
+            "suspicious" -> {
+                binding.unsafe.isGone = true
+                binding.suspicious.isVisible = true
+                binding.safe.isGone = true
+                binding.noInformation.isGone = true
+            }
+            "safe" -> {
+                binding.unsafe.isGone = true
+                binding.suspicious.isGone = true
+                binding.safe.isVisible = true
+                binding.noInformation.isGone = true
+            }
+            else -> {
+                binding.unsafe.isGone = true
+                binding.suspicious.isGone = true
+                binding.safe.isGone = true
+                binding.noInformation.isVisible = true
+            }
+        }
     }
 }

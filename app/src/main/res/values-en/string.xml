@@ -12,7 +12,9 @@
     <string name="guest_mode"><u>Guest Mode</u></string>
 
     <!-- Dialog. -->
-    <string name="delete_dialog_title">Delete All Message</string>
+    <string name="delete_all_dialog_title">Delete All History</string>
+    <string name="delete_all_dialog_des">Are You Sure?</string>
+    <string name="delete_dialog_title">Delete History</string>
     <string name="delete_dialog_des">Are You Sure?</string>
     <string name="logout_dialog_title">Logout</string>
     <string name="logout_dialog_des">Are You Sure?</string>
@@ -77,7 +79,9 @@
     <string name="scan">Scan URL</string>
     <string name="history">History</string>
     <string name="detect_history">Detect History</string>
+    <string name="auto_scan">Automatic Detection</string>
     <string name="clear_all"><u>ClearAll</u></string>
+    <string name="delete_success">Delete Success</string>
 
     <!-- Risk Level. -->
     <string name="risk_level">Risk Level</string>
@@ -94,11 +98,18 @@
     <string name="organization">Organization</string>
     <string name="safe_link">This link is safe.</string>
     <string name="browser">Go to Browser</string>
+    <string name="checklist_1">Shorted URL</string>
+    <string name="checklist_2">SSL Certificate</string>
+    <string name="checklist_3">IFRAME</string>
+    <string name="checklist_4">FORM</string>
+    <string name="checklist_5">Domain Age Day</string>
     <string name="result_1">Checklist</string>
     <string name="result_2">Google Web Risk</string>
     <string name="result_3">Phishtank</string>
     <string name="result_4">in the Database</string>
     <string name="result_safe">Safe</string>
+    <string name="result_suspicious">Suspicious</string>
+    <string name="result_unsafe">Unsafe</string>
     <string name="low">Low</string>
     <string name="medium">Medium</string>
     <string name="high">High</string>
@@ -112,6 +123,7 @@
     <string name="spam">Spam</string>
 
     <!-- Notification. -->
+    <string name="notification_title">Malicious Link Alert</string>
     <string name="message_auto_scan_title">Message Auto Scan</string>
     <string name="message_auto_scan_des">Message Auto Detection Service</string>
     <string name="notification_auto_scan_title">Notification Auto Scan</string>
@@ -120,6 +132,8 @@
     <string name="notification_suspicious_title">Suspicious Link Detect</string>
     <string name="notification_unsafe_title">Unsafe Link Detect</string>
     <string name="notification_no_info_title">No Information Detect</string>
+    <string name="source_message">Messages</string>
+    <string name="source_notification">Notifications</string>
 
     <!-- Setting. -->
     <string name="title_settings">Settings</string>

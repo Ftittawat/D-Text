@@ -8,11 +8,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.senior.d_text.data.model.history.History
 import com.senior.d_text.databinding.ItemHistoryBinding
 import com.senior.d_text.presentation.core.OnItemClickListener
+import com.senior.d_text.presentation.core.OnItemClickListenerDelBtn
 
 class HistoryAdapter(): RecyclerView.Adapter<HistoryViewHolder>() {
 
     private val historyList: ArrayList<History> = ArrayList()
-    private lateinit var mListener: OnItemClickListener
+    private lateinit var mListener: OnItemClickListenerDelBtn
 
     fun setList(history: List<History>) {
         historyList.clear()
@@ -24,7 +25,7 @@ class HistoryAdapter(): RecyclerView.Adapter<HistoryViewHolder>() {
         return historyList[position]
     }
 
-    fun setOnItemClickListener(listener: OnItemClickListener) {
+    fun setOnItemClickListener(listener: OnItemClickListenerDelBtn) {
         mListener = listener
     }
 
@@ -43,13 +44,20 @@ class HistoryAdapter(): RecyclerView.Adapter<HistoryViewHolder>() {
     }
 }
 
-class HistoryViewHolder(val binding: ItemHistoryBinding, listener: OnItemClickListener): RecyclerView.ViewHolder(binding.root) {
+class HistoryViewHolder(val binding: ItemHistoryBinding, listener: OnItemClickListenerDelBtn): RecyclerView.ViewHolder(binding.root) {
 
     init {
         binding.root.setOnClickListener {
             val position = adapterPosition
             if (position != RecyclerView.NO_POSITION) {
                 listener.onItemClick(position)
+            }
+        }
+
+        binding.deleteButton.setOnClickListener {
+            val position = adapterPosition
+            if (position != RecyclerView.NO_POSITION) {
+                listener.onDeleteClick(position)
             }
         }
     }

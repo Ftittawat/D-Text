@@ -5,5 +5,5 @@ import com.senior.d_text.data.model.history.History
 import retrofit2.Response
 
 interface AnalysisRemoteDatasource {
-    suspend fun analysisUrl(url: String): Response<AnalysisUrl>
+    suspend fun analysisUrl(url: String, apikey: String): Response<AnalysisUrl>
 }

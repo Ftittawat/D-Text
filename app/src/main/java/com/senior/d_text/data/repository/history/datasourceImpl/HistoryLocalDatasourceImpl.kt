@@ -28,6 +28,14 @@ class HistoryLocalDatasourceImpl(private val historyDao: HistoryDao):
     }
 
     override suspend fun deleteFirstHistory() {
-        TODO("Not yet implemented")
+        CoroutineScope(Dispatchers.IO).launch {
+            historyDao.deleteFirstHistory()
+        }
+    }
+
+    override suspend fun deleteHistory(id: Int) {
+        CoroutineScope(Dispatchers.IO).launch {
+            historyDao.deleteNotification(id)
+        }
     }
 }

@@ -9,6 +9,8 @@ import com.senior.d_text.data.repository.history.HistoryRepositoryImpl
 import com.senior.d_text.data.repository.history.datasource.HistoryLocalDatasource
 import com.senior.d_text.data.repository.message.MessageRepositoryImpl
 import com.senior.d_text.data.repository.message.datasource.MessageLocalDatasource
+import com.senior.d_text.data.repository.notification.NotificationRepositoryImpl
+import com.senior.d_text.data.repository.notification.datasource.NotificationLocalDatasource
 import com.senior.d_text.data.repository.notificationHistory.NotificationHistoryRepositoryImpl
 import com.senior.d_text.data.repository.notificationHistory.datasource.NotificationHistoryLocalDatasource
 import com.senior.d_text.data.repository.notificationReceiver.NotificationReceiverRepositoryImpl
@@ -62,6 +64,16 @@ class RepositoryModule(private val context: Context) {
     ): NotificationHistoryRepository {
         return NotificationHistoryRepositoryImpl(
             notificationHistoryLocalDatasource
+        )
+    }
+
+    @Singleton
+    @Provides
+    fun provideNotificationRepository(
+        notificationLocalDatasource: NotificationLocalDatasource
+    ): NotificationRepository {
+        return NotificationRepositoryImpl(
+            notificationLocalDatasource
         )
     }
 

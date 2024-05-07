@@ -1,4 +1,4 @@
-package com.senior.d_text.data.model.authentication
+package com.senior.d_text.data.model
 
 sealed class Result<out T> {
     data class Success<out T>(val data: T): Result<T>()

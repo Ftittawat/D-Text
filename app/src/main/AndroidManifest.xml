@@ -46,9 +46,9 @@
 
         <receiver android:name=".data.repository.notificationReceiver.NotificationReceiver"
             android:enabled="true"
-            android:exported="true">
+            android:exported="false">
             <intent-filter>
-                <action android:name="com.senior.ACTION_CUSTOM_INTENT"/>
+                <action android:name="com.d-text.ACTION_NOTIFICATION_INTENT"/>
             </intent-filter>
         </receiver>
 
@@ -80,6 +80,12 @@
             android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/Base.Theme.DText.Home" >
+        </activity>
+        <activity
+            android:name=".presentation.autoscan.AutoScanActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Base.Theme.DText.Home">
         </activity>
         <activity
             android:name=".presentation.onboardingscreen.OnboardActivity"

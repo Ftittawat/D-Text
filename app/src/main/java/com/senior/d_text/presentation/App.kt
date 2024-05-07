@@ -5,14 +5,17 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
 import com.senior.d_text.BuildConfig
+import com.senior.d_text.data.model.authentication.UserToken
 import com.senior.d_text.presentation.di.Injector
 import com.senior.d_text.presentation.di.authentication.AuthenticationSubcomponent
 import com.senior.d_text.presentation.di.authentication.signin.SignInSubComponent
 import com.senior.d_text.presentation.di.authentication.signup.SignUpSubComponent
+import com.senior.d_text.presentation.di.autoscan.AutoScanSubComponent
 import com.senior.d_text.presentation.di.core.AppComponent
 import com.senior.d_text.presentation.di.core.AppModule
 import com.senior.d_text.presentation.di.core.DaggerAppComponent
 import com.senior.d_text.presentation.di.core.NetModule
+import com.senior.d_text.presentation.di.core.RemoteDataModule
 import com.senior.d_text.presentation.di.core.RepositoryModule
 import com.senior.d_text.presentation.di.home.HomeSubComponent
 import com.senior.d_text.presentation.di.messagehistory.MessageHistorySubComponent
@@ -76,6 +79,10 @@ class App : Application(), Injector {
         return appComponent.settingSubComponent().create()
     }
 
+    override fun createAutoScanSubComponent(): AutoScanSubComponent {
+        return appComponent.autoScanSubComponent().create()
+    }
+
     fun initNotificationChannel() {
         val channelId = "MessageForegroundServiceChannel"
         val channel = NotificationChannel(
@@ -85,6 +92,14 @@ class App : Application(), Injector {
         )
         val notificationManager: NotificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         notificationManager.createNotificationChannel(channel)
+    }
+
+    private fun loadUserToken(): UserToken {
+        val sharePref = applicationContext.getSharedPreferences("account", Context.MODE_PRIVATE)
+        val tokenId = sharePref.getString("token_id", null)
+        val accessToken = sharePref.getString("access_token", null)
+        val refreshToken = sharePref.getString("refresh_token", null)
+        return UserToken(tokenId, accessToken, refreshToken)
     }
 
     companion object {
