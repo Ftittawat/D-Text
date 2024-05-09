@@ -1,5 +1,6 @@
 package com.senior.d_text.presentation.notification
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.view.isGone
@@ -8,11 +9,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.senior.d_text.data.model.notification.Notification
 import com.senior.d_text.databinding.ItemNotificationBinding
 import com.senior.d_text.presentation.core.OnItemClickListener
+import com.senior.d_text.presentation.core.OnItemClickListenerDelBtn
 
 class NotificationAdapter(): RecyclerView.Adapter<NotificationViewHolder>() {
 
     private val notificationList: ArrayList<Notification> = ArrayList()
-    private lateinit var mListener: OnItemClickListener
+    private lateinit var mListener: OnItemClickListenerDelBtn
 
     fun setList(notification: List<Notification>) {
         notificationList.clear()
@@ -24,7 +26,7 @@ class NotificationAdapter(): RecyclerView.Adapter<NotificationViewHolder>() {
         return notificationList[position]
     }
 
-    fun setOnItemClickListener(listener: OnItemClickListener) {
+    fun setOnItemClickListener(listener: OnItemClickListenerDelBtn) {
         mListener = listener
     }
 
@@ -44,7 +46,7 @@ class NotificationAdapter(): RecyclerView.Adapter<NotificationViewHolder>() {
 
 }
 
-class NotificationViewHolder(val binding: ItemNotificationBinding, listener: OnItemClickListener): RecyclerView.ViewHolder(binding.root) {
+class NotificationViewHolder(val binding: ItemNotificationBinding, listener: OnItemClickListenerDelBtn): RecyclerView.ViewHolder(binding.root) {
 
     init {
         binding.root.setOnClickListener {
@@ -53,10 +55,16 @@ class NotificationViewHolder(val binding: ItemNotificationBinding, listener: OnI
                 listener.onItemClick(position)
             }
         }
+        binding.moreButton.setOnClickListener {
+            val position = adapterPosition
+            if (position != RecyclerView.NO_POSITION) {
+                listener.onDeleteClick(position)
+            }
+        }
     }
 
     fun bind(notification: Notification) {
-        binding.title.text = notification.url
+        binding.description.text = notification.url
         binding.location.text = notification.application
         binding.appType.text = notification.source
         binding.time.text = notification.date_time

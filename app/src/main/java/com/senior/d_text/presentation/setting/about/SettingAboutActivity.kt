@@ -2,10 +2,13 @@ package com.senior.d_text.presentation.setting.about
 
 import android.app.Notification
 import android.os.Bundle
+import android.os.TokenWatcher
 import android.service.notification.NotificationListenerService
 import android.service.notification.StatusBarNotification
 import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import com.senior.d_text.R
 import com.senior.d_text.databinding.ActivitySettingAboutBinding
@@ -15,6 +18,7 @@ class SettingAboutActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySettingAboutBinding
     private lateinit var vm: SettingAboutViewModel
+    private var commandCount: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,10 +41,26 @@ class SettingAboutActivity : AppCompatActivity() {
         binding.backButton.setOnClickListener {
             onBackPressed()
         }
+        binding.logoImage.setOnClickListener {
+            commandCount += 1
+            if (commandCount >= 1) {
+                commandContainer()
+                Toast.makeText(applicationContext, "Dev Mode", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
     private fun setupView() {
         binding.version.text = vm.version
+    }
+
+    private fun commandContainer() {
+        val token = vm.loadUserToken()
+        val notification = vm.loadNotificationSetting()
+        val autoScan = vm.loadAutoScanSetting()
+        binding.monitorContainer.isVisible = true
+        binding.text1.text = notification.toString()
+        binding.text2.text = autoScan.toString()
     }
 
     override fun onBackPressed() {

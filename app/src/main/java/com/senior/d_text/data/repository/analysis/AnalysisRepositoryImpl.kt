@@ -6,6 +6,8 @@ import com.senior.d_text.data.model.Result
 import com.senior.d_text.data.model.analysis.AnalysisUrl
 import com.senior.d_text.data.repository.analysis.datasource.AnalysisRemoteDatasource
 import com.senior.d_text.domain.repository.AnalysisRepository
+import retrofit2.HttpException
+import java.io.IOException
 import java.lang.Exception
 
 class AnalysisRepositoryImpl(
@@ -37,7 +39,14 @@ class AnalysisRepositoryImpl(
                 Result.Error(errorResponse.error ?: "")
             }
         } catch (e: Exception) {
+            Log.i("log", "analysisUrl: ${e.message}")
+            Result.Error("Unknown error")
+        } catch (e: IOException) {
+            Log.i("log", "analysisUrl: ${e.message}")
             Result.Error("Network error")
+        } catch (e: HttpException) {
+            Log.i("log", "analysisUrl: ${e.code()}: ${e.message()}")
+            Result.Error("${e.code()}")
         }
     }
 }

@@ -55,7 +55,7 @@ class SMSReceiver : BroadcastReceiver() {
 
                     val fullMessage = concatenateSmsParts(bundle)
                     Log.d("logMessage", "onReceive-fullMessage: $fullMessage")
-                    val url = extractUrl(messageBody)  ?: ""
+                    val url = extractUrl(fullMessage)  ?: ""
                     listener?.invoke(ReceiveSMS(sender, fullMessage, url, dateTime))
                 }
             }

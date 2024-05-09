@@ -129,6 +129,12 @@
         <item name="android:textColor">@color/green</item>
     </style>
 
+    <style name="command" parent="TextAppearance.AppCompat">
+        <item name="android:fontFamily">serif-monospace</item>
+        <item name="android:textColor">@color/command</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
     <!-- Components. -->
 
     <style name="Theme.Switch" parent="Theme.AppCompat.Light">

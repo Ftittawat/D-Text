@@ -136,7 +136,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     android:background="@color/blank"
-                    android:src="@drawable/round_delete_24"/>
+                    android:src="@drawable/round_delete_24_secondary"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

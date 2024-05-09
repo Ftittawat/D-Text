@@ -21,6 +21,20 @@ class HistoryViewModel(application: Application) : AndroidViewModel(application)
     val hasSsl = MutableLiveData(false)
     val urlScore = MutableLiveData(0.0)
 
+    fun validationUrl(value: String): String {
+        return if (!value.startsWith("http://") && !value.startsWith("https://")) {
+            if (!value.startsWith("www.")) {
+                "https://www.$value"
+            }
+            else {
+                "https://$value"
+            }
+        }
+        else {
+            value
+        }
+    }
+
     fun validationLevel(level: Boolean): String {
         return if (level) {
             getString(R.string.found)

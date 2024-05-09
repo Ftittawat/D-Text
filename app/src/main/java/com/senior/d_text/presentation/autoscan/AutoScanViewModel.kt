@@ -6,13 +6,22 @@ import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
+import androidx.lifecycle.viewModelScope
 import com.senior.d_text.data.model.Result
 import com.senior.d_text.data.model.authentication.UserToken
 import com.senior.d_text.domain.usecase.AnalysisUrlUseCase
+import com.senior.d_text.domain.usecase.DeleteAllNotificationUseCase
+import com.senior.d_text.domain.usecase.DeleteNotificationUseCase
+import com.senior.d_text.domain.usecase.GetNotificationUseCase
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 class AutoScanViewModel(
     private val application: Application,
-    private val analysisUrlUseCase: AnalysisUrlUseCase
+    private val analysisUrlUseCase: AnalysisUrlUseCase,
+    private val getNotificationUseCase: GetNotificationUseCase,
+    private val deleteAllNotificationUseCase: DeleteAllNotificationUseCase,
+    private val deleteNotificationUseCase: DeleteNotificationUseCase
 ): AndroidViewModel(application) {
 
     private val sharePref = application.getSharedPreferences("account", Context.MODE_PRIVATE)
@@ -32,6 +41,20 @@ class AutoScanViewModel(
                 error = response.message
             }
         }
+    }
+
+    fun getNotification() = liveData {
+        getNotificationUseCase.execute()?.collect() {
+            emit(it)
+        }
+    }
+
+    fun deleteAllNotification() = viewModelScope.launch {
+        deleteAllNotificationUseCase.execute()
+    }
+
+    fun deleteNotification(id: Int) = viewModelScope.launch {
+        deleteNotificationUseCase.execute(id)
     }
 
     private fun loadUserToken(): UserToken {

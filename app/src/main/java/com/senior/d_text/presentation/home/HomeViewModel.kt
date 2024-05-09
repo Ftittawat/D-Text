@@ -5,6 +5,7 @@ import android.content.Context
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
 import com.senior.d_text.data.model.Result
@@ -20,6 +21,7 @@ import com.senior.d_text.domain.usecase.ListenForMessagesUseCase
 import com.senior.d_text.domain.usecase.RefreshUseCase
 import com.senior.d_text.domain.usecase.SaveHistoryUseCase
 import kotlinx.coroutines.launch
+import kotlin.random.Random
 
 class HomeViewModel(
     private val application: Application,
@@ -47,10 +49,10 @@ class HomeViewModel(
     fun validationUrl(value: String): String {
         return if (!value.startsWith("http://") && !value.startsWith("https://")) {
             if (!value.startsWith("www.")) {
-                "http://www.$value"
+                "https://www.$value"
             }
             else {
-                "http://$value"
+                "https://$value"
             }
         }
         else {
@@ -96,7 +98,7 @@ class HomeViewModel(
 
     fun validateOrgName(org_name: String, registrarName: String): String {
         return if (org_name.isNullOrEmpty()) {
-            registrarName
+            ""
         } else {
             org_name
         }
@@ -108,6 +110,10 @@ class HomeViewModel(
         } else {
             org_name
         }
+    }
+
+    fun randomBadges(): Boolean {
+        return Random.nextBoolean()
     }
 
     fun saveHistory(history: History) = viewModelScope.launch {

@@ -103,9 +103,9 @@ class App : Application(), Injector {
     }
 
     companion object {
-        const val BASE_URL_AUTH = "http://10.0.2.2:8080/"
+        const val BASE_URL_LOCAL = "http://10.0.2.2:8080/"
         const val BASE_URL_ANALYSIS = "http://10.0.2.2:9999/"
-        const val BASE_URL = "http://10.0.2.2:8080/"
+        const val BASE_URL = "https://dtext-app-7uaczrrahq-as.a.run.app/"
 //        const val BASE_URL = "http://localhost:9999/"
     }
 }

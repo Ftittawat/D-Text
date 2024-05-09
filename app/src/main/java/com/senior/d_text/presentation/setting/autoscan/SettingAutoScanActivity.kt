@@ -114,10 +114,10 @@ class SettingAutoScanActivity : AppCompatActivity() {
         val serviceIntent = Intent(this, MessageService::class.java)
         if (state) {
             startService(serviceIntent)
-            Log.d("logMessages", "startMessageService")
+            Log.i("AutoScan", "startMessageService")
         } else {
             stopService(serviceIntent)
-            Log.d("logMessages", "stopMessageService")
+            Log.i("AutoScan", "stopMessageService")
         }
     }
 
@@ -125,11 +125,11 @@ class SettingAutoScanActivity : AppCompatActivity() {
         val serviceIntent = Intent(this, NotificationService::class.java)
         if (state) {
             startService(serviceIntent)
-            Log.d("logNoti", "startNotificationService")
+            Log.i("AutoScan", "startNotificationService")
         }
         else {
             stopService(serviceIntent)
-            Log.d("logNoti", "stopNotificationService")
+            Log.i("AutoScan", "stopNotificationService")
         }
     }
 

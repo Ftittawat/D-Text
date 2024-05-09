@@ -30,6 +30,7 @@ import com.senior.d_text.domain.usecase.AnalysisUrlNotificationServiceUseCase
 import com.senior.d_text.domain.usecase.ListenForNotificationUseCase
 import com.senior.d_text.domain.usecase.SaveNotificationForNotificationUseCase
 import com.senior.d_text.domain.usecase.SaveNotificationHistoryUseCase
+import com.senior.d_text.presentation.autoscan.AutoScanActivity
 import com.senior.d_text.presentation.di.Injector
 import com.senior.d_text.presentation.home.HomeActivity
 import com.senior.d_text.presentation.home.HomeViewModel
@@ -89,6 +90,9 @@ class NotificationService : Service() {
                 startActivity(intent)
             }
         }
+
+//        val notificationSetting = loadNotificationSetting()
+//        Log.d("logMessage", "onCreate: $notificationSetting")
     }
 
     override fun onBind(p0: Intent?): IBinder? {
@@ -111,17 +115,17 @@ class NotificationService : Service() {
                     "Notification: ${notification.title}: ${notification.text}: ${notification.url}"
                 )
                 saveNotificationHistory(lastNotification!!)
-                checkUrl(lastNotification!!.url)
+                checkUrl(lastNotification!!.url, notification.appName)
             }
         }
     }
 
-    private fun checkUrl(url: String) = GlobalScope.launch(Dispatchers.IO) {
+    private fun checkUrl(url: String, application: String) = GlobalScope.launch(Dispatchers.IO) {
         val response = analysisUrlNotificationServiceUseCase.execute(url, userToken.access_token!!)
         when (response) {
             is Result.Success -> {
                 val data = response.data!!
-                displayResult(data)
+                displayResult(data, application)
             }
             is Result.Error -> {
                 error = response.message
@@ -129,26 +133,43 @@ class NotificationService : Service() {
         }
     }
 
-    private fun displayResult(result: AnalysisUrl) {
+    private fun displayResult(result: AnalysisUrl, application: String) {
         val notificationSetting = loadNotificationSetting()
         val checklist = result.dtextResult
         val google = result.webriskResult
-        val type = CalculateUrlType().calculate(checklist.urlType, google.urlType)
+        val riskLevel = CalculateUrlType().calculate(checklist.urlType, google.urlType)
+        val orgName = validateOrgName(checklist.organzName, checklist.registrarName)
+        val type = checkOrgName(riskLevel, orgName, google.urlThreatType)
         val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
         val currentTime = LocalDateTime.now().format(formatter)
-        if (type == SAFE && notificationSetting.safe) {
-            notify(type, checklist.url)
+        if (riskLevel == SAFE && notificationSetting.notification && notificationSetting.safe) {
+            notify(riskLevel, checklist.url)
         }
-        else if (type == SUSPICIOUS && notificationSetting.suspicious) {
-            notify(type, checklist.url)
+        else if (riskLevel == SUSPICIOUS && notificationSetting.notification && notificationSetting.suspicious) {
+            notify(riskLevel, checklist.url)
         }
-        else if (type == UNSAFE && notificationSetting.unsafe) {
-            notify(type, checklist.url)
+        else if (riskLevel == UNSAFE && notificationSetting.notification && notificationSetting.unsafe) {
+            notify(riskLevel, checklist.url)
         }
-        else if (type == NO_INFORMATION && notificationSetting.no_information) {
-            notify(type, checklist.url)
+        else if (riskLevel == NO_INFORMATION && notificationSetting.notification && notificationSetting.no_information) {
+            notify(riskLevel, checklist.url)
         }
-        val notificationData = Notification(0, checklist.url, type, getString(R.string.source_message), getString(R.string.source_message), currentTime)
+        val notificationData = Notification(
+            0,
+            checklist.url,
+            riskLevel,
+            checklist.urlType,
+            google.urlType,
+            type,
+            application,
+            getString(R.string.source_notification),
+            currentTime,
+            checklist.domainAgeDay,
+            checklist.hasForm,
+            checklist.hasIframe,
+            checklist.hasShortened,
+            checklist.hasSsl,
+            checklist.urlScore)
         saveNotification(notificationData)
     }
 
@@ -168,7 +189,7 @@ class NotificationService : Service() {
             .setContentText(url)
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
 
-        val intent = Intent(this, HomeActivity::class.java)
+        val intent = Intent(this, AutoScanActivity::class.java)
         val pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
         notificationBuilder.setContentIntent(pendingIntent)
 
@@ -186,11 +207,12 @@ class NotificationService : Service() {
 
     private fun loadNotificationSetting(): NotificationSetting {
         val sharePref = application.getSharedPreferences("Setting_Notification", AppCompatActivity.MODE_PRIVATE)
-        val safe = sharePref.getBoolean(MessageService.SAFE, false)
-        val suspicious = sharePref.getBoolean(MessageService.SUSPICIOUS, false)
-        val unsafe = sharePref.getBoolean(MessageService.UNSAFE, false)
-        val noInformation = sharePref.getBoolean(MessageService.NO_INFORMATION, false)
-        return NotificationSetting(unsafe, suspicious, safe, noInformation)
+        val notification = sharePref.getBoolean(NOTIFICATION, false)
+        val safe = sharePref.getBoolean(SAFE, false)
+        val suspicious = sharePref.getBoolean(SUSPICIOUS, false)
+        val unsafe = sharePref.getBoolean(UNSAFE, false)
+        val noInformation = sharePref.getBoolean(NO_INFORMATION, false)
+        return NotificationSetting(notification, unsafe, suspicious, safe, noInformation)
     }
 
     private fun saveNotificationHistory(notification: ReceiveNotification) {
@@ -203,6 +225,22 @@ class NotificationService : Service() {
     private fun saveNotification(notification: Notification) {
         CoroutineScope(Dispatchers.IO).launch {
             saveNotificationForNotificationUseCase.execute(notification)
+        }
+    }
+
+    private fun validateOrgName(org_name: String, registrarName: String): String {
+        return if (org_name.isNullOrEmpty()) {
+            ""
+        } else {
+            org_name
+        }
+    }
+
+    private fun checkOrgName(url_type: String, org_name: String, threat_type: String): String {
+        return if (url_type == HomeViewModel.UNSAFE) {
+            threat_type
+        } else {
+            org_name
         }
     }
 

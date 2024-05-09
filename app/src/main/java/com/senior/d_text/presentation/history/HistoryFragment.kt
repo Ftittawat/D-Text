@@ -20,7 +20,7 @@ import com.senior.d_text.databinding.FragmentHistoryBinding
 class HistoryFragment : BottomSheetDialogFragment() {
 
     private lateinit var vm: HistoryViewModel
-    private lateinit var  binding: FragmentHistoryBinding
+    private lateinit var binding: FragmentHistoryBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -86,6 +86,10 @@ class HistoryFragment : BottomSheetDialogFragment() {
         binding.checklist5Result.text = vm.domainAgeDay.value.toString()
 
         Log.d("analysisResult", "setupView: ${linkData.toString()}")
+
+        if (vm.type.value.isNullOrEmpty()) {
+            binding.typeContainer.isGone = true
+        }
 
         when (vm.riskLevel.value) {
             "safe" -> {
@@ -180,7 +184,8 @@ class HistoryFragment : BottomSheetDialogFragment() {
             dismiss()
         }
         binding.browserButton.setOnClickListener {
-            val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(vm.url.value.toString()))
+            val url = vm.validationUrl(vm.url.value.toString())
+            val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
             startActivity(browserIntent)
         }
     }

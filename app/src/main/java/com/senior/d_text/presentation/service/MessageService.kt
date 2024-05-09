@@ -23,6 +23,7 @@ import com.senior.d_text.domain.usecase.AnalysisUrlMessageServiceUseCase
 import com.senior.d_text.domain.usecase.ListenForMessagesUseCase
 import com.senior.d_text.domain.usecase.SaveMessageUseCase
 import com.senior.d_text.domain.usecase.SaveNotificationForMessageUseCase
+import com.senior.d_text.presentation.autoscan.AutoScanActivity
 import com.senior.d_text.presentation.di.Injector
 import com.senior.d_text.presentation.home.HomeActivity
 import com.senior.d_text.presentation.home.HomeViewModel
@@ -96,6 +97,7 @@ class MessageService : Service() {
                 lastMessage = message
                 Log.d("logMessages", "messagesSender: ${lastMessage!!.sender}")
                 Log.d("logMessages", "messagesBody: ${lastMessage!!.messageBody}")
+                Log.d("logMessages", "url: ${lastMessage!!.url}")
                 saveMessageHistory(lastMessage!!)
                 checkUrl(lastMessage!!.url)
             }
@@ -110,6 +112,7 @@ class MessageService : Service() {
     }
 
     private fun checkUrl(url: String) = GlobalScope.launch(Dispatchers.IO) {
+        // Log.d("logMessages", "checkUrl: $url")
         val response = analysisUrlMessageServiceUseCase.execute(url, apiKey.access_token!!)
         when (response) {
             is Result.Success -> {
@@ -123,25 +126,44 @@ class MessageService : Service() {
     }
 
     private fun displayResult(result: AnalysisUrl) {
+        // Log.d("logMessages", "displayResult: ")
         val notificationSetting = loadNotificationSetting()
         val checklist = result.dtextResult
         val google = result.webriskResult
-        val type = CalculateUrlType().calculate(checklist.urlType, google.urlType)
+        val riskLevel = CalculateUrlType().calculate(checklist.urlType, google.urlType)
+        val orgName = validateOrgName(checklist.organzName, checklist.registrarName)
+        val type = checkOrgName(riskLevel, orgName, google.urlThreatType)
         val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
         val currentTime = LocalDateTime.now().format(formatter)
-        if (type == SAFE && notificationSetting.safe) {
-            notify(type, checklist.url)
+        Log.d("logMessages", "displayResult: ${checklist.url} $riskLevel")
+        if (riskLevel == SAFE && notificationSetting.notification && notificationSetting.safe) {
+            notify(riskLevel, checklist.url)
         }
-        else if (type == SUSPICIOUS && notificationSetting.suspicious) {
-            notify(type, checklist.url)
+        else if (riskLevel == SUSPICIOUS && notificationSetting.notification && notificationSetting.suspicious) {
+            notify(riskLevel, checklist.url)
         }
-        else if (type == UNSAFE && notificationSetting.unsafe) {
-            notify(type, checklist.url)
+        else if (riskLevel == UNSAFE && notificationSetting.notification && notificationSetting.unsafe) {
+            notify(riskLevel, checklist.url)
         }
-        else if (type == NO_INFORMATION && notificationSetting.no_information) {
-            notify(type, checklist.url)
+        else if (riskLevel == NO_INFORMATION && notificationSetting.notification && notificationSetting.no_information) {
+            notify(riskLevel, checklist.url)
         }
-        val notificationData = Notification(0, checklist.url, type, getString(R.string.source_message), getString(R.string.source_message), currentTime)
+        val notificationData = Notification(
+            0,
+            checklist.url,
+            riskLevel,
+            checklist.urlType,
+            google.urlType,
+            type,
+            getString(R.string.source_message),
+            getString(R.string.source_message),
+            currentTime,
+            checklist.domainAgeDay,
+            checklist.hasForm,
+            checklist.hasIframe,
+            checklist.hasShortened,
+            checklist.hasSsl,
+            checklist.urlScore)
         saveNotification(notificationData)
     }
 
@@ -167,7 +189,8 @@ class MessageService : Service() {
             .setContentText(url)
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
 
-        val intent = Intent(this, HomeActivity::class.java)
+        val intent = Intent(this, AutoScanActivity::class.java)
+        // intent.putExtra("url", url)
         val pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
         notificationBuilder.setContentIntent(pendingIntent)
 
@@ -178,11 +201,12 @@ class MessageService : Service() {
     private fun loadNotificationSetting(): NotificationSetting {
         val sharePref =
             application.getSharedPreferences("Setting_Notification", AppCompatActivity.MODE_PRIVATE)
+        val notification = sharePref.getBoolean(NOTIFICATION, false)
         val safe = sharePref.getBoolean(SAFE, false)
         val suspicious = sharePref.getBoolean(SUSPICIOUS, false)
         val unsafe = sharePref.getBoolean(UNSAFE, false)
         val noInformation = sharePref.getBoolean(NO_INFORMATION, false)
-        return NotificationSetting(unsafe, suspicious, safe, noInformation)
+        return NotificationSetting(notification, unsafe, suspicious, safe, noInformation)
     }
 
     private fun loadUserToken(): UserToken {
@@ -203,6 +227,22 @@ class MessageService : Service() {
     private fun saveNotification(notification: Notification) {
         CoroutineScope(Dispatchers.IO).launch {
             saveNotificationForMessageUseCase.execute(notification)
+        }
+    }
+
+    private fun validateOrgName(org_name: String, registrarName: String): String {
+        return if (org_name.isNullOrEmpty()) {
+            ""
+        } else {
+            org_name
+        }
+    }
+
+    private fun checkOrgName(url_type: String, org_name: String, threat_type: String): String {
+        return if (url_type == HomeViewModel.UNSAFE) {
+            threat_type
+        } else {
+            org_name
         }
     }
 

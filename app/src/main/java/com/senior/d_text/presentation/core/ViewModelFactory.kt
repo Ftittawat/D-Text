@@ -8,10 +8,13 @@ import com.senior.d_text.domain.usecase.AnalysisUrlUseCase
 import com.senior.d_text.domain.usecase.DeleteAllHistoryUseCase
 import com.senior.d_text.domain.usecase.DeleteAllMessageUseCase
 import com.senior.d_text.domain.usecase.DeleteAllNotificationHistoryUseCase
+import com.senior.d_text.domain.usecase.DeleteAllNotificationUseCase
 import com.senior.d_text.domain.usecase.DeleteHistoryUseCase
+import com.senior.d_text.domain.usecase.DeleteNotificationUseCase
 import com.senior.d_text.domain.usecase.GetHistoryUseCase
 import com.senior.d_text.domain.usecase.GetMessageUseCase
 import com.senior.d_text.domain.usecase.GetNotificationHistoryUseCase
+import com.senior.d_text.domain.usecase.GetNotificationUseCase
 import com.senior.d_text.domain.usecase.ListenForMessagesUseCase
 import com.senior.d_text.domain.usecase.RefreshUseCase
 import com.senior.d_text.domain.usecase.SaveHistoryUseCase
@@ -51,12 +54,18 @@ class HomeViewModelFactory(
 
 class AutoScanViewModelFactory(
     private val application: Application,
-    private val analysisUrlUseCase: AnalysisUrlUseCase
+    private val analysisUrlUseCase: AnalysisUrlUseCase,
+    private val getNotificationUseCase: GetNotificationUseCase,
+    private val deleteAllNotificationUseCase: DeleteAllNotificationUseCase,
+    private val deleteNotificationUseCase: DeleteNotificationUseCase
 ): ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return AutoScanViewModel(
             application,
-            analysisUrlUseCase
+            analysisUrlUseCase,
+            getNotificationUseCase,
+            deleteAllNotificationUseCase,
+            deleteNotificationUseCase
         ) as T
     }
 }

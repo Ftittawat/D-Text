@@ -26,12 +26,14 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/description"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Description"
             android:fontFamily="@font/kanit"
             android:textSize="12sp"
-            android:textColor="@color/text_primary" />
+            android:textColor="@color/text_primary"
+            android:maxLines="1"
+            android:ellipsize="end"/>
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="wrap_content"
@@ -135,9 +137,10 @@
 
     <androidx.appcompat.widget.AppCompatImageButton
         android:id="@+id/more_button"
-        android:visibility="gone"
+        android:visibility="visible"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="4dp"
         android:src="@drawable/baseline_more_vert_24"
         android:background="@color/blank"
         app:layout_constraintTop_toTopOf="parent"

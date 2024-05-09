@@ -57,7 +57,6 @@ class HomeActivity() : AppCompatActivity() {
         vm = ViewModelProvider(this, factory)[HomeViewModel::class.java]
         requestPermissions()
         initRecyclerView()
-
 //        Handler().postDelayed({
 //            val fragmentManager = supportFragmentManager
 //            val fragmentTransaction = fragmentManager.beginTransaction()
@@ -79,15 +78,16 @@ class HomeActivity() : AppCompatActivity() {
     }
 
     private fun setupView() {
-        notificationIndicator(true)
+        binding.searchBox.clearFocus()
+//        if (vm.randomBadges()) {
+//            binding.informationBadges.isVisible = true
+//        }
         vm.messagesUrl.observe(this) {
             // Log.d("sms", "url: ${vm.messagesUrl.value}")
         }
     }
 
     private fun setupButton() {
-        // binding.notificationIndicator.isVisible = true
-        // val guest = intent.extras?.getBoolean("guest", false)
         binding.activity.setOnClickListener {
             it.hideKeyboard()
             binding.searchBox.clearFocus()
@@ -117,6 +117,7 @@ class HomeActivity() : AppCompatActivity() {
         binding.scanButton.setOnClickListener {
             getSearchValue()
             displayUrlResult()
+            binding.searchBox.text = null
 //            testNotification(applicationContext)
 //            val historyFragment = HistoryFragment()
 //            val bundle = Bundle()
@@ -284,17 +285,12 @@ class HomeActivity() : AppCompatActivity() {
                 val historyFragment = HistoryFragment()
                 val bundle = Bundle()
                 bundle.putSerializable("LINK_DATA", adapter.getList(position))
-//                bundle.putString("URL", adapter.getList(position).url)
-//                bundle.putString("RISK_LEVEL", adapter.getList(position).risk_level)
-//                bundle.putString("ORG_NAME", adapter.getList(position).type)
-//                bundle.putString("DATE_TIME", adapter.getList(position).date_time)
                 historyFragment.arguments = bundle
                 historyFragment.show(supportFragmentManager, "HistoryFragmentTag")
             }
 
             override fun onDeleteClick(position: Int) {
                 val id = adapter.getList(position).id
-                // vm.deleteHistory(id)
                 showConfirmDeleteDialog(id)
             }
         })
@@ -342,20 +338,23 @@ class HomeActivity() : AppCompatActivity() {
                     it.dtextResult.urlScore
                 )
                 vm.saveHistory(saveData)
-//                bundle.putString("URL", vm.url.value.toString())
-//                bundle.putString("RISK_LEVEL", riskLevel)
-//                bundle.putString("ORG_NAME", orgName)
                 bundle.putSerializable("LINK_DATA", saveData)
                 historyFragment.arguments = bundle
                 historyFragment.show(supportFragmentManager, "HistoryFragmentTag")
                 showLoadingIndicator(false)
-//                binding.progressCircular.isGone = true
-//                binding.scanButton.isEnabled = true
             } else {
 //                binding.progressCircular.isGone = true
 //                binding.scanButton.isEnabled = true
                 showLoadingIndicator(false)
                 Toast.makeText(applicationContext, "No Response", Toast.LENGTH_LONG).show()
+            }
+        }
+        vm.error.observe(this) {
+            if (!vm.error.value.isNullOrEmpty()) {
+                if (vm.error.value != "Success") {
+                    Toast.makeText(applicationContext, vm.error.value, Toast.LENGTH_LONG).show()
+                    showLoadingIndicator(false)
+                }
             }
         }
     }

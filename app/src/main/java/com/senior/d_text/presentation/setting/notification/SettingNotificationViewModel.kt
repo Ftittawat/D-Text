@@ -6,8 +6,7 @@ import androidx.lifecycle.AndroidViewModel
 
 class SettingNotificationViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val sharePref =
-        application.getSharedPreferences("Setting_Notification", AppCompatActivity.MODE_PRIVATE)
+    private val sharePref = application.getSharedPreferences("Setting_Notification", AppCompatActivity.MODE_PRIVATE)
 
     fun saveNotification(tag: String, state: Boolean) {
         val editor = sharePref.edit()
