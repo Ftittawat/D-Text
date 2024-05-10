@@ -137,6 +137,7 @@
 
     <androidx.appcompat.widget.AppCompatImageButton
         android:id="@+id/more_button"
+        android:contentDescription="@string/delete_dialog_title"
         android:visibility="visible"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

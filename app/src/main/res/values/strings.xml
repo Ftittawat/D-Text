@@ -9,6 +9,8 @@
     <string name="ok">ตกลง</string>
     <string name="cancel">ยกเลิก</string>
     <string name="guest_mode"><u>โหมดผู้มาเยือน</u></string>
+    <string name="back">ย้อนกลับ</string>
+    <string name="close">ปิด</string>
 
     <!-- Dialog. -->
     <string name="delete_all_dialog_title">ลบประวัติทั้งหมด</string>

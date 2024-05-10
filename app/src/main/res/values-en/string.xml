@@ -10,6 +10,8 @@
     <string name="ok">Ok</string>
     <string name="cancel">Cancel</string>
     <string name="guest_mode"><u>Guest Mode</u></string>
+    <string name="back">Back</string>
+    <string name="close">Close</string>
 
     <!-- Dialog. -->
     <string name="delete_all_dialog_title">Delete All History</string>

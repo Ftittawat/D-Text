@@ -55,6 +55,7 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/confirm_button"
+        android:contentDescription="@string/ok"
         android:visibility="visible"
         android:layout_width="wrap_content"
         android:layout_height="36dp"
@@ -71,6 +72,7 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/cancel_button"
+        android:contentDescription="@string/close"
         android:visibility="visible"
         android:layout_width="wrap_content"
         android:layout_height="36dp"
