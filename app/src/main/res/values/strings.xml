@@ -72,6 +72,7 @@
     <string name="warning_SDK_34_2">การทำงานบางอย่างของแอปพลิเคชันอาจไม่รองบน Android 14 (SDK Version  34)</string>
     <string name="warning_dialog_1">ขออภัยในความไม่สะดวก</string>
     <string name="warning_dialog_2">การรีเซ็ตรหัสผ่านไม่มาสามารถใช้งานได้ในขณะนี้</string>
+    <string name="warning_dialog_3">ไม่รองรับการทำงานในอุปกรณ์นี้</string>
 
     <!-- Home. -->
     <string name="search">พิมพ์หรือวาง URL</string>
@@ -140,6 +141,7 @@
     <string name="setting_2">ช่วยเหลือ</string>
     <string name="title_privacy_policy">นโยบายความเป็นส่วนตัว</string>
     <string name="version">Version</string>
+    <string name="sdk_version">SDK Version</string>
     <string name="setting_message_history">ประวัติข้อความ</string>
     <string name="setting_notification_history">ประวัติการแจ้งเตือน</string>
     <string name="setting_notification">การแจ้งเตือน</string>

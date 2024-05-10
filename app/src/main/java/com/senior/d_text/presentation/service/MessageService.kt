@@ -94,12 +94,14 @@ class MessageService : Service() {
     private fun startListeningForMessages() {
         listenForMessagesUseCase { message ->
             if (lastMessage == null || message.messageBody != lastMessage!!.messageBody) {
-                lastMessage = message
-                Log.d("logMessages", "messagesSender: ${lastMessage!!.sender}")
-                Log.d("logMessages", "messagesBody: ${lastMessage!!.messageBody}")
-                Log.d("logMessages", "url: ${lastMessage!!.url}")
-                saveMessageHistory(lastMessage!!)
-                checkUrl(lastMessage!!.url)
+                if (message.url.isNotEmpty()) {
+                    lastMessage = message
+                    Log.d("logMessages", "messagesSender: ${lastMessage!!.sender}")
+                    Log.d("logMessages", "messagesBody: ${lastMessage!!.messageBody}")
+                    Log.d("logMessages", "url: ${lastMessage!!.url}")
+                    saveMessageHistory(lastMessage!!)
+                    checkUrl(lastMessage!!.url)
+                }
             }
             // lastMessage.sender = message.sender
             // lastMessage.messageBody = message.messageBody

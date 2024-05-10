@@ -52,6 +52,7 @@ class SettingAboutActivity : AppCompatActivity() {
 
     private fun setupView() {
         binding.version.text = vm.version
+        binding.sdkVersion.text = vm.sdkVersion
     }
 
     private fun commandContainer() {

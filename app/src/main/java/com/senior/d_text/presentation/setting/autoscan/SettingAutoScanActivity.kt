@@ -6,12 +6,18 @@ import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.view.isGone
+import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import com.senior.d_text.R
 import com.senior.d_text.databinding.ActivitySettingScanBinding
+import com.senior.d_text.databinding.DialogConfirmDeleteBinding
+import com.senior.d_text.databinding.DialogCustomBinding
 import com.senior.d_text.presentation.home.HomeActivity
 import com.senior.d_text.presentation.service.MessageService
 import com.senior.d_text.presentation.service.NotificationService
@@ -52,15 +58,19 @@ class SettingAutoScanActivity : AppCompatActivity() {
         }
         binding.detectButton.setOnCheckedChangeListener { _, isChecked ->
             vm.saveAutoDetection(AUTO_DETECTION, isChecked)
+            // Log.d("logService", "setupButton: $isChecked")
+            // Log.d("logService", "setupButton: ${vm.loadAutoDetection(MESSAGE_DETECT)}")
+            // Log.d("logService", "setupButton: ${vm.loadAutoDetection(NOTIFICATION_DETECT)}")
             if (isChecked && vm.loadAutoDetection(MESSAGE_DETECT)) {
                 messageService(true)
                 // Log.d("logService", "messageService True")
             }
-            if (isChecked && vm.loadAutoDetection(NOTIFICATION_DETECT)) {
+            else if (isChecked && vm.loadAutoDetection(NOTIFICATION_DETECT)) {
                 notificationService(true)
                 // Log.d("logService", "notificationService True")
             }
             else {
+                // Log.d("logService", "setupButton: else")
                 messageService(false)
                 notificationService(false)
                 // Log.d("logService", "messageService False")
@@ -78,14 +88,20 @@ class SettingAutoScanActivity : AppCompatActivity() {
             }
         }
         binding.notificationButton.setOnCheckedChangeListener { _, isChecked ->
-            vm.saveAutoDetection(NOTIFICATION_DETECT ,isChecked)
 //            notificationService(isChecked)
-            if (isChecked && vm.loadAutoDetection(AUTO_DETECTION)) {
-                notificationService(true)
-                // Log.d("logService", "notificationService True")
-            } else {
-                notificationService(false)
-                // Log.d("logService", "notificationService False")
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
+                vm.saveAutoDetection(NOTIFICATION_DETECT ,isChecked)
+                if (isChecked && vm.loadAutoDetection(AUTO_DETECTION)) {
+                    notificationService(true)
+                    // Log.d("logService", "notificationService True")
+                } else {
+                    notificationService(false)
+                    // Log.d("logService", "notificationService False")
+                }
+            }
+            else {
+                showAlertDialog()
+                binding.notificationButton.isChecked = false
             }
         }
     }
@@ -180,6 +196,21 @@ class SettingAutoScanActivity : AppCompatActivity() {
             else -> {
                 // Handle other requestCode if any
             }
+        }
+    }
+
+    private fun showAlertDialog() {
+        val dialogBinding: DialogCustomBinding = DialogCustomBinding.inflate(layoutInflater)
+        val builder = AlertDialog.Builder(this, R.style.Theme_AlertDialog)
+        builder.setView(dialogBinding.root)
+
+        val dialog = builder.create()
+        dialog.show()
+
+        dialogBinding.description.text = getText(R.string.warning_dialog_3)
+        dialogBinding.cancelButton.isGone = true
+        dialogBinding.confirmButton.setOnClickListener {
+            dialog.dismiss()
         }
     }
 

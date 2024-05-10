@@ -83,13 +83,15 @@ class NotificationService : Service() {
         //val intent = Intent("android.settings.ACTION_NOTIFICATION_LISTENER_SETTINGS")
         //startActivity(intent)
 
-        val n = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (!n.isNotificationPolicyAccessGranted) {
-                val intent = Intent("android.settings.ACTION_NOTIFICATION_LISTENER_SETTINGS")
-                startActivity(intent)
-            }
-        }
+       if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+           val n = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+           if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+               if (!n.isNotificationPolicyAccessGranted) {
+                   val intent = Intent("android.settings.ACTION_NOTIFICATION_LISTENER_SETTINGS")
+                   startActivity(intent)
+               }
+           }
+       }
 
 //        val notificationSetting = loadNotificationSetting()
 //        Log.d("logMessage", "onCreate: $notificationSetting")
@@ -108,14 +110,16 @@ class NotificationService : Service() {
     private fun startListeningForNotification() {
         listenForNotificationUseCase { notification ->
             if (lastNotification == null || notification.text != lastNotification!!.text) {
-                lastNotification = notification
-                Log.d("NotiResult", "Notification: ${notification.appName}")
-                Log.d(
-                    "NotiResult",
-                    "Notification: ${notification.title}: ${notification.text}: ${notification.url}"
-                )
-                saveNotificationHistory(lastNotification!!)
-                checkUrl(lastNotification!!.url, notification.appName)
+                if (notification.url.isNotEmpty()) {
+                    lastNotification = notification
+                    Log.d("NotiResult", "Notification: ${notification.appName}")
+                    Log.d(
+                        "NotiResult",
+                        "Notification: ${notification.title}: ${notification.text}: ${notification.url}"
+                    )
+                    saveNotificationHistory(lastNotification!!)
+                    checkUrl(lastNotification!!.url, notification.appName)
+                }
             }
         }
     }

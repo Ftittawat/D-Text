@@ -9,8 +9,10 @@ import android.util.Log
 import android.view.accessibility.AccessibilityManager
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isGone
 import com.senior.d_text.R
 import com.senior.d_text.databinding.ActivityWelcomeBinding
+import com.senior.d_text.databinding.DialogCustomBinding
 import com.senior.d_text.presentation.util.CustomDialogFragment
 import com.senior.d_text.presentation.authentication.AuthenticationActivity
 import com.senior.d_text.presentation.home.HomeActivity
@@ -67,26 +69,30 @@ class WelcomeScreenActivity : AppCompatActivity() {
 
     private fun setupView() {
         if (Build.VERSION.SDK_INT >= 34) {
+            showAlertDialog()
             // showDialog(this)
             // val warningVersionFragment = VersionDialogFragment()
             // warningVersionFragment.show(supportFragmentManager, "WarningVersionFragment")
-            val customDialogFragment = CustomDialogFragment()
-            customDialogFragment.type = 2
-            customDialogFragment.show(supportFragmentManager, "CustomDialogFragment")
+            // val customDialogFragment = CustomDialogFragment()
+            // customDialogFragment.type = 2
+            // customDialogFragment.show(supportFragmentManager, "CustomDialogFragment")
         }
     }
 
-    private fun showVersionDialog() {
-        val context: Context = applicationContext
-        val builder = AlertDialog.Builder(context)
+    private fun showAlertDialog() {
+        val dialogBinding: DialogCustomBinding = DialogCustomBinding.inflate(layoutInflater)
+        val builder = AlertDialog.Builder(this, R.style.Theme_AlertDialog)
+        builder.setView(dialogBinding.root)
 
-        builder.setTitle("Warning For Android 14")
-        builder.setMessage("This is a sample dialog message.")
-        builder.setPositiveButton("OK") { dialog, _ ->
-            dialog.dismiss() // Dismiss the dialog
-        }
         val dialog = builder.create()
         dialog.show()
+
+        dialogBinding.title.text = getText(R.string.warning_SDK_34_1)
+        dialogBinding.description.text = getText(R.string.warning_SDK_34_2)
+        dialogBinding.cancelButton.isGone = true
+        dialogBinding.confirmButton.setOnClickListener {
+            dialog.dismiss()
+        }
     }
 
     private fun guestMode(guest: Boolean) {

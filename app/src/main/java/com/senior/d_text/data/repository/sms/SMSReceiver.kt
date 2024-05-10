@@ -55,8 +55,10 @@ class SMSReceiver : BroadcastReceiver() {
 
                     val fullMessage = concatenateSmsParts(bundle)
                     Log.d("logMessage", "onReceive-fullMessage: $fullMessage")
-                    val url = extractUrl(fullMessage)  ?: ""
-                    listener?.invoke(ReceiveSMS(sender, fullMessage, url, dateTime))
+                    if (hasUrl(fullMessage)) {
+                        val url = extractUrl(fullMessage)  ?: ""
+                        listener?.invoke(ReceiveSMS(sender, fullMessage, url, dateTime))
+                    }
                 }
             }
         }
@@ -82,5 +84,10 @@ class SMSReceiver : BroadcastReceiver() {
         val pattern = "(?i)\\b((?:https?://|www\\d{0,3}[.]|[a-z0-9.-]+[.][a-z]{2,4}/)(?:[^\\s()<>]+|\\(([^\\s()<>]+|(\\([^\\s()<>]+\\)))*\\))+(?:\\(([^\\s()<>]+|(\\([^\\s()<>]+\\)))*\\)|[^\\s`!()\\[\\]{};:'\".,<>?«»“”‘’]))".toRegex()
         val matchResult = pattern.find(message)
         return matchResult?.value
+    }
+
+    private fun hasUrl(text: String): Boolean {
+        val urlRegex = Regex("((http|https)://)?(www\\.)?[a-zA-Z0-9@:%._\\+~#?&//=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%_\\+.~#?&//=]*)")
+        return urlRegex.containsMatchIn(text)
     }
 }

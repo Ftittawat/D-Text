@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.Context
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.AndroidViewModel
 import com.senior.d_text.data.model.authentication.UserToken
@@ -18,6 +19,7 @@ class SettingAboutViewModel(application: Application) : AndroidViewModel(applica
     private val sharePrefAutoScan = application.getSharedPreferences("Setting_Detection", Context.MODE_PRIVATE)
 
     val version: String = getVersionName()
+    val sdkVersion: String = getSDKVersion()
 
     private fun getVersionName(): String {
         return try {
@@ -30,6 +32,10 @@ class SettingAboutViewModel(application: Application) : AndroidViewModel(applica
             e.printStackTrace()
             "N/A"
         }
+    }
+
+    private fun getSDKVersion(): String {
+        return Build.VERSION.SDK_INT.toString()
     }
 
      fun loadUserToken(): UserToken {

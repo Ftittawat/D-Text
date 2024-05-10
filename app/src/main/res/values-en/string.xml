@@ -73,6 +73,7 @@
     <string name="warning_SDK_34_2">Application is not fully support for Android 14 (SDK Version  34)</string>
     <string name="warning_dialog_1">Sorry for the inconvenience</string>
     <string name="warning_dialog_2">Password reset is not available at this time.</string>
+    <string name="warning_dialog_3">Operation is not supported on this device.</string>
 
     <!-- Home. -->
     <string name="search">Type or paste a URL</string>
@@ -141,6 +142,7 @@
     <string name="setting_2">Support</string>
     <string name="title_privacy_policy">Privacy Policy</string>
     <string name="version">Version</string>
+    <string name="sdk_version">SDK Version</string>
     <string name="setting_message_history">Messages History</string>
     <string name="setting_notification_history">Notifications History</string>
     <string name="setting_notification">Notifications</string>

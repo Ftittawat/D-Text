@@ -4,7 +4,7 @@ import com.senior.d_text.presentation.service.NotificationService
 
 class CalculateUrlType {
 
-    public fun calculate(d_text_type: String, google_type: String): String {
+    fun calculate(d_text_type: String, google_type: String): String {
         return if (google_type == SAFE && (d_text_type == SAFE || d_text_type == SUSPICIOUS) || d_text_type == NO_INFORMATION) {
             SAFE
         } else if (google_type == SAFE && (d_text_type == UNSAFE)) {
