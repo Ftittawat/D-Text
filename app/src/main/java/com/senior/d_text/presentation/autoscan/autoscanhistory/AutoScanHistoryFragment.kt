@@ -77,6 +77,7 @@ class AutoScanHistoryFragment: BottomSheetDialogFragment() {
         vm.urlScore.value = notificationData?.urlScore
 
         binding.url.text = vm.url.value
+        binding.sourceResult.text = vm.source.value
         binding.checklist1Result.text = vm.validationLevel(vm.hasShortened.value!!)
         binding.checklist2Result.text = vm.validationLevel(vm.hasSsl.value!!)
         binding.checklist3Result.text = vm.validationLevel(vm.hasIframe.value!!)

@@ -74,9 +74,27 @@ class MessageService : Service() {
             .setContentTitle(getString(R.string.message_auto_scan_title))
             .setContentText(getString(R.string.message_auto_scan_des))
             .setSmallIcon(R.drawable.logo_blue)
-            .setGroup(groupKey)
         val notification = notificationBuilder.build()
         startForeground(1, notification)
+//        notify(UNSAFE,"t.ly/TOj3g")
+//        val notificationData = Notification(
+//            0,
+//            "t.ly/TOj3g",
+//            UNSAFE,
+//            UNSAFE,
+//            UNSAFE,
+//            "PHISHING",
+//            getString(R.string.source_message),
+//            getString(R.string.source_message),
+//            "25-04-2024 16:45:55",
+//            3,
+//            hasForm = true,
+//            hasIframe = true,
+//            hasShortened = true,
+//            hasSsl = true,
+//            urlScore = 0.5
+//        )
+//        saveNotification(notificationData)
     }
 
     override fun onBind(p0: Intent?): IBinder? {
@@ -189,11 +207,11 @@ class MessageService : Service() {
             .setSmallIcon(R.drawable.logo_blue)
             .setContentTitle(title)
             .setContentText(url)
-            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+            .setPriority(NotificationCompat.PRIORITY_HIGH)
 
         val intent = Intent(this, AutoScanActivity::class.java)
         // intent.putExtra("url", url)
-        val pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
+        val pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_MUTABLE)
         notificationBuilder.setContentIntent(pendingIntent)
 
         val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager

@@ -7,6 +7,7 @@ import android.content.pm.PackageManager
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.AndroidViewModel
+import com.senior.d_text.BuildConfig
 import com.senior.d_text.data.model.authentication.UserToken
 import com.senior.d_text.data.model.setting.AutoScanSetting
 import com.senior.d_text.data.model.setting.NotificationSetting
@@ -20,6 +21,7 @@ class SettingAboutViewModel(application: Application) : AndroidViewModel(applica
 
     val version: String = getVersionName()
     val sdkVersion: String = getSDKVersion()
+    //val codeVersion: String = getCodeVersion()
 
     private fun getVersionName(): String {
         return try {
@@ -36,6 +38,10 @@ class SettingAboutViewModel(application: Application) : AndroidViewModel(applica
 
     private fun getSDKVersion(): String {
         return Build.VERSION.SDK_INT.toString()
+    }
+
+    private fun getCodeVersion(): String {
+        return BuildConfig.VERSION_CODE.toString()
     }
 
      fun loadUserToken(): UserToken {

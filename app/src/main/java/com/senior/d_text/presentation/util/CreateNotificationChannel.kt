@@ -19,6 +19,7 @@ class NotificationFactory(private val context: Context): NotificationChannelCrea
                 NotificationManager.IMPORTANCE_DEFAULT
             )
             val notificationManager: NotificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            channel.enableVibration(true)
             notificationManager.createNotificationChannel(channel)
         }
     }
@@ -31,6 +32,7 @@ class NotificationFactory(private val context: Context): NotificationChannelCrea
                 NotificationManager.IMPORTANCE_DEFAULT
             )
             val notificationManager: NotificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            channel.enableVibration(true)
             notificationManager.createNotificationChannel(channel)
         }
     }

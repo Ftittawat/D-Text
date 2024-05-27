@@ -77,13 +77,12 @@ class NotificationService : Service() {
             .setContentTitle(getString(R.string.notification_auto_scan_title))
             .setContentText(getString(R.string.notification_auto_scan_des))
             .setSmallIcon(R.drawable.logo_blue)
-            .setGroup(groupKey)
         val notification = notificationBuilder.build()
         startForeground(2, notification)
         //val intent = Intent("android.settings.ACTION_NOTIFICATION_LISTENER_SETTINGS")
         //startActivity(intent)
 
-       if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+       if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.Q) {
            val n = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                if (!n.isNotificationPolicyAccessGranted) {
@@ -191,7 +190,7 @@ class NotificationService : Service() {
             .setSmallIcon(R.drawable.logo_blue)
             .setContentTitle(title)
             .setContentText(url)
-            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+            .setPriority(NotificationCompat.PRIORITY_HIGH)
 
         val intent = Intent(this, AutoScanActivity::class.java)
         val pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)

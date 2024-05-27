@@ -77,13 +77,15 @@ class HistoryFragment : BottomSheetDialogFragment() {
         vm.hasShortened.value = linkData?.hasShortened
         vm.hasSsl.value = linkData?.hasSsl
         vm.urlScore.value = linkData?.urlScore
+        vm.redirectUrl.value = linkData?.hasRedirectUrl
 
         binding.url.text = vm.url.value
         binding.checklist1Result.text = vm.validationLevel(vm.hasShortened.value!!)
-        binding.checklist2Result.text = vm.validationLevel(vm.hasSsl.value!!)
-        binding.checklist3Result.text = vm.validationLevel(vm.hasIframe.value!!)
-        binding.checklist4Result.text = vm.validationLevel(vm.hasForm.value!!)
-        binding.checklist5Result.text = vm.domainAgeDay.value.toString()
+        binding.checklist2Result.text = vm.validationRedirectUrl(vm.redirectUrl.value!!)
+        binding.checklist3Result.text = vm.validationLevel(vm.hasSsl.value!!)
+        binding.checklist4Result.text = vm.validationLevel(vm.hasIframe.value!!)
+        binding.checklist5Result.text = vm.validationLevel(vm.hasForm.value!!)
+        binding.checklist6Result.text = vm.domainAgeDay.value.toString()
 
         Log.d("analysisResult", "setupView: ${linkData.toString()}")
 
@@ -158,7 +160,7 @@ class HistoryFragment : BottomSheetDialogFragment() {
                 val color = ContextCompat.getColor(requireContext(), R.color.text_green)
                 binding.checklistResult.setTextColor(color)
             } else -> {
-                binding.checklistResult.text = getText(R.string.not_found)
+                binding.checklistResult.text = getText(R.string.no_information)
             }
         }
 
@@ -173,8 +175,8 @@ class HistoryFragment : BottomSheetDialogFragment() {
                 val color = ContextCompat.getColor(requireContext(), R.color.text_green)
                 binding.googleResult.setTextColor(color)
             } else -> {
-            binding.googleResult.text = getText(R.string.not_found)
-        }
+                binding.googleResult.text = getText(R.string.no_information)
+            }
         }
 
     }

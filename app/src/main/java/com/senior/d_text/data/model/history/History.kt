@@ -28,6 +28,8 @@ data class History(
     val hasForm: Boolean,
     @SerializedName("has_iframe")
     val hasIframe: Boolean,
+    @SerializedName("has_redirect_url")
+    val hasRedirectUrl: String,
     @SerializedName("has_shortened")
     val hasShortened: Boolean,
     @SerializedName("has_ssl")

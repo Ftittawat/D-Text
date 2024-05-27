@@ -102,6 +102,7 @@
     <string name="safe_link">This link is safe.</string>
     <string name="browser">Go to Browser</string>
     <string name="checklist_1">Shorted URL</string>
+    <string name="checklist_1.5">Redirect URL</string>
     <string name="checklist_2">SSL Certificate</string>
     <string name="checklist_3">IFRAME</string>
     <string name="checklist_4">FORM</string>

@@ -20,6 +20,7 @@ class HistoryViewModel(application: Application) : AndroidViewModel(application)
     val hasShortened = MutableLiveData(false)
     val hasSsl = MutableLiveData(false)
     val urlScore = MutableLiveData(0.0)
+    val redirectUrl = MutableLiveData("")
 
     fun validationUrl(value: String): String {
         return if (!value.startsWith("http://") && !value.startsWith("https://")) {
@@ -40,6 +41,14 @@ class HistoryViewModel(application: Application) : AndroidViewModel(application)
             getString(R.string.found)
         } else {
             getString(R.string.not_found)
+        }
+    }
+
+    fun validationRedirectUrl(url: String): String {
+        return if (url == "false") {
+            getString(R.string.no_information)
+        } else {
+            url
         }
     }
 

@@ -333,6 +333,7 @@ class HomeActivity() : AppCompatActivity() {
                     it.dtextResult.domainAgeDay,
                     it.dtextResult.hasForm,
                     it.dtextResult.hasIframe,
+                    it.dtextResult.hasRedirectUrl,
                     it.dtextResult.hasShortened,
                     it.dtextResult.hasSsl,
                     it.dtextResult.urlScore
